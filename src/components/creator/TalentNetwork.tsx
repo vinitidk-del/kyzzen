@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { TALENT_NETWORK } from '@/data/mockApi';
 import { TalentMember } from '@/types/auth';
+import { cn } from '@/lib/utils';
 
 export function TalentNetwork() {
   const [selectedTalent, setSelectedTalent] = useState<TalentMember | null>(null);
@@ -155,8 +156,4 @@ export function TalentNetwork() {
       </Dialog>
     </div>
   );
-}
-
-function cn(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
 }

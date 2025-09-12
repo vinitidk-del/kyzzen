@@ -1,5 +1,7 @@
 import { User, AgencyClient, Campaign, TalentMember, ContentTask } from '@/types/auth';
 
+// Export the mock data and functions individually for better tree-shaking
+
 const USER_PROFILES = {
   creator: {
     id: '1',

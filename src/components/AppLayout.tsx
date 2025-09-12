@@ -8,6 +8,8 @@ import { UserRole } from '@/types/auth';
 import { BrandVentures } from '@/components/creator/BrandVentures';
 import { ContentHub } from '@/components/creator/ContentHub';
 import { TalentNetwork } from '@/components/creator/TalentNetwork';
+import { CreatorDashboard } from '@/components/creator/CreatorDashboard';
+import { Analytics } from '@/components/creator/Analytics';
 
 // Agency Components
 import { AgencyDashboard } from '@/components/agency/AgencyDashboard';
@@ -19,10 +21,11 @@ import { CampaignManagement } from '@/components/business/CampaignManagement';
 
 const navigationConfig = {
   creator: [
+    { id: 'dashboard', label: 'Dashboard', icon: <Home className="w-5 h-5" /> },
     { id: 'brand-ventures', label: 'Brand Ventures', icon: <Briefcase className="w-5 h-5" /> },
     { id: 'content-hub', label: 'Content Pipeline', icon: <Edit className="w-5 h-5" /> },
     { id: 'talent', label: 'Talent Network', icon: <Users className="w-5 h-5" /> },
-    { id: 'analytics', label: 'Audience Analytics', icon: <TrendingUp className="w-5 h-5" /> },
+    { id: 'analytics', label: 'Analytics', icon: <TrendingUp className="w-5 h-5" /> },
   ],
   agency: [
     { id: 'dashboard', label: 'Agency Dashboard', icon: <Home className="w-5 h-5" /> },
@@ -39,7 +42,7 @@ const navigationConfig = {
 const getDefaultPage = (role: UserRole): string => {
   switch (role) {
     case 'creator':
-      return 'brand-ventures';
+      return 'dashboard';
     case 'agency':
     case 'business':
       return 'dashboard';
@@ -63,6 +66,8 @@ export function AppLayout() {
     switch (user.role) {
       case 'creator':
         switch (activePage) {
+          case 'dashboard':
+            return <CreatorDashboard />;
           case 'brand-ventures':
             return <BrandVentures />;
           case 'content-hub':
@@ -70,13 +75,9 @@ export function AppLayout() {
           case 'talent':
             return <TalentNetwork />;
           case 'analytics':
-            return (
-              <div className="flex items-center justify-center h-64">
-                <p className="text-muted-foreground text-lg">Analytics dashboard coming soon...</p>
-              </div>
-            );
+            return <Analytics />;
           default:
-            return <BrandVentures />;
+            return <CreatorDashboard />;
         }
       
       case 'agency':
