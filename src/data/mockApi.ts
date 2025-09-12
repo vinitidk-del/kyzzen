@@ -1,11 +1,8 @@
 import { User, AgencyClient, Campaign, TalentMember, ContentTask } from '@/types/auth';
 
-export const MOCK_USERS: Record<string, User & { password: string }> = {
-  'creator-admin': {
+const USER_PROFILES = {
+  creator: {
     id: '1',
-    username: 'creator-admin',
-    password: 'admin',
-    role: 'creator',
     name: 'Alex "Apex" Miller',
     handle: '@ApexMiller',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face&auto=format',
@@ -16,23 +13,26 @@ export const MOCK_USERS: Record<string, User & { password: string }> = {
       inventory: { stock: 2500, status: "Low" }
     }
   },
-  'agency-admin': {
+  agency: {
     id: '2',
-    username: 'agency-admin',
-    password: 'admin',
-    role: 'agency',
     name: 'Nexus Media Group',
     handle: 'Agency Account',
     avatar: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=100&h=100&fit=crop&crop=center&auto=format'
   },
-  'business-admin': {
+  business: {
     id: '3',
-    username: 'business-admin',
-    password: 'admin',
-    role: 'business',
     name: 'Synth Co.',
     handle: 'Brand Partner',
     avatar: 'https://images.unsplash.com/photo-1549923746-c502d488b3ea?w=100&h=100&fit=crop&crop=center&auto=format'
+  }
+};
+
+export const MOCK_USERS: Record<string, User & { password: string }> = {
+  'admin': {
+    username: 'admin',
+    password: 'admin',
+    role: 'creator', // Default role, will be overridden
+    ...USER_PROFILES.creator
   }
 };
 
@@ -152,9 +152,15 @@ export const CONTENT_PIPELINE: Record<string, ContentTask[]> = {
 
 export function authenticateUser(username: string, password: string, role: string): User | null {
   const user = MOCK_USERS[username];
-  if (user && user.password === password && user.role === role) {
+  if (user && user.password === password) {
     const { password: _, ...userWithoutPassword } = user;
-    return userWithoutPassword;
+    const profile = USER_PROFILES[role as keyof typeof USER_PROFILES];
+    return {
+      ...userWithoutPassword,
+      ...profile,
+      role: role as any,
+      username
+    };
   }
   return null;
 }

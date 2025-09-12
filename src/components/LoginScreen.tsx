@@ -81,7 +81,7 @@ export function LoginScreen() {
                   type="text"
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  placeholder="e.g., creator-admin"
+                  placeholder="admin"
                   className="pl-10"
                   required
                 />
