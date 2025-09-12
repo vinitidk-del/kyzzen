@@ -1,73 +1,73 @@
-# Welcome to your Lovable project
-
-## Project info
+# Kyzzen Media - The Creator Super App
 
 **URL**: https://lovable.dev/projects/700046ab-188b-485e-b21b-f780bc3850e8
 
-## How can I edit this code?
+## About
 
-There are several ways of editing your application.
+Kyzzen Media is a comprehensive creator management platform that serves as the "operating system for creator empires." It provides different dashboards and tools for creators, agencies, and businesses to manage their content, campaigns, and partnerships.
 
-**Use Lovable**
+## Features
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/700046ab-188b-485e-b21b-f780bc3850e8) and start prompting.
+### For Creators
+- **Brand Ventures Dashboard**: Track revenue, units sold, profit margins, and inventory
+- **AI Product Idea Lab**: Generate innovative product ideas based on audience data
+- **Content Pipeline**: Kanban-style content management from idea to published
+- **Talent Network**: Browse and connect with editors, managers, and designers
 
-Changes made via Lovable will be committed automatically to this repo.
+### For Agencies
+- **Client Management**: Overview of all creator clients with performance metrics
+- **Campaign Tracking**: Monitor active campaigns across all clients
+- **Revenue Analytics**: Track total monthly revenue and client performance
 
-**Use your preferred IDE**
+### For Businesses
+- **Campaign Dashboard**: Monitor ROI, spend, and campaign performance
+- **Creator Discovery**: Find and evaluate potential creator partners
+- **Budget Management**: Track spending against allocated budgets
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Login Credentials
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+The app supports three user roles with demo accounts:
 
-Follow these steps:
+| Role | Username | Password |
+|------|----------|----------|
+| Creator | `creator-admin` | `admin` |
+| Agency | `agency-admin` | `admin` |
+| Business | `business-admin` | `admin` |
+
+## Tech Stack
+
+- **Frontend**: React, TypeScript, Tailwind CSS
+- **UI Components**: shadcn/ui with Radix UI primitives
+- **Icons**: Lucide React
+- **Build Tool**: Vite
+- **Routing**: React Router DOM
+- **State Management**: React Context API
+
+## Development
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Install dependencies
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
+
+# Build for production
+npm run build
 ```
 
-**Edit a file directly in GitHub**
+## Design System
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+The app features a custom dark theme with:
+- **Primary Colors**: Forest green and golden orange accents
+- **Typography**: Inter font family
+- **Components**: Fully customized shadcn/ui components
+- **Animations**: Smooth transitions and hover effects
 
-**Use GitHub Codespaces**
+## Deployment
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Deploy easily through [Lovable](https://lovable.dev/projects/700046ab-188b-485e-b21b-f780bc3850e8) by clicking Share → Publish.
 
-## What technologies are used for this project?
+---
 
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/700046ab-188b-485e-b21b-f780bc3850e8) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+&copy; 2025 Kyzzen Media. All rights reserved.
