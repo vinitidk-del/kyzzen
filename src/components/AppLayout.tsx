@@ -10,6 +10,7 @@ import { ContentHub } from '@/components/creator/ContentHub';
 import { TalentNetwork } from '@/components/creator/TalentNetwork';
 import { CreatorDashboard } from '@/components/creator/CreatorDashboard';
 import { Analytics } from '@/components/creator/Analytics';
+import { GrowthEngine } from '@/components/creator/GrowthEngine';
 
 // Agency Components
 import { AgencyDashboard } from '@/components/agency/AgencyDashboard';
@@ -26,6 +27,7 @@ const navigationConfig = {
     { id: 'content-hub', label: 'Content Pipeline', icon: <Edit className="w-5 h-5" /> },
     { id: 'talent', label: 'Talent Network', icon: <Users className="w-5 h-5" /> },
     { id: 'analytics', label: 'Analytics', icon: <TrendingUp className="w-5 h-5" /> },
+    { id: 'growth', label: 'Growth Engine', icon: <TrendingUp className="w-5 h-5" /> },
   ],
   agency: [
     { id: 'dashboard', label: 'Agency Dashboard', icon: <Home className="w-5 h-5" /> },
@@ -64,21 +66,23 @@ export function AppLayout() {
 
   const renderPageContent = () => {
     switch (user.role) {
-      case 'creator':
-        switch (activePage) {
-          case 'dashboard':
-            return <CreatorDashboard />;
-          case 'brand-ventures':
-            return <BrandVentures />;
-          case 'content-hub':
-            return <ContentHub />;
-          case 'talent':
-            return <TalentNetwork />;
-          case 'analytics':
-            return <Analytics />;
-          default:
-            return <CreatorDashboard />;
-        }
+        case 'creator':
+          switch (activePage) {
+            case 'dashboard':
+              return <CreatorDashboard />;
+            case 'brand-ventures':
+              return <BrandVentures />;
+            case 'content-hub':
+              return <ContentHub />;
+            case 'talent':
+              return <TalentNetwork />;
+            case 'analytics':
+              return <Analytics />;
+            case 'growth':
+              return <GrowthEngine />;
+            default:
+              return <CreatorDashboard />;
+          }
       
       case 'agency':
         switch (activePage) {

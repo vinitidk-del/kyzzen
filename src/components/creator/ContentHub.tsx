@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Plus, Brain } from 'lucide-react';
 import { CONTENT_PIPELINE } from '@/data/mockApi';
 import { ContentTask } from '@/types/auth';
 import { cn } from '@/lib/utils';
+import { AIContentGenerator } from './AIContentGenerator';
 
 const columns = [
   { id: 'idea', label: 'Ideas', color: 'text-warning' },
@@ -15,6 +18,7 @@ const columns = [
 export function ContentHub() {
   const [pipeline, setPipeline] = useState(CONTENT_PIPELINE);
   const [draggedTask, setDraggedTask] = useState<ContentTask | null>(null);
+  const [showAIGenerator, setShowAIGenerator] = useState(false);
 
   const handleDragStart = (e: React.DragEvent, task: ContentTask) => {
     setDraggedTask(task);
@@ -53,7 +57,25 @@ export function ContentHub() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-foreground">Content Pipeline</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold text-foreground">Content Pipeline</h1>
+        <div className="flex gap-2">
+          <Button
+            onClick={() => setShowAIGenerator(!showAIGenerator)}
+            variant={showAIGenerator ? "default" : "outline"}
+            className="flex items-center gap-2"
+          >
+            <Brain className="w-4 h-4" />
+            AI Content Generator
+          </Button>
+          <Button variant="outline" size="sm">
+            <Plus className="w-4 h-4 mr-1" />
+            Add Task
+          </Button>
+        </div>
+      </div>
+      
+      {showAIGenerator && <AIContentGenerator />}
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4">
         {columns.map((column) => (

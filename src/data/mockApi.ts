@@ -13,6 +13,23 @@ const USER_PROFILES = {
       product: "Stealth Pro Mousepad",
       metrics: { unitsSold: 12530, revenue: 375900, profitMargin: 0.35 },
       inventory: { stock: 2500, status: "Low" }
+    },
+    profile: {
+      niche: 'Gaming & Tech',
+      primaryAudience: 'Male 16-24',
+      contentStyle: 'High-energy, fast-paced',
+      avgEngagement: 9.8,
+      topPerformingContent: ['Challenge videos', 'Product reviews', 'Gaming tutorials'],
+      brandPersonality: ['Enthusiastic', 'Authentic', 'Innovative'],
+      controversyTolerance: 'Medium',
+      politicalStance: 'Neutral',
+      audiencePreferences: {
+        entertainment: 85,
+        education: 70,
+        controversy: 40,
+        trending: 90,
+        challenges: 95
+      }
     }
   },
   agency: {
@@ -133,6 +150,26 @@ export const TALENT_NETWORK: TalentMember[] = [
     bio: 'Creates stunning visual identities and graphics that convert. Gaming and tech specialist.'
   }
 ];
+
+export const AUDIENCE_INSIGHTS = {
+  demographics: {
+    ageGroups: { '13-17': 15, '18-24': 45, '25-34': 30, '35+': 10 },
+    gender: { male: 75, female: 23, other: 2 },
+    interests: ['Gaming', 'Technology', 'Entertainment', 'Reviews', 'Challenges'],
+    peakActivity: ['19:00-23:00', 'Weekend mornings']
+  },
+  contentPreferences: {
+    videoLength: { 'short': 40, 'medium': 45, 'long': 15 },
+    topics: ['Gaming reviews', 'Tech unboxings', 'Challenges', 'Tutorials'],
+    engagement: { likes: 8.5, comments: 6.2, shares: 4.8 }
+  },
+  viralityFactors: {
+    trending: { weight: 0.9, topics: ['AI', 'New games', 'Tech launches'] },
+    controversy: { weight: 0.3, acceptable: ['Tech debates', 'Gaming opinions'] },
+    challenge: { weight: 0.8, types: ['24h challenges', 'Extreme builds'] },
+    emotion: { weight: 0.7, triggers: ['Surprise', 'Achievement', 'Humor'] }
+  }
+};
 
 export const CONTENT_PIPELINE: Record<string, ContentTask[]> = {
   'idea': [
