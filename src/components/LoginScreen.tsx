@@ -8,6 +8,7 @@ import { authenticateUser } from '@/data/mockApi';
 import { UserRole } from '@/types/auth';
 import kyzzenLogo from '@/assets/kyzzen-logo.png';
 import { TalentRegistration } from '@/components/TalentRegistration';
+import { InfluencerSignup } from '@/components/InfluencerSignup';
 
 const roleLabels = {
   creator: 'Creator',
@@ -46,7 +47,7 @@ export function LoginScreen() {
     <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4 relative">
       {/* Top-right corner button */}
       <div className="absolute top-4 right-4">
-        <TalentRegistration 
+        <InfluencerSignup 
           trigger={
             <Button variant="outline" className="bg-background/20 backdrop-blur-sm border-accent/30 text-accent hover:bg-accent hover:text-accent-foreground">
               New? Join here!
