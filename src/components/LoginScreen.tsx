@@ -7,6 +7,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { authenticateUser } from '@/data/mockApi';
 import { UserRole } from '@/types/auth';
 import kyzzenLogo from '@/assets/kyzzen-logo.png';
+import { TalentRegistration } from '@/components/TalentRegistration';
 
 const roleLabels = {
   creator: 'Creator',
@@ -122,7 +123,17 @@ export function LoginScreen() {
           </form>
         </Card>
 
-        <p className="text-center text-muted-foreground text-sm mt-6">
+        <div className="text-center mt-6">
+          <TalentRegistration 
+            trigger={
+              <Button variant="ghost" className="text-muted-foreground hover:text-accent">
+                Talent? Join here!
+              </Button>
+            }
+          />
+        </div>
+
+        <p className="text-center text-muted-foreground text-sm mt-4">
           &copy; 2025 Kyzzen Media. All rights reserved.
         </p>
       </div>
