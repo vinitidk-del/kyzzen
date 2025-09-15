@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { cn } from '@/lib/utils';
 import kyzzenLogo from '@/assets/kyzzen-logo.png';
+import { TalentRegistration } from '@/components/TalentRegistration';
 
 interface NavigationItem {
   id: string;
@@ -126,6 +127,7 @@ export function Header({ onOpenSidebar }: HeaderProps) {
         <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
           <Bell className="w-5 h-5" />
         </Button>
+        <TalentRegistration />
         <Button
           variant="outline"
           size="sm"
