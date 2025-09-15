@@ -43,7 +43,18 @@ export function LoginScreen() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-hero flex items-center justify-center p-4 relative">
+      {/* Top-right corner button */}
+      <div className="absolute top-4 right-4">
+        <TalentRegistration 
+          trigger={
+            <Button variant="outline" className="bg-background/20 backdrop-blur-sm border-accent/30 text-accent hover:bg-accent hover:text-accent-foreground">
+              New? Join here!
+            </Button>
+          }
+        />
+      </div>
+      
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="flex items-center justify-center mb-4">
@@ -126,7 +137,7 @@ export function LoginScreen() {
         <div className="text-center mt-6">
           <TalentRegistration 
             trigger={
-              <Button variant="ghost" className="text-muted-foreground hover:text-accent">
+              <Button className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-6 py-2 shadow-lg hover:shadow-xl transition-all duration-300">
                 Talent? Join here!
               </Button>
             }
