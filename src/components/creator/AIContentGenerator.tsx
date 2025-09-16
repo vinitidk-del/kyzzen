@@ -42,50 +42,52 @@ export function AIContentGenerator() {
       // Simulate AI generation based on parameters
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-      const ideas: ContentIdea[] = [
+      // Generate varied ideas based on parameters and custom prompt
+      const ideaTemplates = [
         {
-          title: "24 Hours Using Only AI Tools Challenge",
-          description: "Complete daily tasks using only AI-powered tools and software for an entire day. Document the struggles, surprises, and efficiency gains.",
-          viralityScore: viralityLevel[0],
-          controversyLevel: controversyLevel[0] * 0.8,
-          engagementPotential: 92,
-          targetAudience: "Tech enthusiasts 18-35",
-          contentType: "Challenge Video",
-          hooks: [
-            "What happens when AI replaces EVERYTHING?",
-            "I let AI control my life for 24 hours...",
-            "This AI challenge broke my brain"
-          ]
+          base: "24 Hours Challenge",
+          variations: ["AI Tools", "Budget Constraint", "Impossible Tasks", "Viewer Requests"]
         },
         {
-          title: "Building the Most INSANE Gaming Setup for $100 vs $10,000",
-          description: "Compare extreme budget constraints by building two gaming setups with drastically different budgets and testing their performance.",
-          viralityScore: viralityLevel[0] * 0.9,
-          controversyLevel: controversyLevel[0] * 0.6,
-          engagementPotential: 88,
-          targetAudience: "Gamers 16-28",
-          contentType: "Comparison Review",
-          hooks: [
-            "Can a $100 setup beat a $10K monster?",
-            "Budget vs Premium: The SHOCKING results",
-            "This cheap setup DESTROYED the expensive one"
-          ]
+          base: "vs Comparison",
+          variations: ["Budget vs Premium", "Old vs New", "Cheap vs Expensive", "DIY vs Store-bought"]
         },
         {
-          title: "Rating Viewers' Setups: BRUTAL Honest Reviews",
-          description: "Review and rate subscriber gaming/tech setups with honest feedback, improvement suggestions, and surprise reactions.",
-          viralityScore: viralityLevel[0] * 0.85,
-          controversyLevel: controversyLevel[0] * 1.2,
-          engagementPotential: 95,
-          targetAudience: "Community members all ages",
-          contentType: "Community Interaction",
-          hooks: [
-            "Your setups made me CRINGE...",
-            "Rating setups that cost more than my car",
-            "Some of these setups are ILLEGAL"
-          ]
+          base: "Rating/Review Series",
+          variations: ["Viewer Setups", "Trending Products", "Viral Claims", "Brand Promises"]
+        },
+        {
+          base: "Experiment",
+          variations: ["Life Hack Testing", "Viral Recipe Trial", "Speed Challenges", "Efficiency Tests"]
         }
       ];
+
+      const getRandomVariation = (template: any) => {
+        return template.variations[Math.floor(Math.random() * template.variations.length)];
+      };
+
+      const customInfluence = customPrompt ? ` incorporating "${customPrompt}"` : "";
+      
+      const ideas: ContentIdea[] = ideaTemplates.slice(0, 3).map((template, index) => {
+        const variation = getRandomVariation(template);
+        const viralityMultiplier = 0.8 + Math.random() * 0.4;
+        const controversyMultiplier = 0.6 + Math.random() * 0.8;
+        
+        return {
+          title: `${variation} ${template.base}${customInfluence}`,
+          description: `Create engaging ${contentType} content featuring ${variation.toLowerCase()}${customInfluence}. Designed to match your audience preferences with optimized engagement strategies.`,
+          viralityScore: Math.round(viralityLevel[0] * viralityMultiplier),
+          controversyLevel: Math.round(controversyLevel[0] * controversyMultiplier),
+          engagementPotential: Math.round(70 + Math.random() * 25 + (spiceLevel[0] / 4)),
+          targetAudience: customPrompt ? `Custom audience for ${customPrompt}` : "Your core demographic 18-35",
+          contentType: contentType.charAt(0).toUpperCase() + contentType.slice(1),
+          hooks: [
+            `This ${variation.toLowerCase()} will ${customPrompt ? 'change everything about ' + customPrompt : 'blow your mind'}...`,
+            `I tried ${variation.toLowerCase()}${customInfluence} and here's what happened`,
+            `${Math.random() > 0.5 ? 'SHOCKING' : 'INSANE'} results from ${variation.toLowerCase()}${customInfluence}`
+          ]
+        };
+      });
       
       setGeneratedIdeas(ideas);
       toast({
@@ -356,10 +358,20 @@ export function AIContentGenerator() {
                       </div>
                       
                       <div className="flex gap-2">
-                        <Button size="sm" variant="default">
+                        <Button size="sm" variant="default" onClick={() => {
+                          toast({
+                            title: "Added to Pipeline! 📝",
+                            description: `"${idea.title}" added to your content pipeline.`,
+                          });
+                        }}>
                           Add to Pipeline
                         </Button>
-                        <Button size="sm" variant="outline">
+                        <Button size="sm" variant="outline" onClick={() => {
+                          toast({
+                            title: "Refining Idea... ✨",
+                            description: "Generating refined version of this content idea.",
+                          });
+                        }}>
                           Refine Idea
                         </Button>
                       </div>

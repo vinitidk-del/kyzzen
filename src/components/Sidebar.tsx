@@ -5,6 +5,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { cn } from '@/lib/utils';
 import kyzzenLogo from '@/assets/kyzzen-logo.png';
 import { TalentRegistration } from '@/components/TalentRegistration';
+import { AccountPreview } from '@/components/AccountPreview';
 
 interface NavigationItem {
   id: string;
@@ -83,19 +84,21 @@ export function Sidebar({ isOpen, setIsOpen, navigation, activePage, onNavigate 
         {/* User Profile */}
         {user && (
           <div className="p-4 border-t border-border">
-            <div className="bg-card/20 p-4 rounded-lg border border-border">
-              <div className="flex items-center gap-3">
-                <img
-                  src={user.avatar}
-                  alt={user.name}
-                  className="w-10 h-10 rounded-full border-2 border-accent"
-                />
-                <div className="flex-1 min-w-0">
-                  <p className="font-bold text-foreground truncate">{user.name}</p>
-                  <p className="text-sm text-muted-foreground truncate">{user.handle}</p>
+            <AccountPreview>
+              <button className="w-full bg-card/20 p-4 rounded-lg border border-border hover:bg-card/30 transition-colors cursor-pointer">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={user.avatar}
+                    alt={user.name}
+                    className="w-10 h-10 rounded-full border-2 border-accent"
+                  />
+                  <div className="flex-1 min-w-0 text-left">
+                    <p className="font-bold text-foreground truncate">{user.name}</p>
+                    <p className="text-sm text-muted-foreground truncate">{user.handle}</p>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </button>
+            </AccountPreview>
           </div>
         )}
       </aside>

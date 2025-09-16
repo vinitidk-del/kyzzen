@@ -359,8 +359,18 @@ export function GrowthEngine() {
                   </ol>
                   
                   <div className="flex gap-2 pt-4">
-                    <Button size="sm">Start Implementation</Button>
-                    <Button size="sm" variant="outline">Save for Later</Button>
+                    <Button size="sm" onClick={() => {
+                      toast({
+                        title: "Implementation Started! 🚀",
+                        description: `Started implementing: ${selectedStrategy.title}`,
+                      });
+                    }}>Start Implementation</Button>
+                    <Button size="sm" variant="outline" onClick={() => {
+                      toast({
+                        title: "Strategy Saved 💾",
+                        description: "Strategy saved to your implementation queue.",
+                      });
+                    }}>Save for Later</Button>
                     <Button size="sm" variant="ghost" onClick={() => setSelectedStrategy(null)}>
                       Close
                     </Button>
