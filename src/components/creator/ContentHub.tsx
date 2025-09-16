@@ -68,7 +68,26 @@ export function ContentHub() {
             <Brain className="w-4 h-4" />
             AI Content Generator
           </Button>
-          <Button variant="outline" size="sm">
+          <Button 
+            variant="outline" 
+            size="sm"
+            onClick={() => {
+              const newTask = {
+                id: `task-${Date.now()}`,
+                title: `New Content Task`,
+                status: 'idea' as const,
+                priority: 'medium',
+                createdAt: new Date().toISOString()
+              };
+              
+              const updatedPipeline = { ...pipeline };
+              updatedPipeline.idea = [...(updatedPipeline.idea || []), newTask];
+              setPipeline(updatedPipeline);
+              
+              // Also save to localStorage for persistence
+              localStorage.setItem('contentPipeline', JSON.stringify(updatedPipeline));
+            }}
+          >
             <Plus className="w-4 h-4 mr-1" />
             Add Task
           </Button>
