@@ -30,6 +30,8 @@ interface GrowthStrategy {
   timeline: string;
   category: 'Content' | 'Audience' | 'Monetization' | 'Optimization';
   steps: string[];
+  status?: 'pending' | 'implementing' | 'completed';
+  startDate?: string;
 }
 
 export function GrowthEngine() {
@@ -358,23 +360,72 @@ export function GrowthEngine() {
                     ))}
                   </ol>
                   
-                  <div className="flex gap-2 pt-4">
-                    <Button size="sm" onClick={() => {
-                      toast({
-                        title: "Implementation Started! 🚀",
-                        description: `Started implementing: ${selectedStrategy.title}`,
-                      });
-                    }}>Start Implementation</Button>
-                    <Button size="sm" variant="outline" onClick={() => {
-                      toast({
-                        title: "Strategy Saved 💾",
-                        description: "Strategy saved to your implementation queue.",
-                      });
-                    }}>Save for Later</Button>
-                    <Button size="sm" variant="ghost" onClick={() => setSelectedStrategy(null)}>
-                      Close
-                    </Button>
-                  </div>
+                   <div className="flex gap-2 pt-4">
+                     <Button size="sm" onClick={() => {
+                       // Actually implement the strategy
+                       const updatedStrategies = strategies.map(s => 
+                         s.title === selectedStrategy.title 
+                           ? { ...s, status: 'implementing', startDate: new Date().toISOString() }
+                           : s
+                       );
+                       setStrategies(updatedStrategies as GrowthStrategy[]);
+                       
+                       // Save to localStorage for persistence
+                       localStorage.setItem('growthStrategies', JSON.stringify(updatedStrategies));
+                       
+                       toast({
+                         title: "Implementation Started! 🚀",
+                         description: `Started implementing: ${selectedStrategy.title}`,
+                       });
+                       
+                       // Log the action
+                       console.log(`[Growth Engine] Started implementing strategy: ${selectedStrategy.title}`);
+                     }}>Start Implementation</Button>
+                     <Button size="sm" variant="outline" onClick={() => {
+                       // Save strategy to implementation queue
+                       const savedStrategies = JSON.parse(localStorage.getItem('savedStrategies') || '[]');
+                       const strategyToSave = {
+                         ...selectedStrategy,
+                         savedAt: new Date().toISOString(),
+                         id: `saved-${Date.now()}`
+                       };
+                       
+                       savedStrategies.push(strategyToSave);
+                       localStorage.setItem('savedStrategies', JSON.stringify(savedStrategies));
+                       
+                       toast({
+                         title: "Strategy Saved 💾",
+                         description: "Strategy saved to your implementation queue.",
+                       });
+                       
+                       console.log(`[Growth Engine] Saved strategy: ${selectedStrategy.title}`);
+                     }}>Save for Later</Button>
+                     <Button size="sm" variant="outline" onClick={() => {
+                       // Add to content pipeline as tasks
+                       const pipeline = JSON.parse(localStorage.getItem('contentPipeline') || '{}');
+                       const newTasks = selectedStrategy.steps.map((step, index) => ({
+                         id: `strategy-task-${Date.now()}-${index}`,
+                         title: `${selectedStrategy.title}: ${step}`,
+                         status: 'idea' as const,
+                         priority: selectedStrategy.priority.toLowerCase(),
+                         createdAt: new Date().toISOString(),
+                         strategySource: selectedStrategy.title
+                       }));
+                       
+                       pipeline.idea = [...(pipeline.idea || []), ...newTasks];
+                       localStorage.setItem('contentPipeline', JSON.stringify(pipeline));
+                       
+                       toast({
+                         title: "Added to Pipeline 📋",
+                         description: `Added ${newTasks.length} tasks to content pipeline.`,
+                       });
+                       
+                       console.log(`[Growth Engine] Added strategy tasks to pipeline:`, newTasks);
+                     }}>Add to Pipeline</Button>
+                     <Button size="sm" variant="ghost" onClick={() => setSelectedStrategy(null)}>
+                       Close
+                     </Button>
+                   </div>
                 </div>
               </CardContent>
             </Card>
