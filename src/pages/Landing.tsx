@@ -35,32 +35,32 @@ const Landing = () => {
           <div className="max-w-5xl mx-auto text-center mb-16 animate-fade-in">
             <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2 mb-6">
               <Sparkles className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Your Complete Creator Operating System</span>
+              <span className="text-sm font-medium text-primary">Creator Operating System</span>
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              Build Your Creator Empire
+              Build Your Empire
               <br />
-              <span className="text-primary">All in One Place</span>
+              <span className="text-primary">Create. Grow. Monetize.</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              From AI-powered content generation to analytics and brand ventures—everything you need to grow your creator business, beautifully organized.
+              AI content tools, analytics, brand deals—everything you need in one place.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link to="/app">
                 <Button size="lg" className="rounded-full text-lg px-10 py-6 shadow-xl hover:shadow-primary/50 transition-all group">
-                  Start Creating Free
+                  Start Free
                   <Rocket className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
               <a href="#features">
                 <Button size="lg" variant="outline" className="rounded-full text-lg px-10 py-6">
-                  See Features
+                  Features
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </a>
             </div>
             <p className="text-sm text-muted-foreground mt-6">
-              <Heart className="inline h-4 w-4 text-primary" /> Trusted by thousands of creators worldwide
+              <Heart className="inline h-4 w-4 text-primary" /> Trusted by 10K+ creators
             </p>
           </div>
 
@@ -87,10 +87,10 @@ const Landing = () => {
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Everything You Need to <span className="text-primary">Succeed</span>
+              Everything to <span className="text-primary">Succeed</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Powerful tools designed specifically for creators who want to scale their impact
+              Powerful tools built for creators
             </p>
           </div>
           
@@ -99,37 +99,37 @@ const Landing = () => {
               {
                 icon: Brain,
                 title: 'AI Content Generator',
-                description: 'Create engaging content in seconds with our advanced AI that understands your brand voice and audience.',
+                description: 'Create engaging content instantly with AI that understands your brand.',
                 color: 'text-blue-500'
               },
               {
                 icon: BarChart3,
                 title: 'Smart Analytics',
-                description: 'Track your growth with real-time analytics and insights that help you make data-driven decisions.',
+                description: 'Track growth with real-time insights and data-driven decisions.',
                 color: 'text-green-500'
               },
               {
                 icon: Zap,
                 title: 'Content Pipeline',
-                description: 'Organize and schedule your content with an intuitive pipeline that keeps you consistently posting.',
+                description: 'Organize and schedule content to stay consistent.',
                 color: 'text-yellow-500'
               },
               {
                 icon: Target,
                 title: 'Brand Ventures',
-                description: 'Discover and manage brand partnerships, sponsorships, and collaborations all in one dashboard.',
+                description: 'Manage partnerships and sponsorships in one dashboard.',
                 color: 'text-purple-500'
               },
               {
                 icon: TrendingUp,
                 title: 'Growth Engine',
-                description: 'Get personalized growth strategies and actionable insights to expand your reach exponentially.',
+                description: 'Get personalized strategies to expand your reach.',
                 color: 'text-pink-500'
               },
               {
                 icon: Users,
                 title: 'Talent Network',
-                description: 'Connect with other creators, build your team, and collaborate on projects that matter.',
+                description: 'Connect with creators and build your team.',
                 color: 'text-orange-500'
               }
             ].map((feature, idx) => (
@@ -163,10 +163,10 @@ const Landing = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Built for Creators, <span className="text-primary">By Creators</span>
+              Built <span className="text-primary">By Creators</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              We understand your journey because we've lived it
+              We understand your journey
             </p>
           </div>
           
@@ -178,7 +178,7 @@ const Landing = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground leading-relaxed">
-                  Stop juggling dozens of tools. Kyzzen brings everything together—content creation, analytics, brand deals, and growth strategies—so you can spend more time doing what you love.
+                  Stop juggling tools. Everything you need in one place so you can focus on creating.
                 </p>
               </CardContent>
             </Card>
@@ -190,7 +190,7 @@ const Landing = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground leading-relaxed">
-                  Our AI-powered tools and intelligent automation help you create more content, reach more people, and grow your business without burning out or hiring a whole team.
+                  AI-powered automation helps you create more, reach more, and grow faster.
                 </p>
               </CardContent>
             </Card>
@@ -203,7 +203,7 @@ const Landing = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">Loved by Creators</h2>
-            <p className="text-lg text-muted-foreground">See how Kyzzen is transforming creator businesses</p>
+            <p className="text-lg text-muted-foreground">Real results from real creators</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
@@ -212,7 +212,7 @@ const Landing = () => {
                 initial: 'J',
                 role: 'YouTube Creator',
                 followers: '250K',
-                text: 'The AI content generator is a game-changer. I went from posting once a week to daily, and my engagement has tripled. Kyzzen gets my creative flow.',
+                text: 'Went from posting weekly to daily. Engagement tripled. Game-changer.',
                 metric: '+300% Engagement'
               },
               {
@@ -220,7 +220,7 @@ const Landing = () => {
                 initial: 'S',
                 role: 'Instagram Influencer',
                 followers: '500K',
-                text: 'Managing brand deals used to be chaos. Now everything is organized in one place. I\'ve closed 5 new partnerships this month alone.',
+                text: 'Brand deals used to be chaos. Now organized. Closed 5 partnerships this month.',
                 metric: '5 New Deals/Month'
               },
               {
@@ -228,7 +228,7 @@ const Landing = () => {
                 initial: 'T',
                 role: 'Digital Artist',
                 followers: '150K',
-                text: 'The analytics showed me exactly which content my audience loves. My art sales are up 150% and I finally understand my audience.',
+                text: 'Analytics showed what works. Sales up 150%. Finally understand my audience.',
                 metric: '+150% Sales'
               }
             ].map((testimonial, idx) => (
@@ -264,9 +264,9 @@ const Landing = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Start Free, <span className="text-primary">Scale When Ready</span>
+              Start Free, <span className="text-primary">Scale Fast</span>
             </h2>
-            <p className="text-lg text-muted-foreground">Choose the plan that fits your creator journey</p>
+            <p className="text-lg text-muted-foreground">Choose your plan</p>
           </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
@@ -347,7 +347,7 @@ const Landing = () => {
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">How It Works</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Get started in minutes and start seeing results
+              Start in minutes, see results fast
             </p>
           </div>
           
@@ -358,20 +358,20 @@ const Landing = () => {
             {[
               {
                 step: '01',
-                title: 'Sign Up & Setup',
-                description: 'Create your free account in 30 seconds. Connect your social profiles and you\'re ready to go.',
+                title: 'Sign Up',
+                description: 'Create your free account in 30 seconds. Connect and go.',
                 icon: Rocket
               },
               {
                 step: '02',
-                title: 'Create & Organize',
-                description: 'Use our AI tools to generate content ideas, schedule posts, and organize your creator workflow.',
+                title: 'Create',
+                description: 'Use AI tools to generate ideas, schedule posts, and organize.',
                 icon: Sparkles
               },
               {
                 step: '03',
-                title: 'Grow & Monetize',
-                description: 'Track analytics, secure brand deals, and scale your creator business with data-driven insights.',
+                title: 'Grow',
+                description: 'Track analytics, secure deals, and scale with insights.',
                 icon: TrendingUp
               }
             ].map((step, idx) => (
@@ -408,23 +408,23 @@ const Landing = () => {
                 <span className="font-semibold text-primary">Start Free Today</span>
               </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                Your Creator Empire
+                Start Building
                 <br />
-                <span className="text-primary">Starts Here</span>
+                <span className="text-primary">Today</span>
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-                Join over 10,000 creators who are building their dream businesses with Kyzzen. No credit card required.
+                Join 10K+ creators building their dream businesses.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/app">
                   <Button size="lg" className="rounded-full text-lg px-12 py-7 shadow-2xl hover:shadow-primary/50 transition-all group text-lg font-semibold">
-                    Launch Your App Now
+                    Launch App
                     <Rocket className="ml-2 h-5 w-5 group-hover:translate-y-[-2px] transition-transform" />
                   </Button>
                 </Link>
               </div>
               <p className="text-sm text-muted-foreground mt-6">
-                ✨ Free forever • No credit card needed • Get started in 30 seconds
+                ✨ Free forever • No credit card • 30 seconds setup
               </p>
             </div>
           </div>
@@ -438,7 +438,7 @@ const Landing = () => {
             <div className="md:col-span-2">
               <div className="text-3xl font-bold text-primary mb-4">kyzzen</div>
               <p className="text-muted-foreground mb-4 max-w-sm">
-                The complete operating system for creator empires. Build, grow, and monetize your brand all in one place.
+                Complete creator operating system. Build, grow, monetize.
               </p>
               <div className="flex gap-2">
                 <Link to="/app">
