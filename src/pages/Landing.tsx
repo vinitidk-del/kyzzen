@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Play } from 'lucide-react';
+import { ArrowRight, Sparkles, TrendingUp, Users, Zap, Target, BarChart3, Rocket, Brain, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -32,21 +32,36 @@ const Landing = () => {
       {/* Hero Section */}
       <section id="home" className="pt-32 pb-20 px-6">
         <div className="container mx-auto">
-          <div className="max-w-4xl mx-auto text-center mb-16 animate-fade-in">
-            <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
-              We make brands shine
+          <div className="max-w-5xl mx-auto text-center mb-16 animate-fade-in">
+            <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2 mb-6">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium text-primary">Your Complete Creator Operating System</span>
+            </div>
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+              Build Your Creator Empire
               <br />
-              <span className="text-primary">& competitors envious</span>
+              <span className="text-primary">All in One Place</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              Innovative Digital Marketing Solutions for Creators, Artists, and Influencers
+            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              From AI-powered content generation to analytics and brand ventures—everything you need to grow your creator business, beautifully organized.
             </p>
-            <Link to="/app">
-              <Button size="lg" className="rounded-full text-lg px-8 py-6 shadow-lg hover:shadow-primary/50 transition-all">
-                Launch App
-                <Play className="ml-2 h-5 w-5" />
-              </Button>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link to="/app">
+                <Button size="lg" className="rounded-full text-lg px-10 py-6 shadow-xl hover:shadow-primary/50 transition-all group">
+                  Start Creating Free
+                  <Rocket className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+              <a href="#features">
+                <Button size="lg" variant="outline" className="rounded-full text-lg px-10 py-6">
+                  See Features
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </a>
+            </div>
+            <p className="text-sm text-muted-foreground mt-6">
+              <Heart className="inline h-4 w-4 text-primary" /> Trusted by thousands of creators worldwide
+            </p>
           </div>
 
           {/* Services Marquee */}
@@ -67,65 +82,176 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Good Morning Section */}
-      <section className="py-20 px-6 bg-gradient-to-r from-primary/5 to-accent/10">
-        <div className="container mx-auto">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-5xl md:text-6xl font-bold mb-8 text-center">
-              Good Morning <span className="text-primary">legends!</span>
+      {/* Features Section */}
+      <section id="features" className="py-20 px-6 bg-gradient-to-b from-accent/5 to-background">
+        <div className="container mx-auto max-w-7xl">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Everything You Need to <span className="text-primary">Succeed</span>
             </h2>
-            <p className="text-xl text-center text-muted-foreground max-w-3xl mx-auto mb-8">
-              "Enhance your online presence with tailored social media strategies, content creation, and community engagement"
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Powerful tools designed specifically for creators who want to scale their impact
             </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                icon: Brain,
+                title: 'AI Content Generator',
+                description: 'Create engaging content in seconds with our advanced AI that understands your brand voice and audience.',
+                color: 'text-blue-500'
+              },
+              {
+                icon: BarChart3,
+                title: 'Smart Analytics',
+                description: 'Track your growth with real-time analytics and insights that help you make data-driven decisions.',
+                color: 'text-green-500'
+              },
+              {
+                icon: Zap,
+                title: 'Content Pipeline',
+                description: 'Organize and schedule your content with an intuitive pipeline that keeps you consistently posting.',
+                color: 'text-yellow-500'
+              },
+              {
+                icon: Target,
+                title: 'Brand Ventures',
+                description: 'Discover and manage brand partnerships, sponsorships, and collaborations all in one dashboard.',
+                color: 'text-purple-500'
+              },
+              {
+                icon: TrendingUp,
+                title: 'Growth Engine',
+                description: 'Get personalized growth strategies and actionable insights to expand your reach exponentially.',
+                color: 'text-pink-500'
+              },
+              {
+                icon: Users,
+                title: 'Talent Network',
+                description: 'Connect with other creators, build your team, and collaborate on projects that matter.',
+                color: 'text-orange-500'
+              }
+            ].map((feature, idx) => (
+              <Card key={idx} className="bg-card border-border hover:shadow-xl hover:scale-105 transition-all duration-300 group">
+                <CardHeader>
+                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform ${feature.color}`}>
+                    <feature.icon className="h-6 w-6" />
+                  </div>
+                  <CardTitle className="text-xl">{feature.title}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground">{feature.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          
+          <div className="text-center mt-12">
+            <Link to="/app">
+              <Button size="lg" variant="outline" className="rounded-full group">
+                Explore All Features
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Why Us Section */}
-      <section id="about" className="py-20 px-6">
+      {/* Why Choose Us Section */}
+      <section id="about" className="py-20 px-6 bg-accent/5">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-5xl font-bold mb-8 text-center">Why Us?</h2>
-          <div className="bg-card rounded-2xl p-8 md:p-12 border border-border shadow-card">
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Every creator has a vision, but bringing that vision to life can be challenging. At Kyzzen Media, we specialize in turning your creative dreams into reality. Let us handle the editing, social media management, and branding, so you can focus on what you do best: creating! With Kyzzen Media by your side, your vision will shine brilliantly in the digital world.
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Built for Creators, <span className="text-primary">By Creators</span>
+            </h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              We understand your journey because we've lived it
             </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <Card className="bg-gradient-to-br from-card to-accent/10 border-border shadow-xl">
+              <CardHeader>
+                <Sparkles className="h-8 w-8 text-primary mb-4" />
+                <CardTitle className="text-2xl">Focus on Creating</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground leading-relaxed">
+                  Stop juggling dozens of tools. Kyzzen brings everything together—content creation, analytics, brand deals, and growth strategies—so you can spend more time doing what you love.
+                </p>
+              </CardContent>
+            </Card>
+            
+            <Card className="bg-gradient-to-br from-card to-primary/10 border-border shadow-xl">
+              <CardHeader>
+                <Zap className="h-8 w-8 text-primary mb-4" />
+                <CardTitle className="text-2xl">Scale Smarter</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground leading-relaxed">
+                  Our AI-powered tools and intelligent automation help you create more content, reach more people, and grow your business without burning out or hiring a whole team.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 px-6 bg-accent/5">
+      <section className="py-20 px-6">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-5xl font-bold mb-12 text-center">What Our Customers Are Saying</h2>
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">Loved by Creators</h2>
+            <p className="text-lg text-muted-foreground">See how Kyzzen is transforming creator businesses</p>
+          </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
                 name: 'Jake M.',
                 initial: 'J',
-                text: 'kyzzen has improved the quality of my YouTube videos with their professional editing. Their SEO advice has also helped attract more viewers. They\'ve been a valuable part of my growth.'
+                role: 'YouTube Creator',
+                followers: '250K',
+                text: 'The AI content generator is a game-changer. I went from posting once a week to daily, and my engagement has tripled. Kyzzen gets my creative flow.',
+                metric: '+300% Engagement'
               },
               {
                 name: 'Sophia L.',
                 initial: 'S',
-                text: 'Kyzzen Media has helped me gradually grow my Instagram following. Their content ideas and strategies fit my brand well, and the team is always there to offer support and advice.'
+                role: 'Instagram Influencer',
+                followers: '500K',
+                text: 'Managing brand deals used to be chaos. Now everything is organized in one place. I\'ve closed 5 new partnerships this month alone.',
+                metric: '5 New Deals/Month'
               },
               {
                 name: 'Tom S.',
                 initial: 'T',
-                text: 'Thanks to Kyzzen Media, my website traffic and art sales have seen a nice increase. Their marketing strategies have helped bring more visibility to my work.'
+                role: 'Digital Artist',
+                followers: '150K',
+                text: 'The analytics showed me exactly which content my audience loves. My art sales are up 150% and I finally understand my audience.',
+                metric: '+150% Sales'
               }
             ].map((testimonial, idx) => (
-              <Card key={idx} className="bg-card border-border hover:shadow-lg transition-shadow">
+              <Card key={idx} className="bg-card border-border hover:shadow-xl hover:scale-105 transition-all duration-300">
                 <CardHeader>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold text-xl">
-                      {testimonial.initial}
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center gap-3">
+                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center text-primary font-bold text-xl">
+                        {testimonial.initial}
+                      </div>
+                      <div>
+                        <CardTitle className="text-lg">{testimonial.name}</CardTitle>
+                        <p className="text-sm text-muted-foreground">{testimonial.role} • {testimonial.followers}</p>
+                      </div>
                     </div>
-                    <CardTitle className="text-lg">{testimonial.name}</CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground italic">"{testimonial.text}"</p>
+                  <p className="text-muted-foreground mb-4">"{testimonial.text}"</p>
+                  <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-3 py-1">
+                    <TrendingUp className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-medium text-primary">{testimonial.metric}</span>
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -134,10 +260,14 @@ const Landing = () => {
       </section>
 
       {/* Pricing Plans */}
-      <section className="py-20 px-6">
+      <section className="py-20 px-6 bg-gradient-to-b from-accent/5 to-background">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-5xl font-bold mb-4 text-center">Choose the Perfect Plan</h2>
-          <p className="text-xl text-muted-foreground mb-12 text-center">for Your Creative Journey</p>
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Start Free, <span className="text-primary">Scale When Ready</span>
+            </h2>
+            <p className="text-lg text-muted-foreground">Choose the plan that fits your creator journey</p>
+          </div>
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
@@ -211,68 +341,135 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Services Section */}
-      <section id="services" className="py-20 px-6 bg-accent/5">
+      {/* How It Works Section */}
+      <section id="services" className="py-20 px-6">
         <div className="container mx-auto max-w-6xl">
-          <h2 className="text-5xl font-bold mb-4 text-center">What We Offer</h2>
-          <p className="text-xl text-muted-foreground mb-12 text-center max-w-3xl mx-auto">
-            We specialize in empowering creators through a comprehensive suite of services designed to enhance their digital presence and maximize their impact.
-          </p>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">How It Works</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Get started in minutes and start seeing results
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-12 relative">
+            {/* Connection Lines */}
+            <div className="hidden md:block absolute top-1/4 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
+            
             {[
               {
-                title: 'Social Media Management',
-                description: 'We manage your social media accounts, ensuring consistent posting and audience growth.'
+                step: '01',
+                title: 'Sign Up & Setup',
+                description: 'Create your free account in 30 seconds. Connect your social profiles and you\'re ready to go.',
+                icon: Rocket
               },
               {
-                title: 'Video Editing',
-                description: 'Our editors craft high-quality videos with professional cuts, effects, and transitions.'
+                step: '02',
+                title: 'Create & Organize',
+                description: 'Use our AI tools to generate content ideas, schedule posts, and organize your creator workflow.',
+                icon: Sparkles
               },
               {
-                title: 'Content Strategy',
-                description: 'We develop tailored strategies to drive engagement and increase visibility.'
+                step: '03',
+                title: 'Grow & Monetize',
+                description: 'Track analytics, secure brand deals, and scale your creator business with data-driven insights.',
+                icon: TrendingUp
               }
-            ].map((service, idx) => (
-              <Card key={idx} className="bg-card border-border hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-xl mb-2">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{service.description}</p>
-                </CardContent>
-              </Card>
+            ].map((step, idx) => (
+              <div key={idx} className="relative text-center">
+                <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center relative z-10 border-4 border-background">
+                  <step.icon className="h-10 w-10 text-primary" />
+                </div>
+                <div className="text-5xl font-bold text-primary/20 mb-2">{step.step}</div>
+                <h3 className="text-xl font-bold mb-3">{step.title}</h3>
+                <p className="text-muted-foreground">{step.description}</p>
+              </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-6">
-        <div className="container mx-auto max-w-4xl text-center">
-          <div className="bg-gradient-to-r from-primary/10 to-accent/20 rounded-3xl p-12 border border-border">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Ready to elevate your digital presence?
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Join thousands of creators who trust Kyzzen Media to bring their vision to life.
-            </p>
+          
+          <div className="text-center mt-16">
             <Link to="/app">
-              <Button size="lg" className="rounded-full text-lg px-12 py-6 shadow-xl hover:shadow-primary/50 transition-all">
-                Let's Elevate!
-                <ArrowRight className="ml-2 h-5 w-5" />
+              <Button size="lg" className="rounded-full text-lg px-10 py-6 shadow-xl group">
+                Start Your Journey
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
             </Link>
           </div>
         </div>
       </section>
 
+      {/* CTA Section */}
+      <section className="py-20 px-6 bg-gradient-to-b from-accent/10 to-background">
+        <div className="container mx-auto max-w-5xl text-center">
+          <div className="relative overflow-hidden bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 rounded-3xl p-12 md:p-16 border border-primary/20 shadow-2xl">
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent animate-pulse"></div>
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 bg-background/80 backdrop-blur-sm rounded-full px-6 py-2 mb-6">
+                <Sparkles className="h-5 w-5 text-primary" />
+                <span className="font-semibold text-primary">Start Free Today</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+                Your Creator Empire
+                <br />
+                <span className="text-primary">Starts Here</span>
+              </h2>
+              <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
+                Join over 10,000 creators who are building their dream businesses with Kyzzen. No credit card required.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link to="/app">
+                  <Button size="lg" className="rounded-full text-lg px-12 py-7 shadow-2xl hover:shadow-primary/50 transition-all group text-lg font-semibold">
+                    Launch Your App Now
+                    <Rocket className="ml-2 h-5 w-5 group-hover:translate-y-[-2px] transition-transform" />
+                  </Button>
+                </Link>
+              </div>
+              <p className="text-sm text-muted-foreground mt-6">
+                ✨ Free forever • No credit card needed • Get started in 30 seconds
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Footer */}
-      <footer className="border-t border-border/50 py-12 px-6 bg-accent/5">
-        <div className="container mx-auto text-center">
-          <div className="text-2xl font-bold text-primary mb-4">kyzzen</div>
-          <p className="text-muted-foreground">
-            © 2025 Kyzzen Media. All rights reserved.
-          </p>
+      <footer className="border-t border-border/50 py-12 px-6">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid md:grid-cols-4 gap-8 mb-8">
+            <div className="md:col-span-2">
+              <div className="text-3xl font-bold text-primary mb-4">kyzzen</div>
+              <p className="text-muted-foreground mb-4 max-w-sm">
+                The complete operating system for creator empires. Build, grow, and monetize your brand all in one place.
+              </p>
+              <div className="flex gap-2">
+                <Link to="/app">
+                  <Button variant="outline" size="sm" className="rounded-full">
+                    Get Started Free
+                  </Button>
+                </Link>
+              </div>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Product</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li><a href="#features" className="hover:text-primary transition-colors">Features</a></li>
+                <li><a href="#about" className="hover:text-primary transition-colors">About</a></li>
+                <li><a href="#services" className="hover:text-primary transition-colors">How It Works</a></li>
+                <li><Link to="/app" className="hover:text-primary transition-colors">Launch App</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-semibold mb-4">Company</h3>
+              <ul className="space-y-2 text-muted-foreground">
+                <li><a href="#about" className="hover:text-primary transition-colors">About Us</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Support</a></li>
+                <li><a href="#" className="hover:text-primary transition-colors">Privacy</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-border/50 pt-8 text-center text-muted-foreground text-sm">
+            <p>© 2025 Kyzzen Media. Made with <Heart className="inline h-4 w-4 text-primary" /> for creators worldwide.</p>
+          </div>
         </div>
       </footer>
     </div>
