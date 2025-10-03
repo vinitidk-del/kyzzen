@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Plus, Brain } from 'lucide-react';
+import { Plus, Brain, Calendar, ArrowUpDown } from 'lucide-react';
 import { CONTENT_PIPELINE } from '@/data/mockApi';
 import { ContentTask } from '@/types/auth';
 import { cn } from '@/lib/utils';
 import { AIContentGenerator } from './AIContentGenerator';
+import { toast } from '@/hooks/use-toast';
 
 const columns = [
   { id: 'idea', label: 'Ideas', color: 'text-warning' },
@@ -19,6 +20,22 @@ export function ContentHub() {
   const [pipeline, setPipeline] = useState(CONTENT_PIPELINE);
   const [draggedTask, setDraggedTask] = useState<ContentTask | null>(null);
   const [showAIGenerator, setShowAIGenerator] = useState(false);
+  const [sortOrder, setSortOrder] = useState<'date' | 'priority'>('date');
+
+  const handleSchedulePost = (taskTitle: string) => {
+    toast({
+      title: "Scheduling Post",
+      description: `"${taskTitle}" has been scheduled for publishing.`,
+    });
+  };
+
+  const toggleSortOrder = () => {
+    setSortOrder(prev => prev === 'date' ? 'priority' : 'date');
+    toast({
+      title: "Sort Order Changed",
+      description: `Sorting by ${sortOrder === 'date' ? 'priority' : 'date'}`,
+    });
+  };
 
   const handleDragStart = (e: React.DragEvent, task: ContentTask) => {
     setDraggedTask(task);
@@ -61,12 +78,21 @@ export function ContentHub() {
         <h1 className="text-3xl font-bold text-foreground">Content Pipeline</h1>
         <div className="flex gap-2">
           <Button
+            onClick={toggleSortOrder}
+            variant="outline"
+            size="sm"
+            className="flex items-center gap-2"
+          >
+            <ArrowUpDown className="w-4 h-4" />
+            Sort by {sortOrder}
+          </Button>
+          <Button
             onClick={() => setShowAIGenerator(!showAIGenerator)}
             variant={showAIGenerator ? "default" : "outline"}
             className="flex items-center gap-2"
           >
             <Brain className="w-4 h-4" />
-            AI Content Generator
+            AI Generator
           </Button>
           <Button 
             variant="outline" 
@@ -84,8 +110,11 @@ export function ContentHub() {
               updatedPipeline.idea = [...(updatedPipeline.idea || []), newTask];
               setPipeline(updatedPipeline);
               
-              // Also save to localStorage for persistence
               localStorage.setItem('contentPipeline', JSON.stringify(updatedPipeline));
+              toast({
+                title: "Task Added",
+                description: "New task created in Ideas column",
+              });
             }}
           >
             <Plus className="w-4 h-4 mr-1" />
@@ -121,7 +150,18 @@ export function ContentHub() {
                       draggedTask?.id === task.id && "opacity-50 rotate-1"
                     )}
                   >
-                    <p className="text-sm font-semibold text-foreground">{task.title}</p>
+                    <p className="text-sm font-semibold text-foreground mb-2">{task.title}</p>
+                    {column.id === 'editing' && (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="w-full text-xs"
+                        onClick={() => handleSchedulePost(task.title)}
+                      >
+                        <Calendar className="w-3 h-3 mr-1" />
+                        Schedule Post
+                      </Button>
+                    )}
                   </div>
                 ))}
                 

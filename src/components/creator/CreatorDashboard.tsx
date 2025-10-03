@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { TrendingUp, Users, DollarSign, Zap } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { TrendingUp, Users, DollarSign, Zap, Link as LinkIcon, Download } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { toast } from '@/hooks/use-toast';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 const revenueData = [
   { month: 'Jan', revenue: 45000 },
@@ -19,17 +22,63 @@ const platformMetrics = {
 };
 
 export function CreatorDashboard() {
+  const [connectDialogOpen, setConnectDialogOpen] = useState(false);
+  const [selectedPlatform, setSelectedPlatform] = useState('');
+
   const totalFollowers = Object.values(platformMetrics).reduce((sum, platform) => sum + platform.followers, 0);
   const totalRevenue = Object.values(platformMetrics).reduce((sum, platform) => sum + platform.revenue, 0);
   const avgEngagement = Object.values(platformMetrics).reduce((sum, platform) => sum + platform.engagement, 0) / 3;
+
+  const handleConnectAccount = (platform: string) => {
+    setSelectedPlatform(platform);
+    setConnectDialogOpen(true);
+  };
+
+  const confirmConnect = () => {
+    toast({
+      title: "Connecting Account",
+      description: `Connecting to ${selectedPlatform}...`,
+    });
+    setTimeout(() => {
+      setConnectDialogOpen(false);
+      toast({
+        title: "Connected!",
+        description: `${selectedPlatform} account linked successfully.`,
+      });
+    }, 1500);
+  };
+
+  const handleExportReport = () => {
+    toast({
+      title: "Generating Report",
+      description: "Creating your monthly performance report...",
+    });
+    setTimeout(() => {
+      toast({
+        title: "Report Ready",
+        description: "monthly-report.pdf has been downloaded.",
+      });
+    }, 2000);
+  };
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-foreground">Creator Dashboard</h1>
-        <span className="bg-success/20 text-success font-semibold py-1 px-3 rounded-full text-sm">
-          LIVE
-        </span>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleExportReport}
+            className="flex items-center gap-2"
+          >
+            <Download className="h-4 w-4" />
+            Export Report
+          </Button>
+          <span className="bg-success/20 text-success font-semibold py-1 px-3 rounded-full text-sm">
+            LIVE
+          </span>
+        </div>
       </div>
 
       {/* Key Metrics */}
@@ -126,7 +175,18 @@ export function CreatorDashboard() {
         {Object.entries(platformMetrics).map(([key, platform]) => (
           <Card key={key} className="bg-gradient-card border-border shadow-card">
             <CardHeader>
-              <CardTitle className="text-lg font-bold text-foreground">{platform.name}</CardTitle>
+              <div className="flex justify-between items-center">
+                <CardTitle className="text-lg font-bold text-foreground">{platform.name}</CardTitle>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => handleConnectAccount(platform.name)}
+                  className="flex items-center gap-1"
+                >
+                  <LinkIcon className="h-3 w-3" />
+                  Connect
+                </Button>
+              </div>
             </CardHeader>
             <CardContent className="space-y-3">
               <div className="flex justify-between">
@@ -151,6 +211,31 @@ export function CreatorDashboard() {
           </Card>
         ))}
       </div>
+
+      {/* Connect Account Dialog */}
+      <Dialog open={connectDialogOpen} onOpenChange={setConnectDialogOpen}>
+        <DialogContent className="bg-card border-border">
+          <DialogHeader>
+            <DialogTitle>Connect {selectedPlatform} Account</DialogTitle>
+            <DialogDescription>
+              Link your {selectedPlatform} account to sync your analytics and content automatically.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <p className="text-sm text-muted-foreground">
+              You'll be redirected to {selectedPlatform} to authorize access. We'll only read your public metrics.
+            </p>
+            <div className="flex gap-2">
+              <Button onClick={confirmConnect} className="flex-1">
+                Connect Account
+              </Button>
+              <Button variant="outline" onClick={() => setConnectDialogOpen(false)} className="flex-1">
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

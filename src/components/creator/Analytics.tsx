@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { TrendingUp, Users, Eye, Heart } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { TrendingUp, Users, Eye, Heart, Download, Calendar, Filter } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, PieChart, Pie, Cell } from 'recharts';
+import { toast } from '@/hooks/use-toast';
 
 const audienceGrowthData = [
   { month: 'Jan', followers: 10000000 },
@@ -31,14 +33,107 @@ const engagementData = [
 const COLORS = ['#F5A623', '#22c55e', '#3b82f6', '#ec4899'];
 
 export function Analytics() {
-  const totalFollowers = platformData.reduce((sum, platform) => sum + platform.followers, 0);
+  const [dateRange, setDateRange] = useState('30');
+  const [activePlatforms, setActivePlatforms] = useState({
+    youtube: true,
+    tiktok: true,
+    instagram: true,
+    twitter: true
+  });
+
+  const totalFollowers = platformData
+    .filter(p => activePlatforms[p.platform.toLowerCase() as keyof typeof activePlatforms])
+    .reduce((sum, platform) => sum + platform.followers, 0);
   const avgEngagement = 9.2;
   const monthlyViews = 45600000;
   const revenueGrowth = 18.5;
 
+  const handleExportData = () => {
+    toast({
+      title: "Exporting Analytics",
+      description: "Your report will be ready in a moment...",
+    });
+    setTimeout(() => {
+      toast({
+        title: "Export Complete",
+        description: "analytics-report.pdf has been downloaded.",
+      });
+    }, 2000);
+  };
+
+  const handleDateRangeChange = (range: string) => {
+    setDateRange(range);
+    toast({
+      title: "Date Range Updated",
+      description: `Showing data for the last ${range} days`,
+    });
+  };
+
+  const togglePlatform = (platform: keyof typeof activePlatforms) => {
+    setActivePlatforms(prev => ({
+      ...prev,
+      [platform]: !prev[platform]
+    }));
+  };
+
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold text-foreground">Analytics Dashboard</h1>
+      <div className="flex justify-between items-center">
+        <h1 className="text-3xl font-bold text-foreground">Analytics Dashboard</h1>
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleExportData}
+            className="flex items-center gap-2"
+          >
+            <Download className="h-4 w-4" />
+            Export Data
+          </Button>
+        </div>
+      </div>
+
+      {/* Filters */}
+      <Card className="bg-gradient-card border-border shadow-card">
+        <CardContent className="p-4">
+          <div className="flex flex-wrap items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Calendar className="h-4 w-4 text-muted-foreground" />
+              <span className="text-sm font-medium">Date Range:</span>
+              <div className="flex gap-2">
+                {['7', '30', '90'].map(range => (
+                  <Button
+                    key={range}
+                    variant={dateRange === range ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => handleDateRangeChange(range)}
+                  >
+                    {range} Days
+                  </Button>
+                ))}
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2">
+              <Filter className="h-4 w-4 text-muted-foreground" />
+              <span className="text-sm font-medium">Platforms:</span>
+              <div className="flex gap-2">
+                {Object.entries(activePlatforms).map(([platform, isActive]) => (
+                  <Button
+                    key={platform}
+                    variant={isActive ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => togglePlatform(platform as keyof typeof activePlatforms)}
+                    className="capitalize"
+                  >
+                    {platform}
+                  </Button>
+                ))}
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
       
       {/* Key Metrics */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">

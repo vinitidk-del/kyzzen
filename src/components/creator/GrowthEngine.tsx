@@ -39,6 +39,15 @@ export function GrowthEngine() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [strategies, setStrategies] = useState<GrowthStrategy[]>([]);
   const [selectedStrategy, setSelectedStrategy] = useState<GrowthStrategy | null>(null);
+  const [appliedStrategies, setAppliedStrategies] = useState<Set<string>>(new Set());
+  
+  const handleApplyStrategy = (strategyTitle: string) => {
+    setAppliedStrategies(prev => new Set(prev).add(strategyTitle));
+    toast({
+      title: "Strategy Applied ✓",
+      description: `"${strategyTitle}" is now being implemented.`,
+    });
+  };
 
   const analyzeGrowthOpportunities = async () => {
     setIsAnalyzing(true);
@@ -361,26 +370,13 @@ export function GrowthEngine() {
                   </ol>
                   
                    <div className="flex gap-2 pt-4">
-                     <Button size="sm" onClick={() => {
-                       // Actually implement the strategy
-                       const updatedStrategies = strategies.map(s => 
-                         s.title === selectedStrategy.title 
-                           ? { ...s, status: 'implementing', startDate: new Date().toISOString() }
-                           : s
-                       );
-                       setStrategies(updatedStrategies as GrowthStrategy[]);
-                       
-                       // Save to localStorage for persistence
-                       localStorage.setItem('growthStrategies', JSON.stringify(updatedStrategies));
-                       
-                       toast({
-                         title: "Implementation Started! 🚀",
-                         description: `Started implementing: ${selectedStrategy.title}`,
-                       });
-                       
-                       // Log the action
-                       console.log(`[Growth Engine] Started implementing strategy: ${selectedStrategy.title}`);
-                     }}>Start Implementation</Button>
+                     <Button 
+                       size="sm" 
+                       onClick={() => handleApplyStrategy(selectedStrategy.title)}
+                       disabled={appliedStrategies.has(selectedStrategy.title)}
+                     >
+                       {appliedStrategies.has(selectedStrategy.title) ? 'Applied ✓' : 'Apply Strategy'}
+                     </Button>
                      <Button size="sm" variant="outline" onClick={() => {
                        // Save strategy to implementation queue
                        const savedStrategies = JSON.parse(localStorage.getItem('savedStrategies') || '[]');

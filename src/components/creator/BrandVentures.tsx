@@ -1,15 +1,64 @@
 import React, { useState } from 'react';
-import { Sparkles, TrendingUp, Package, AlertTriangle } from 'lucide-react';
+import { Sparkles, TrendingUp, Package, AlertTriangle, CreditCard, DollarSign } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useAuth } from '@/contexts/AuthContext';
+import { toast } from '@/hooks/use-toast';
+import { Badge } from '@/components/ui/badge';
+
+const mockBrandDeals = [
+  {
+    id: 1,
+    brand: 'TechGear Pro',
+    amount: '$15,000',
+    status: 'active' as const,
+    dueDate: '2025-11-15',
+    description: 'Gaming headset sponsorship - 2 dedicated videos'
+  },
+  {
+    id: 2,
+    brand: 'Energy Boost',
+    amount: '$8,500',
+    status: 'pending' as const,
+    dueDate: '2025-11-01',
+    description: 'Energy drink integration in 3 videos'
+  },
+  {
+    id: 3,
+    brand: 'StreamSetup',
+    amount: '$22,000',
+    status: 'negotiating' as const,
+    dueDate: '2025-12-01',
+    description: 'Complete streaming setup showcase series'
+  }
+];
 
 export function BrandVentures() {
   const { user } = useAuth();
   const [aiPrompt, setAiPrompt] = useState('');
   const [aiOutput, setAiOutput] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
+  
+  const handlePayment = (dealId: number, brandName: string, amount: string) => {
+    toast({
+      title: "Processing Payment",
+      description: `Initiating payment for ${brandName} - ${amount}`,
+    });
+    setTimeout(() => {
+      toast({
+        title: "Payment Successful",
+        description: `Received ${amount} from ${brandName}`,
+      });
+    }, 2000);
+  };
+
+  const handleAcceptDeal = (brandName: string) => {
+    toast({
+      title: "Deal Accepted",
+      description: `Partnership with ${brandName} confirmed!`,
+    });
+  };
 
   const brand = user?.brand;
   const metrics = brand?.metrics;
@@ -184,6 +233,84 @@ export function BrandVentures() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Brand Deals */}
+      <Card className="bg-gradient-card border-border shadow-card">
+        <CardHeader>
+          <CardTitle className="text-2xl flex items-center gap-2">
+            <TrendingUp className="w-6 h-6 text-success" />
+            Active Brand Deals
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {mockBrandDeals.map(deal => (
+              <Card key={deal.id} className="bg-card border-border">
+                <CardContent className="p-4">
+                  <div className="flex justify-between items-start mb-3">
+                    <div>
+                      <h4 className="font-bold text-lg text-foreground">{deal.brand}</h4>
+                      <p className="text-sm text-muted-foreground">{deal.description}</p>
+                    </div>
+                    <Badge 
+                      variant={deal.status === 'active' ? 'default' : 'outline'}
+                      className="capitalize"
+                    >
+                      {deal.status}
+                    </Badge>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-4">
+                      <div>
+                        <p className="text-xs text-muted-foreground">Amount</p>
+                        <p className="font-bold text-success text-lg">{deal.amount}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-muted-foreground">Due Date</p>
+                        <p className="font-medium text-foreground">{deal.dueDate}</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      {deal.status === 'active' && (
+                        <Button
+                          size="sm"
+                          onClick={() => handlePayment(deal.id, deal.brand, deal.amount)}
+                          className="flex items-center gap-1"
+                        >
+                          <DollarSign className="w-4 h-4" />
+                          Request Payment
+                        </Button>
+                      )}
+                      {deal.status === 'pending' && (
+                        <Button
+                          size="sm"
+                          onClick={() => handleAcceptDeal(deal.brand)}
+                          className="flex items-center gap-1"
+                        >
+                          <CreditCard className="w-4 h-4" />
+                          Accept Deal
+                        </Button>
+                      )}
+                      {deal.status === 'negotiating' && (
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => toast({
+                            title: "Negotiation In Progress",
+                            description: `Current offer: ${deal.amount}`,
+                          })}
+                        >
+                          View Offer
+                        </Button>
+                      )}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
 
       {/* AI Product Idea Lab */}
       <Card className="bg-gradient-card border-border shadow-card">
