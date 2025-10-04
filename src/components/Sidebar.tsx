@@ -1,11 +1,14 @@
 import React from 'react';
-import { X, Menu, LogOut, Bell } from 'lucide-react';
+import { X, Menu, LogOut, Settings as SettingsIcon, Trophy } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { cn } from '@/lib/utils';
 import kyzzenLogo from '@/assets/kyzzen-logo.png';
 import { TalentRegistration } from '@/components/TalentRegistration';
 import { AccountPreview } from '@/components/AccountPreview';
+import { Notifications } from '@/components/Notifications';
+import { Settings } from '@/components/Settings';
+import { Achievements } from '@/components/Achievements';
 
 interface NavigationItem {
   id: string;
@@ -126,10 +129,18 @@ export function Header({ onOpenSidebar }: HeaderProps) {
       
       <div className="flex-1" />
       
-      <div className="flex items-center gap-4">
-        <Button variant="ghost" size="sm" className="text-muted-foreground hover:text-foreground">
-          <Bell className="w-5 h-5" />
-        </Button>
+      <div className="flex items-center gap-2">
+        <Notifications />
+        <Achievements>
+          <Button variant="ghost" size="sm">
+            <Trophy className="w-5 h-5" />
+          </Button>
+        </Achievements>
+        <Settings>
+          <Button variant="ghost" size="sm">
+            <SettingsIcon className="w-5 h-5" />
+          </Button>
+        </Settings>
         <TalentRegistration />
         <Button
           variant="outline"
