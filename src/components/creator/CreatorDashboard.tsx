@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { TrendingUp, Users, DollarSign, Zap, Link as LinkIcon, Download } from 'lucide-react';
+import { TrendingUp, Users, DollarSign, Zap, Link as LinkIcon, Download, Minimize2, Maximize2, Copy } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { toast } from '@/hooks/use-toast';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import { FlippableCard } from '@/components/FlippableCard';
+import { RecentlyViewed, trackRecentlyViewed } from '@/components/RecentlyViewed';
 
 const revenueData = [
   { month: 'Jan', revenue: 45000 },
@@ -24,10 +26,35 @@ const platformMetrics = {
 export function CreatorDashboard() {
   const [connectDialogOpen, setConnectDialogOpen] = useState(false);
   const [selectedPlatform, setSelectedPlatform] = useState('');
+  const [minimizedWidgets, setMinimizedWidgets] = useState<Set<string>>(new Set());
+
+  React.useEffect(() => {
+    trackRecentlyViewed('Creator Dashboard', 'analytics');
+  }, []);
 
   const totalFollowers = Object.values(platformMetrics).reduce((sum, platform) => sum + platform.followers, 0);
   const totalRevenue = Object.values(platformMetrics).reduce((sum, platform) => sum + platform.revenue, 0);
   const avgEngagement = Object.values(platformMetrics).reduce((sum, platform) => sum + platform.engagement, 0) / 3;
+
+  const toggleWidget = (widgetId: string) => {
+    setMinimizedWidgets(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(widgetId)) {
+        newSet.delete(widgetId);
+      } else {
+        newSet.add(widgetId);
+      }
+      return newSet;
+    });
+  };
+
+  const copyDashboardLink = () => {
+    navigator.clipboard.writeText(window.location.href);
+    toast({
+      title: "Link Copied!",
+      description: "Dashboard link copied to clipboard",
+    });
+  };
 
   const handleConnectAccount = (platform: string) => {
     setSelectedPlatform(platform);
@@ -66,6 +93,14 @@ export function CreatorDashboard() {
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold text-foreground">Creator Dashboard</h1>
         <div className="flex items-center gap-2">
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={copyDashboardLink}
+          >
+            <Copy className="h-4 w-4 mr-2" />
+            Copy Link
+          </Button>
           <Button
             variant="outline"
             size="sm"
@@ -211,6 +246,9 @@ export function CreatorDashboard() {
           </Card>
         ))}
       </div>
+
+      {/* Recently Viewed */}
+      <RecentlyViewed />
 
       {/* Connect Account Dialog */}
       <Dialog open={connectDialogOpen} onOpenChange={setConnectDialogOpen}>

@@ -9,6 +9,7 @@ import { AccountPreview } from '@/components/AccountPreview';
 import { Notifications } from '@/components/Notifications';
 import { Settings } from '@/components/Settings';
 import { Achievements } from '@/components/Achievements';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 interface NavigationItem {
   id: string;
@@ -130,6 +131,7 @@ export function Header({ onOpenSidebar }: HeaderProps) {
       <div className="flex-1" />
       
       <div className="flex items-center gap-2">
+        <ThemeToggle />
         <Notifications />
         <Achievements>
           <Button variant="ghost" size="sm">
