@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Briefcase, Edit, Users, TrendingUp, Home, Search } from 'lucide-react';
+import { Briefcase, Edit, Users, TrendingUp, Home, Search, Calendar, DollarSign, BarChart3, MessageSquare } from 'lucide-react';
 import { Sidebar, Header } from '@/components/Sidebar';
 import { useAuth } from '@/contexts/AuthContext';
 import { UserRole } from '@/types/auth';
@@ -11,6 +11,11 @@ import { TalentNetwork } from '@/components/creator/TalentNetwork';
 import { CreatorDashboard } from '@/components/creator/CreatorDashboard';
 import { Analytics } from '@/components/creator/Analytics';
 import { GrowthEngine } from '@/components/creator/GrowthEngine';
+import { ContentCalendar } from '@/components/creator/ContentCalendar';
+import { FinancialTracker } from '@/components/creator/FinancialTracker';
+import { AdvancedAnalytics } from '@/components/creator/AdvancedAnalytics';
+import { TeamCollaboration } from '@/components/creator/TeamCollaboration';
+import { AudienceEngagement } from '@/components/creator/AudienceEngagement';
 
 // Agency Components
 import { AgencyDashboard } from '@/components/agency/AgencyDashboard';
@@ -23,11 +28,14 @@ import { CampaignManagement } from '@/components/business/CampaignManagement';
 const navigationConfig = {
   creator: [
     { id: 'dashboard', label: 'Dashboard', icon: <Home className="w-5 h-5" /> },
-    { id: 'brand-ventures', label: 'Brand Ventures', icon: <Briefcase className="w-5 h-5" /> },
+    { id: 'calendar', label: 'Content Calendar', icon: <Calendar className="w-5 h-5" /> },
     { id: 'content-hub', label: 'Content Pipeline', icon: <Edit className="w-5 h-5" /> },
+    { id: 'advanced-analytics', label: 'Analytics', icon: <BarChart3 className="w-5 h-5" /> },
+    { id: 'financial', label: 'Financials', icon: <DollarSign className="w-5 h-5" /> },
+    { id: 'engagement', label: 'Engagement', icon: <MessageSquare className="w-5 h-5" /> },
+    { id: 'team', label: 'Team', icon: <Users className="w-5 h-5" /> },
+    { id: 'brand-ventures', label: 'Brand Ventures', icon: <Briefcase className="w-5 h-5" /> },
     { id: 'talent', label: 'Talent Network', icon: <Users className="w-5 h-5" /> },
-    { id: 'analytics', label: 'Analytics', icon: <TrendingUp className="w-5 h-5" /> },
-    { id: 'growth', label: 'Growth Engine', icon: <TrendingUp className="w-5 h-5" /> },
   ],
   agency: [
     { id: 'dashboard', label: 'Agency Dashboard', icon: <Home className="w-5 h-5" /> },
@@ -66,14 +74,24 @@ export function AppLayout() {
 
   const renderPageContent = () => {
     switch (user.role) {
-        case 'creator':
+      case 'creator':
           switch (activePage) {
             case 'dashboard':
               return <CreatorDashboard />;
-            case 'brand-ventures':
-              return <BrandVentures />;
+            case 'calendar':
+              return <ContentCalendar />;
             case 'content-hub':
               return <ContentHub />;
+            case 'advanced-analytics':
+              return <AdvancedAnalytics />;
+            case 'financial':
+              return <FinancialTracker />;
+            case 'engagement':
+              return <AudienceEngagement />;
+            case 'team':
+              return <TeamCollaboration />;
+            case 'brand-ventures':
+              return <BrandVentures />;
             case 'talent':
               return <TalentNetwork />;
             case 'analytics':
