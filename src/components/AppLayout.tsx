@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Briefcase, Edit, Users, TrendingUp, Home, Search, Calendar, DollarSign, BarChart3, MessageSquare } from 'lucide-react';
+import { Briefcase, Edit, Users, TrendingUp, Home, Search, Calendar, DollarSign, BarChart3, MessageSquare, User } from 'lucide-react';
 import { Sidebar, Header } from '@/components/Sidebar';
 import { useAuth } from '@/contexts/AuthContext';
 import { UserRole } from '@/types/auth';
+import { QuickActions } from '@/components/QuickActions';
+import { MobileActions } from '@/components/MobileActions';
 
 // Creator Components
 import { BrandVentures } from '@/components/creator/BrandVentures';
@@ -16,6 +18,7 @@ import { FinancialTracker } from '@/components/creator/FinancialTracker';
 import { AdvancedAnalytics } from '@/components/creator/AdvancedAnalytics';
 import { TeamCollaboration } from '@/components/creator/TeamCollaboration';
 import { AudienceEngagement } from '@/components/creator/AudienceEngagement';
+import { CreatorProfile } from '@/components/creator/CreatorProfile';
 
 // Agency Components
 import { AgencyDashboard } from '@/components/agency/AgencyDashboard';
@@ -34,6 +37,7 @@ const navigationConfig = {
     { id: 'financial', label: 'Financials', icon: <DollarSign className="w-5 h-5" /> },
     { id: 'engagement', label: 'Engagement', icon: <MessageSquare className="w-5 h-5" /> },
     { id: 'team', label: 'Team', icon: <Users className="w-5 h-5" /> },
+    { id: 'profile', label: 'Profile', icon: <User className="w-5 h-5" /> },
     { id: 'brand-ventures', label: 'Brand Ventures', icon: <Briefcase className="w-5 h-5" /> },
     { id: 'talent', label: 'Talent Network', icon: <Users className="w-5 h-5" /> },
   ],
@@ -90,6 +94,8 @@ export function AppLayout() {
               return <AudienceEngagement />;
             case 'team':
               return <TeamCollaboration />;
+            case 'profile':
+              return <CreatorProfile />;
             case 'brand-ventures':
               return <BrandVentures />;
             case 'talent':
@@ -151,10 +157,16 @@ export function AppLayout() {
       
       <main className="flex-1 overflow-y-auto">
         <div className="p-6 md:p-10">
-          <Header onOpenSidebar={() => setSidebarOpen(true)} />
+          <div className="flex justify-between items-center mb-6">
+            <Header onOpenSidebar={() => setSidebarOpen(true)} />
+            <QuickActions onNavigate={setActivePage} />
+          </div>
           {renderPageContent()}
         </div>
       </main>
+
+      {/* Mobile Actions */}
+      <MobileActions onNavigate={setActivePage} />
     </div>
   );
 }
