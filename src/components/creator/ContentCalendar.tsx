@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface CalendarEvent {
   id: string;
@@ -32,8 +33,11 @@ const upcomingHolidays = [
   { name: 'Christmas', date: new Date('2025-12-25'), daysAway: 265 },
 ];
 
+type ViewMode = 'day' | 'week' | 'month';
+
 export function ContentCalendar() {
   const [currentDate, setCurrentDate] = useState(new Date());
+  const [viewMode, setViewMode] = useState<ViewMode>('month');
   const [events, setEvents] = useState<CalendarEvent[]>([
     { id: '1', title: 'YouTube: Product Review', date: new Date('2025-04-15'), type: 'youtube', series: 'Tech Reviews Q2' },
     { id: '2', title: 'TikTok: Quick Tips', date: new Date('2025-04-18'), type: 'tiktok' },
@@ -56,20 +60,51 @@ export function ContentCalendar() {
 
   const { daysInMonth, startingDayOfWeek } = getDaysInMonth(currentDate);
 
-  const previousMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
+  const navigate = (direction: 'prev' | 'next') => {
+    if (viewMode === 'month') {
+      setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + (direction === 'next' ? 1 : -1), 1));
+    } else if (viewMode === 'week') {
+      const newDate = new Date(currentDate);
+      newDate.setDate(currentDate.getDate() + (direction === 'next' ? 7 : -7));
+      setCurrentDate(newDate);
+    } else {
+      const newDate = new Date(currentDate);
+      newDate.setDate(currentDate.getDate() + (direction === 'next' ? 1 : -1));
+      setCurrentDate(newDate);
+    }
   };
 
-  const nextMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
+  const goToToday = () => {
+    setCurrentDate(new Date());
   };
 
-  const getEventsForDay = (day: number) => {
+  const getEventsForDay = (day: number, month?: number, year?: number) => {
     return events.filter(event => {
       const eventDate = new Date(event.date);
       return eventDate.getDate() === day &&
-             eventDate.getMonth() === currentDate.getMonth() &&
-             eventDate.getFullYear() === currentDate.getFullYear();
+             eventDate.getMonth() === (month ?? currentDate.getMonth()) &&
+             eventDate.getFullYear() === (year ?? currentDate.getFullYear());
+    });
+  };
+
+  const getEventsForDate = (date: Date) => {
+    return events.filter(event => {
+      const eventDate = new Date(event.date);
+      return eventDate.getDate() === date.getDate() &&
+             eventDate.getMonth() === date.getMonth() &&
+             eventDate.getFullYear() === date.getFullYear();
+    });
+  };
+
+  const getWeekDays = () => {
+    const startOfWeek = new Date(currentDate);
+    const day = startOfWeek.getDay();
+    startOfWeek.setDate(currentDate.getDate() - day);
+    
+    return Array.from({ length: 7 }, (_, i) => {
+      const date = new Date(startOfWeek);
+      date.setDate(startOfWeek.getDate() + i);
+      return date;
     });
   };
 
@@ -133,6 +168,16 @@ export function ContentCalendar() {
     }
   };
 
+  const getViewTitle = () => {
+    if (viewMode === 'day') {
+      return currentDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+    } else if (viewMode === 'week') {
+      const weekDays = getWeekDays();
+      return `${weekDays[0].toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} - ${weekDays[6].toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+    }
+    return currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+  };
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
@@ -147,57 +192,165 @@ export function ContentCalendar() {
         {/* Main Calendar */}
         <Card className="lg:col-span-2 bg-gradient-card border-border shadow-card">
           <CardHeader>
-            <div className="flex items-center justify-between">
-              <Button variant="ghost" size="sm" onClick={previousMonth}>
-                <ChevronLeft className="w-5 h-5" />
-              </Button>
-              <CardTitle className="text-xl">
-                {currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-              </CardTitle>
-              <Button variant="ghost" size="sm" onClick={nextMonth}>
-                <ChevronRight className="w-5 h-5" />
-              </Button>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <Button variant="ghost" size="sm" onClick={() => navigate('prev')}>
+                  <ChevronLeft className="w-5 h-5" />
+                </Button>
+                <Button variant="outline" size="sm" onClick={goToToday}>
+                  Today
+                </Button>
+                <Button variant="ghost" size="sm" onClick={() => navigate('next')}>
+                  <ChevronRight className="w-5 h-5" />
+                </Button>
+              </div>
+              <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as ViewMode)}>
+                <TabsList>
+                  <TabsTrigger value="day">Day</TabsTrigger>
+                  <TabsTrigger value="week">Week</TabsTrigger>
+                  <TabsTrigger value="month">Month</TabsTrigger>
+                </TabsList>
+              </Tabs>
             </div>
+            <CardTitle className="text-xl text-center">
+              {getViewTitle()}
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-7 gap-2 mb-2">
-              {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                <div key={day} className="text-center text-sm font-semibold text-muted-foreground py-2">
-                  {day}
-                </div>
-              ))}
-            </div>
-            <div className="grid grid-cols-7 gap-2">
-              {Array.from({ length: startingDayOfWeek }).map((_, i) => (
-                <div key={`empty-${i}`} className="h-24 bg-muted/20 rounded-lg" />
-              ))}
-              {Array.from({ length: daysInMonth }).map((_, i) => {
-                const day = i + 1;
-                const dayEvents = getEventsForDay(day);
-                return (
-                  <div
-                    key={day}
-                    className="h-24 bg-card border border-border rounded-lg p-2 cursor-pointer hover:border-accent transition-colors"
-                    onDragOver={(e) => e.preventDefault()}
-                    onDrop={() => handleDrop(day)}
-                  >
-                    <div className="text-sm font-semibold text-foreground mb-1">{day}</div>
-                    <div className="space-y-1 overflow-y-auto max-h-14">
-                      {dayEvents.map(event => (
-                        <div
-                          key={event.id}
-                          draggable
-                          onDragStart={() => handleDragStart(event)}
-                          className={`text-xs p-1 rounded cursor-move ${getTypeColor(event.type)} border`}
-                        >
-                          {event.title.substring(0, 15)}...
-                        </div>
-                      ))}
+            {/* Month View */}
+            {viewMode === 'month' && (
+              <>
+                <div className="grid grid-cols-7 gap-2 mb-2">
+                  {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
+                    <div key={day} className="text-center text-sm font-semibold text-muted-foreground py-2">
+                      {day}
                     </div>
-                  </div>
-                );
-              })}
-            </div>
+                  ))}
+                </div>
+                <div className="grid grid-cols-7 gap-2">
+                  {Array.from({ length: startingDayOfWeek }).map((_, i) => (
+                    <div key={`empty-${i}`} className="h-24 bg-muted/20 rounded-lg" />
+                  ))}
+                  {Array.from({ length: daysInMonth }).map((_, i) => {
+                    const day = i + 1;
+                    const dayEvents = getEventsForDay(day);
+                    return (
+                      <div
+                        key={day}
+                        className="h-24 bg-card border border-border rounded-lg p-2 cursor-pointer hover:border-accent transition-colors"
+                        onDragOver={(e) => e.preventDefault()}
+                        onDrop={() => handleDrop(day)}
+                      >
+                        <div className="text-sm font-semibold text-foreground mb-1">{day}</div>
+                        <div className="space-y-1 overflow-y-auto max-h-14">
+                          {dayEvents.map(event => (
+                            <div
+                              key={event.id}
+                              draggable
+                              onDragStart={() => handleDragStart(event)}
+                              className={`text-xs p-1 rounded cursor-move ${getTypeColor(event.type)} border`}
+                            >
+                              {event.title.substring(0, 15)}...
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            )}
+
+            {/* Week View */}
+            {viewMode === 'week' && (
+              <div className="space-y-2">
+                <div className="grid grid-cols-7 gap-2">
+                  {getWeekDays().map((date, i) => {
+                    const isToday = date.toDateString() === new Date().toDateString();
+                    const dayEvents = getEventsForDate(date);
+                    return (
+                      <div key={i} className="space-y-2">
+                        <div className={`text-center p-2 rounded ${isToday ? 'bg-primary text-primary-foreground' : 'bg-muted'}`}>
+                          <div className="text-xs font-medium">{date.toLocaleDateString('en-US', { weekday: 'short' })}</div>
+                          <div className="text-lg font-bold">{date.getDate()}</div>
+                        </div>
+                        <div className="space-y-2 min-h-[400px] bg-card/50 rounded-lg p-2">
+                          {dayEvents.map(event => (
+                            <div
+                              key={event.id}
+                              draggable
+                              onDragStart={() => handleDragStart(event)}
+                              className={`p-2 rounded cursor-move ${getTypeColor(event.type)} border`}
+                            >
+                              <div className="text-xs font-semibold mb-1">{event.title}</div>
+                              {event.series && <div className="text-xs opacity-70">{event.series}</div>}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+
+            {/* Day View */}
+            {viewMode === 'day' && (
+              <div className="space-y-3">
+                {Array.from({ length: 24 }).map((_, hour) => {
+                  const hourEvents = getEventsForDate(currentDate).filter(e => {
+                    // For demo purposes, distribute events throughout the day
+                    return true;
+                  });
+                  
+                  return (
+                    <div key={hour} className="flex gap-3">
+                      <div className="w-20 text-sm text-muted-foreground font-medium">
+                        {hour === 0 ? '12 AM' : hour < 12 ? `${hour} AM` : hour === 12 ? '12 PM' : `${hour - 12} PM`}
+                      </div>
+                      <div className="flex-1 border-t border-border pt-2 min-h-[60px]">
+                        {hour === 10 && hourEvents.slice(0, 1).map(event => (
+                          <div
+                            key={event.id}
+                            draggable
+                            onDragStart={() => handleDragStart(event)}
+                            className={`p-3 rounded cursor-move ${getTypeColor(event.type)} border mb-2`}
+                          >
+                            <div className="font-semibold">{event.title}</div>
+                            {event.series && <div className="text-sm opacity-70 mt-1">{event.series}</div>}
+                            {event.notes && <div className="text-sm mt-1">{event.notes}</div>}
+                          </div>
+                        ))}
+                        {hour === 14 && hourEvents.slice(1, 2).map(event => (
+                          <div
+                            key={event.id}
+                            draggable
+                            onDragStart={() => handleDragStart(event)}
+                            className={`p-3 rounded cursor-move ${getTypeColor(event.type)} border mb-2`}
+                          >
+                            <div className="font-semibold">{event.title}</div>
+                            {event.series && <div className="text-sm opacity-70 mt-1">{event.series}</div>}
+                            {event.notes && <div className="text-sm mt-1">{event.notes}</div>}
+                          </div>
+                        ))}
+                        {hour === 16 && hourEvents.slice(2, 3).map(event => (
+                          <div
+                            key={event.id}
+                            draggable
+                            onDragStart={() => handleDragStart(event)}
+                            className={`p-3 rounded cursor-move ${getTypeColor(event.type)} border mb-2`}
+                          >
+                            <div className="font-semibold">{event.title}</div>
+                            {event.series && <div className="text-sm opacity-70 mt-1">{event.series}</div>}
+                            {event.notes && <div className="text-sm mt-1">{event.notes}</div>}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </CardContent>
         </Card>
 
