@@ -22,10 +22,12 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          hover: "hsl(var(--primary-hover))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
+          hover: "hsl(var(--secondary-hover))",
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
@@ -38,6 +40,7 @@ export default {
         accent: {
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
+          hover: "hsl(var(--accent-hover))",
         },
         popover: {
           DEFAULT: "hsl(var(--popover))",
@@ -47,14 +50,46 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Kyzzen specific colors
+        // Kyzzen Brand Colors
+        "kyzzen-blue": {
+          DEFAULT: "hsl(var(--kyzzen-blue))",
+          light: "hsl(var(--kyzzen-blue-light))",
+          dark: "hsl(var(--kyzzen-blue-dark))",
+        },
+        "creator-purple": {
+          DEFAULT: "hsl(var(--creator-purple))",
+          light: "hsl(var(--creator-purple-light))",
+          dark: "hsl(var(--creator-purple-dark))",
+        },
+        "revenue-green": {
+          DEFAULT: "hsl(var(--revenue-green))",
+          light: "hsl(var(--revenue-green-light))",
+          dark: "hsl(var(--revenue-green-dark))",
+        },
+        "content-orange": {
+          DEFAULT: "hsl(var(--content-orange))",
+          light: "hsl(var(--content-orange-light))",
+          dark: "hsl(var(--content-orange-dark))",
+        },
+        "premium-gold": {
+          DEFAULT: "hsl(var(--premium-gold))",
+          light: "hsl(var(--premium-gold-light))",
+          dark: "hsl(var(--premium-gold-dark))",
+        },
+        "insight-teal": {
+          DEFAULT: "hsl(var(--insight-teal))",
+          light: "hsl(var(--insight-teal-light))",
+          dark: "hsl(var(--insight-teal-dark))",
+        },
+        // Background layers
         "bg-dark": "hsl(var(--bg-dark))",
         "bg-medium": "hsl(var(--bg-medium))",
         "bg-light": "hsl(var(--bg-light))",
+        // Text colors
         "text-light": "hsl(var(--text-light))",
         "text-medium": "hsl(var(--text-medium))",
-        "kyzzen-accent": "hsl(var(--kyzzen-accent))",
-        "kyzzen-accent-dark": "hsl(var(--kyzzen-accent-dark))",
+        "text-muted": "hsl(var(--text-muted))",
+        // Semantic colors
         success: "hsl(var(--success))",
         info: "hsl(var(--info))",
         warning: "hsl(var(--warning))",
@@ -65,6 +100,9 @@ export default {
       },
       backgroundImage: {
         'gradient-primary': 'var(--gradient-primary)',
+        'gradient-purple': 'var(--gradient-purple)',
+        'gradient-revenue': 'var(--gradient-revenue)',
+        'gradient-premium': 'var(--gradient-premium)',
         'gradient-card': 'var(--gradient-card)',
         'gradient-hero': 'var(--gradient-hero)',
       },
@@ -72,6 +110,9 @@ export default {
         'card': 'var(--shadow-card)',
         'primary': 'var(--shadow-primary)',
         'primary-hover': 'var(--shadow-primary-hover)',
+        'revenue': 'var(--shadow-revenue)',
+        'purple': 'var(--shadow-purple)',
+        'gold': 'var(--shadow-gold)',
       },
       transitionTimingFunction: {
         'smooth': 'var(--transition-smooth)',
