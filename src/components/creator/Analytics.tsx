@@ -135,15 +135,15 @@ export function Analytics() {
         </CardContent>
       </Card>
       
-      {/* Key Metrics */}
+      {/* Key Metrics - Using Kyzzen Brand Colors */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="bg-gradient-card border-border shadow-card">
+        <Card className="bg-gradient-card border-border hover:border-primary transition-all shadow-primary">
           <CardContent className="p-5">
             <div className="flex items-center gap-3">
-              <Users className="w-8 h-8 text-info" />
+              <Users className="w-8 h-8 text-primary" />
               <div>
                 <h3 className="font-medium text-muted-foreground">Total Followers</h3>
-                <p className="text-2xl font-bold text-foreground">
+                <p className="text-2xl font-bold text-primary">
                   {(totalFollowers / 1000000).toFixed(1)}M
                 </p>
               </div>
@@ -151,13 +151,13 @@ export function Analytics() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-card border-border shadow-card">
+        <Card className="bg-gradient-card border-border hover:border-accent transition-all shadow-card">
           <CardContent className="p-5">
             <div className="flex items-center gap-3">
               <Eye className="w-8 h-8 text-accent" />
               <div>
                 <h3 className="font-medium text-muted-foreground">Monthly Views</h3>
-                <p className="text-2xl font-bold text-foreground">
+                <p className="text-2xl font-bold text-accent">
                   {(monthlyViews / 1000000).toFixed(1)}M
                 </p>
               </div>
@@ -165,19 +165,19 @@ export function Analytics() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-card border-border shadow-card">
+        <Card className="bg-gradient-card border-border hover:border-secondary transition-all shadow-purple">
           <CardContent className="p-5">
             <div className="flex items-center gap-3">
-              <Heart className="w-8 h-8 text-destructive" />
+              <Heart className="w-8 h-8 text-secondary" />
               <div>
                 <h3 className="font-medium text-muted-foreground">Avg Engagement</h3>
-                <p className="text-2xl font-bold text-foreground">{avgEngagement}%</p>
+                <p className="text-2xl font-bold text-secondary">{avgEngagement}%</p>
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-card border-border shadow-card">
+        <Card className="bg-gradient-card border-border hover:border-success transition-all shadow-revenue">
           <CardContent className="p-5">
             <div className="flex items-center gap-3">
               <TrendingUp className="w-8 h-8 text-success" />
@@ -213,9 +213,9 @@ export function Analytics() {
                   <Line 
                     type="monotone" 
                     dataKey="followers" 
-                    stroke="hsl(var(--accent))" 
+                    stroke="hsl(var(--primary))" 
                     strokeWidth={3}
-                    dot={{ fill: 'hsl(var(--accent))', strokeWidth: 2, r: 4 }}
+                    dot={{ fill: 'hsl(var(--primary))', strokeWidth: 2, r: 4 }}
                   />
                 </LineChart>
               </ResponsiveContainer>
@@ -276,9 +276,9 @@ export function Analytics() {
                       borderRadius: '8px'
                     }} 
                   />
-                  <Bar dataKey="likes" fill="hsl(var(--accent))" />
-                  <Bar dataKey="comments" fill="hsl(var(--success))" />
-                  <Bar dataKey="shares" fill="hsl(var(--info))" />
+                  <Bar dataKey="likes" fill="hsl(var(--secondary))" />
+                  <Bar dataKey="comments" fill="hsl(var(--accent))" />
+                  <Bar dataKey="shares" fill="hsl(var(--primary))" />
                 </BarChart>
               </ResponsiveContainer>
             </div>

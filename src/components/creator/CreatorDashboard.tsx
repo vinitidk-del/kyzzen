@@ -116,15 +116,15 @@ export function CreatorDashboard() {
         </div>
       </div>
 
-      {/* Key Metrics */}
+      {/* Key Metrics - Using Kyzzen Brand Colors */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-        <Card className="bg-gradient-card border-border hover:border-accent transition-all duration-300 hover:-translate-y-1 shadow-card">
+        <Card className="bg-gradient-card border-border hover:border-primary transition-all duration-300 hover:-translate-y-1 shadow-primary">
           <CardContent className="p-5">
             <div className="flex items-center gap-3">
-              <Users className="w-8 h-8 text-info" />
+              <Users className="w-8 h-8 text-primary" />
               <div>
                 <h3 className="font-medium text-muted-foreground">Total Audience</h3>
-                <p className="text-3xl font-bold text-info">
+                <p className="text-3xl font-bold text-primary">
                   {(totalFollowers / 1000000).toFixed(1)}M
                 </p>
               </div>
@@ -132,7 +132,7 @@ export function CreatorDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-card border-border hover:border-accent transition-all duration-300 hover:-translate-y-1 shadow-card">
+        <Card className="bg-gradient-card border-border hover:border-success transition-all duration-300 hover:-translate-y-1 shadow-revenue">
           <CardContent className="p-5">
             <div className="flex items-center gap-3">
               <DollarSign className="w-8 h-8 text-success" />
@@ -146,13 +146,13 @@ export function CreatorDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-card border-border hover:border-accent transition-all duration-300 hover:-translate-y-1 shadow-card">
+        <Card className="bg-gradient-card border-border hover:border-secondary transition-all duration-300 hover:-translate-y-1 shadow-purple">
           <CardContent className="p-5">
             <div className="flex items-center gap-3">
-              <Zap className="w-8 h-8 text-warning" />
+              <Zap className="w-8 h-8 text-secondary" />
               <div>
                 <h3 className="font-medium text-muted-foreground">Avg Engagement</h3>
-                <p className="text-3xl font-bold text-warning">
+                <p className="text-3xl font-bold text-secondary">
                   {avgEngagement.toFixed(1)}%
                 </p>
               </div>
@@ -160,13 +160,13 @@ export function CreatorDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-card border-border hover:border-accent transition-all duration-300 hover:-translate-y-1 shadow-card">
+        <Card className="bg-gradient-card border-border hover:border-warning transition-all duration-300 hover:-translate-y-1 shadow-gold">
           <CardContent className="p-5">
             <div className="flex items-center gap-3">
-              <TrendingUp className="w-8 h-8 text-accent" />
+              <TrendingUp className="w-8 h-8 text-warning" />
               <div>
                 <h3 className="font-medium text-muted-foreground">Active Deals</h3>
-                <p className="text-3xl font-bold text-accent">3</p>
+                <p className="text-3xl font-bold text-warning">3</p>
               </div>
             </div>
           </CardContent>
@@ -226,7 +226,7 @@ export function CreatorDashboard() {
             <CardContent className="space-y-3">
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Followers:</span>
-                <span className="font-bold text-info">
+                <span className="font-bold text-primary">
                   {(platform.followers / 1000000).toFixed(1)}M
                 </span>
               </div>
@@ -238,7 +238,7 @@ export function CreatorDashboard() {
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">Engagement:</span>
-                <span className="font-bold text-warning">
+                <span className="font-bold text-secondary">
                   {platform.engagement}%
                 </span>
               </div>
