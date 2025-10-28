@@ -8,39 +8,39 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Kyzzen Media Brand Colors */
-    --background: 220 20% 12%;
-    --foreground: 220 10% 95%;
+    /* Light Mode Colors */
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
 
-    --card: 220 18% 16%;
-    --card-foreground: 220 10% 95%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
 
-    --popover: 220 18% 16%;
-    --popover-foreground: 220 10% 95%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
 
     /* Primary Brand: Kyzzen Blue - Trust & Professionalism */
     --primary: 220 71% 40%;
-    --primary-foreground: 220 10% 98%;
+    --primary-foreground: 0 0% 100%;
     --primary-hover: 220 71% 35%;
 
     /* Secondary: Creator Purple - Innovation & Creativity */
     --secondary: 258 82% 57%;
-    --secondary-foreground: 220 10% 98%;
+    --secondary-foreground: 0 0% 100%;
     --secondary-hover: 258 82% 52%;
 
-    --muted: 220 15% 25%;
-    --muted-foreground: 220 10% 60%;
+    --muted: 220 13% 95%;
+    --muted-foreground: 220 8% 46%;
 
     /* Accent: Content Orange - Energy & Action */
     --accent: 20 92% 48%;
-    --accent-foreground: 220 10% 98%;
+    --accent-foreground: 0 0% 100%;
     --accent-hover: 20 92% 43%;
 
     --destructive: 0 84% 60%;
-    --destructive-foreground: 220 10% 98%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 25%;
-    --input: 220 18% 16%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
     --ring: 220 71% 40%;
 
     --radius: 0.75rem;
@@ -105,6 +105,37 @@ All colors MUST be HSL.
     /* Animations */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .dark {
+    /* Dark Mode Colors */
+    --background: 220 20% 12%;
+    --foreground: 220 10% 95%;
+
+    --card: 220 18% 16%;
+    --card-foreground: 220 10% 95%;
+
+    --popover: 220 18% 16%;
+    --popover-foreground: 220 10% 95%;
+
+    --primary: 220 71% 40%;
+    --primary-foreground: 220 10% 98%;
+
+    --secondary: 258 82% 57%;
+    --secondary-foreground: 220 10% 98%;
+
+    --muted: 220 15% 25%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 20 92% 48%;
+    --accent-foreground: 220 10% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 220 10% 98%;
+
+    --border: 220 15% 25%;
+    --input: 220 18% 16%;
+    --ring: 220 71% 40%;
   }
 }
 

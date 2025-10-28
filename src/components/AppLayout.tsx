@@ -10,7 +10,7 @@ import { MobileActions } from '@/components/MobileActions';
 import { BrandVentures } from '@/components/creator/BrandVentures';
 import { ContentHub } from '@/components/creator/ContentHub';
 import { TalentNetwork } from '@/components/creator/TalentNetwork';
-import { CreatorDashboard } from '@/components/creator/CreatorDashboard';
+import { NewCreatorDashboard } from '@/components/creator/NewCreatorDashboard';
 import { Analytics } from '@/components/creator/Analytics';
 import { GrowthEngine } from '@/components/creator/GrowthEngine';
 import { ContentCalendar } from '@/components/creator/ContentCalendar';
@@ -31,25 +31,21 @@ import { CampaignManagement } from '@/components/business/CampaignManagement';
 const navigationConfig = {
   creator: [
     { id: 'dashboard', label: 'Dashboard', icon: <Home className="w-5 h-5" /> },
-    { id: 'calendar', label: 'Content Calendar', icon: <Calendar className="w-5 h-5" /> },
-    { id: 'content-hub', label: 'Content Pipeline', icon: <Edit className="w-5 h-5" /> },
-    { id: 'advanced-analytics', label: 'Analytics', icon: <BarChart3 className="w-5 h-5" /> },
-    { id: 'financial', label: 'Financials', icon: <DollarSign className="w-5 h-5" /> },
-    { id: 'engagement', label: 'Engagement', icon: <MessageSquare className="w-5 h-5" /> },
-    { id: 'team', label: 'Team', icon: <Users className="w-5 h-5" /> },
-    { id: 'profile', label: 'Profile', icon: <User className="w-5 h-5" /> },
-    { id: 'brand-ventures', label: 'Brand Ventures', icon: <Briefcase className="w-5 h-5" /> },
-    { id: 'talent', label: 'Talent Network', icon: <Users className="w-5 h-5" /> },
+    { id: 'campaigns', label: 'Campaigns', icon: <Briefcase className="w-5 h-5" /> },
+    { id: 'creators', label: 'Creators', icon: <Users className="w-5 h-5" /> },
+    { id: 'analytics', label: 'Analytics', icon: <BarChart3 className="w-5 h-5" /> },
   ],
   agency: [
-    { id: 'dashboard', label: 'Agency Dashboard', icon: <Home className="w-5 h-5" /> },
-    { id: 'clients', label: 'Client Management', icon: <Users className="w-5 h-5" /> },
+    { id: 'dashboard', label: 'Dashboard', icon: <Home className="w-5 h-5" /> },
     { id: 'campaigns', label: 'Campaigns', icon: <Briefcase className="w-5 h-5" /> },
+    { id: 'clients', label: 'Clients', icon: <Users className="w-5 h-5" /> },
+    { id: 'analytics', label: 'Analytics', icon: <BarChart3 className="w-5 h-5" /> },
   ],
   business: [
-    { id: 'dashboard', label: 'Brand Dashboard', icon: <Home className="w-5 h-5" /> },
-    { id: 'discovery', label: 'Creator Discovery', icon: <Search className="w-5 h-5" /> },
-    { id: 'campaigns', label: 'My Campaigns', icon: <Briefcase className="w-5 h-5" /> },
+    { id: 'dashboard', label: 'Dashboard', icon: <Home className="w-5 h-5" /> },
+    { id: 'campaigns', label: 'Campaigns', icon: <Briefcase className="w-5 h-5" /> },
+    { id: 'discovery', label: 'Discovery', icon: <Search className="w-5 h-5" /> },
+    { id: 'analytics', label: 'Analytics', icon: <BarChart3 className="w-5 h-5" /> },
   ],
 };
 
@@ -81,59 +77,47 @@ export function AppLayout() {
       case 'creator':
           switch (activePage) {
             case 'dashboard':
-              return <CreatorDashboard />;
-            case 'calendar':
-              return <ContentCalendar />;
-            case 'content-hub':
-              return <ContentHub />;
-            case 'advanced-analytics':
-              return <AdvancedAnalytics />;
-            case 'financial':
-              return <FinancialTracker />;
-            case 'engagement':
-              return <AudienceEngagement />;
-            case 'team':
-              return <TeamCollaboration />;
-            case 'profile':
-              return <CreatorProfile />;
-            case 'brand-ventures':
-              return <BrandVentures />;
-            case 'talent':
+              return <NewCreatorDashboard />;
+            case 'campaigns':
+              return <CampaignManagement />;
+            case 'creators':
               return <TalentNetwork />;
             case 'analytics':
-              return <Analytics />;
-            case 'growth':
-              return <GrowthEngine />;
+              return <AdvancedAnalytics />;
             default:
-              return <CreatorDashboard />;
+              return <NewCreatorDashboard />;
           }
       
       case 'agency':
         switch (activePage) {
           case 'dashboard':
-            return <AgencyDashboard />;
-          case 'clients':
-            return <ClientManagement />;
+            return <NewCreatorDashboard />;
           case 'campaigns':
             return <CampaignManagement />;
+          case 'clients':
+            return <ClientManagement />;
+          case 'analytics':
+            return <AdvancedAnalytics />;
           default:
-            return <AgencyDashboard />;
+            return <NewCreatorDashboard />;
         }
-      
+
       case 'business':
         switch (activePage) {
           case 'dashboard':
-            return <BusinessDashboard />;
+            return <NewCreatorDashboard />;
+          case 'campaigns':
+            return <CampaignManagement />;
           case 'discovery':
             return (
               <div className="flex items-center justify-center h-64">
                 <p className="text-muted-foreground text-lg">Creator discovery coming soon...</p>
               </div>
             );
-          case 'campaigns':
-            return <CampaignManagement />;
+          case 'analytics':
+            return <AdvancedAnalytics />;
           default:
-            return <BusinessDashboard />;
+            return <NewCreatorDashboard />;
         }
       
       default:
@@ -155,12 +139,9 @@ export function AppLayout() {
         onNavigate={setActivePage}
       />
       
-      <main className="flex-1 overflow-y-auto">
-        <div className="p-6 md:p-10">
-          <div className="flex justify-between items-center mb-6">
-            <Header onOpenSidebar={() => setSidebarOpen(true)} />
-            <QuickActions onNavigate={setActivePage} />
-          </div>
+      <main className="flex-1 overflow-y-auto bg-muted/20">
+        <div className="p-6">
+          <Header onOpenSidebar={() => setSidebarOpen(true)} />
           {renderPageContent()}
         </div>
       </main>

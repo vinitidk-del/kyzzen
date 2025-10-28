@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Menu, LogOut, Settings as SettingsIcon, Trophy } from 'lucide-react';
+import { X, Menu, LogOut, Settings as SettingsIcon, Trophy, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { cn } from '@/lib/utils';
@@ -85,6 +85,20 @@ export function Sidebar({ isOpen, setIsOpen, navigation, activePage, onNavigate 
           ))}
         </nav>
 
+        {/* Bottom Section */}
+        <div className="p-4 border-t border-border space-y-2">
+          <Settings>
+            <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg font-semibold text-muted-foreground hover:text-foreground hover:bg-muted transition-all">
+              <SettingsIcon className="w-5 h-5" />
+              Settings
+            </button>
+          </Settings>
+          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg font-semibold text-muted-foreground hover:text-foreground hover:bg-muted transition-all">
+            <HelpCircle className="w-5 h-5" />
+            Help
+          </button>
+        </div>
+
         {/* User Profile */}
         {user && (
           <div className="p-4 border-t border-border">
@@ -115,7 +129,7 @@ interface HeaderProps {
 }
 
 export function Header({ onOpenSidebar }: HeaderProps) {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
 
   return (
     <header className="flex items-center justify-between mb-8">
@@ -127,9 +141,9 @@ export function Header({ onOpenSidebar }: HeaderProps) {
       >
         <Menu className="w-5 h-5" />
       </Button>
-      
+
       <div className="flex-1" />
-      
+
       <div className="flex items-center gap-2">
         <ThemeToggle />
         <Notifications />
@@ -138,21 +152,23 @@ export function Header({ onOpenSidebar }: HeaderProps) {
             <Trophy className="w-5 h-5" />
           </Button>
         </Achievements>
-        <Settings>
-          <Button variant="ghost" size="sm">
-            <SettingsIcon className="w-5 h-5" />
-          </Button>
-        </Settings>
         <TalentRegistration />
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={logout}
-          className="flex items-center gap-2"
-        >
-          <LogOut className="w-4 h-4" />
-          Logout
-        </Button>
+
+        {user && (
+          <AccountPreview>
+            <button className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border hover:bg-muted transition-colors">
+              <img
+                src={user.avatar}
+                alt={user.name}
+                className="w-8 h-8 rounded-full border-2 border-primary"
+              />
+              <div className="text-left hidden lg:block">
+                <p className="text-sm font-semibold text-foreground">{user.name}</p>
+                <p className="text-xs text-muted-foreground">HR</p>
+              </div>
+            </button>
+          </AccountPreview>
+        )}
       </div>
     </header>
   );
