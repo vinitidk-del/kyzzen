@@ -83,7 +83,7 @@ const feedbackCategories = [
 
 export function NewCreatorDashboard() {
   return (
-    <div className="space-y-6 p-6 bg-background">
+    <div className="space-y-6">
       <div className="flex flex-col lg:flex-row gap-4">
         <div className="lg:w-1/4">
           <OrganizationCard

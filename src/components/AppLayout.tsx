@@ -130,7 +130,7 @@ export function AppLayout() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
+    <div className="flex h-screen overflow-hidden">
       <Sidebar
         isOpen={sidebarOpen}
         setIsOpen={setSidebarOpen}
@@ -138,8 +138,8 @@ export function AppLayout() {
         activePage={activePage}
         onNavigate={setActivePage}
       />
-      
-      <main className="flex-1 overflow-y-auto bg-muted/20">
+
+      <main className="flex-1 overflow-y-auto">
         <div className="p-6">
           <Header onOpenSidebar={() => setSidebarOpen(true)} />
           {renderPageContent()}

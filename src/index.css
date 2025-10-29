@@ -12,7 +12,7 @@ All colors MUST be HSL.
     --background: 0 0% 100%;
     --foreground: 222 47% 11%;
 
-    --card: 0 0% 100%;
+    --card: 0 0% 100% / 0.7;
     --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
@@ -146,8 +146,78 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    position: relative;
+    overflow-x: hidden;
   }
-  
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg,
+      hsl(270, 70%, 70%) 0%,
+      hsl(250, 70%, 75%) 20%,
+      hsl(210, 70%, 75%) 40%,
+      hsl(195, 70%, 70%) 60%,
+      hsl(180, 60%, 75%) 80%,
+      hsl(195, 70%, 80%) 100%
+    );
+    z-index: -2;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  body.light::before {
+    opacity: 1;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: -10%;
+    left: -10%;
+    right: -10%;
+    bottom: -10%;
+    background:
+      radial-gradient(ellipse 900px 700px at 15% 20%, rgba(255, 255, 255, 0.4) 0%, transparent 55%),
+      radial-gradient(ellipse 750px 550px at 85% 75%, rgba(255, 255, 255, 0.35) 0%, transparent 55%),
+      radial-gradient(ellipse 850px 650px at 50% 45%, rgba(255, 255, 255, 0.3) 0%, transparent 55%),
+      radial-gradient(ellipse 650px 450px at 70% 30%, rgba(255, 255, 255, 0.25) 0%, transparent 50%),
+      radial-gradient(ellipse 700px 500px at 30% 70%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+    z-index: -1;
+    animation: cloudDrift 90s ease-in-out infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  body.light::after {
+    opacity: 1;
+  }
+
+  @keyframes cloudDrift {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    20% {
+      transform: translate(40px, -30px) scale(1.05);
+    }
+    40% {
+      transform: translate(-30px, 40px) scale(0.98);
+    }
+    60% {
+      transform: translate(50px, 20px) scale(1.03);
+    }
+    80% {
+      transform: translate(-20px, -40px) scale(0.97);
+    }
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+  }
+
   @keyframes marquee {
     0% {
       transform: translateX(0);
@@ -156,7 +226,7 @@ All colors MUST be HSL.
       transform: translateX(-50%);
     }
   }
-  
+
   .animate-marquee {
     animation: marquee 30s linear infinite;
   }
@@ -176,5 +246,12 @@ All colors MUST be HSL.
   
   .rotate-y-180 {
     transform: rotateY(180deg);
+  }
+
+  /* Glassmorphism effect for cards in light mode */
+  .light [class*="card"],
+  .light .bg-card {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
   }
 }
