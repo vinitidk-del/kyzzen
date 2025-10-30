@@ -6,9 +6,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 const Landing = () => {
   const services = ['Content Strategy', 'Editing', 'Branding', 'Management'];
-  
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-background to-accent/5">
+    <div className="min-h-screen relative overflow-hidden landing-gradient">
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -83,7 +83,7 @@ const Landing = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 px-6 bg-gradient-to-b from-accent/5 to-background">
+      <section id="features" className="py-20 px-6">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -159,7 +159,7 @@ const Landing = () => {
       </section>
 
       {/* Why Choose Us Section */}
-      <section id="about" className="py-20 px-6 bg-accent/5">
+      <section id="about" className="py-20 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -260,7 +260,7 @@ const Landing = () => {
       </section>
 
       {/* Pricing Plans */}
-      <section className="py-20 px-6 bg-gradient-to-b from-accent/5 to-background">
+      <section className="py-20 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -398,7 +398,7 @@ const Landing = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-b from-accent/10 to-background">
+      <section className="py-20 px-6">
         <div className="container mx-auto max-w-5xl text-center">
           <div className="relative overflow-hidden bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 rounded-3xl p-12 md:p-16 border border-primary/20 shadow-2xl">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent animate-pulse"></div>
