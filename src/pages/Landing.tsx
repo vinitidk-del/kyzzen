@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, TrendingUp, Users, Zap, Target, BarChart3, Rocket, Brain, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { LandingModuleSelector } from '@/components/LandingModuleSelector';
 
 const Landing = () => {
   const services = ['Content Strategy', 'Editing', 'Branding', 'Management'];
@@ -38,23 +39,23 @@ const Landing = () => {
               <span className="text-sm font-medium text-primary">Creator Operating System</span>
             </div>
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              Build Your Empire
+              Your Creator OS
               <br />
-              <span className="text-primary">Create. Grow. Monetize.</span>
+              <span className="text-primary">Choose What You Need.</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              AI content tools, analytics, brand deals—everything you need in one place.
+              Pick the exact tools you want. Start with one, add more as you grow.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link to="/app">
+              <a href="#choose-features">
                 <Button size="lg" className="rounded-full text-lg px-10 py-6 shadow-xl hover:shadow-primary/50 transition-all group">
-                  Start Free
-                  <Rocket className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  Choose Your Tools
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
-              </Link>
-              <a href="#features">
+              </a>
+              <a href="#how-it-works">
                 <Button size="lg" variant="outline" className="rounded-full text-lg px-10 py-6">
-                  Features
+                  How It Works
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Button>
               </a>
@@ -82,79 +83,22 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section id="features" className="py-20 px-6">
+      {/* Choose Features Section */}
+      <section id="choose-features" className="py-20 px-6">
         <div className="container mx-auto max-w-7xl">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Everything to <span className="text-primary">Succeed</span>
+              Build Your Perfect <span className="text-primary">Workspace</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Powerful tools built for creators
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-2">
+              Select only the features you need. No bloat, just power.
+            </p>
+            <p className="text-sm text-primary font-medium">
+              Click any tool to add it to your workspace →
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Brain,
-                title: 'AI Content Generator',
-                description: 'Create engaging content instantly with AI that understands your brand.',
-                color: 'text-blue-500'
-              },
-              {
-                icon: BarChart3,
-                title: 'Smart Analytics',
-                description: 'Track growth with real-time insights and data-driven decisions.',
-                color: 'text-green-500'
-              },
-              {
-                icon: Zap,
-                title: 'Content Pipeline',
-                description: 'Organize and schedule content to stay consistent.',
-                color: 'text-yellow-500'
-              },
-              {
-                icon: Target,
-                title: 'Brand Ventures',
-                description: 'Manage partnerships and sponsorships in one dashboard.',
-                color: 'text-purple-500'
-              },
-              {
-                icon: TrendingUp,
-                title: 'Growth Engine',
-                description: 'Get personalized strategies to expand your reach.',
-                color: 'text-pink-500'
-              },
-              {
-                icon: Users,
-                title: 'Talent Network',
-                description: 'Connect with creators and build your team.',
-                color: 'text-orange-500'
-              }
-            ].map((feature, idx) => (
-              <Card key={idx} className="bg-card border-border hover:shadow-xl hover:scale-105 transition-all duration-300 group">
-                <CardHeader>
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform ${feature.color}`}>
-                    <feature.icon className="h-6 w-6" />
-                  </div>
-                  <CardTitle className="text-xl">{feature.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{feature.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-          
-          <div className="text-center mt-12">
-            <Link to="/app">
-              <Button size="lg" variant="outline" className="rounded-full group">
-                Explore All Features
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-          </div>
+          <LandingModuleSelector />
         </div>
       </section>
 
@@ -163,10 +107,10 @@ const Landing = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Built <span className="text-primary">By Creators</span>
+              Built <span className="text-primary">Your Way</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              We understand your journey
+              Modular. Flexible. Scalable.
             </p>
           </div>
           
@@ -174,11 +118,11 @@ const Landing = () => {
             <Card className="bg-gradient-to-br from-card to-accent/10 border-border shadow-xl">
               <CardHeader>
                 <Sparkles className="h-8 w-8 text-primary mb-4" />
-                <CardTitle className="text-2xl">Focus on Creating</CardTitle>
+                <CardTitle className="text-2xl">Start Small, Scale Big</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground leading-relaxed">
-                  Stop juggling tools. Everything you need in one place so you can focus on creating.
+                  Begin with just what you need today. Add more tools as your business grows. No commitment, no waste.
                 </p>
               </CardContent>
             </Card>
@@ -186,11 +130,11 @@ const Landing = () => {
             <Card className="bg-gradient-to-br from-card to-primary/10 border-border shadow-xl">
               <CardHeader>
                 <Zap className="h-8 w-8 text-primary mb-4" />
-                <CardTitle className="text-2xl">Scale Smarter</CardTitle>
+                <CardTitle className="text-2xl">Pay For What You Use</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground leading-relaxed">
-                  AI-powered automation helps you create more, reach more, and grow faster.
+                  Choose individual modules or bundles. Only pay for features you actually need. Cancel anytime.
                 </p>
               </CardContent>
             </Card>
@@ -342,12 +286,12 @@ const Landing = () => {
       </section>
 
       {/* How It Works Section */}
-      <section id="services" className="py-20 px-6">
+      <section id="how-it-works" className="py-20 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">How It Works</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Start in minutes, see results fast
+              Three simple steps to get started
             </p>
           </div>
           
@@ -358,21 +302,21 @@ const Landing = () => {
             {[
               {
                 step: '01',
-                title: 'Sign Up',
-                description: 'Create your free account in 30 seconds. Connect and go.',
-                icon: Rocket
+                title: 'Choose Your Tools',
+                description: 'Select from our library of creator tools. Pick one or pick them all.',
+                icon: Target
               },
               {
                 step: '02',
-                title: 'Create',
-                description: 'Use AI tools to generate ideas, schedule posts, and organize.',
+                title: 'Customize Your Dashboard',
+                description: 'Your workspace adapts to your choices. Clean, focused, powerful.',
                 icon: Sparkles
               },
               {
                 step: '03',
-                title: 'Grow',
-                description: 'Track analytics, secure deals, and scale with insights.',
-                icon: TrendingUp
+                title: 'Start Creating',
+                description: 'Everything you need, nothing you don\'t. Add more tools anytime.',
+                icon: Rocket
               }
             ].map((step, idx) => (
               <div key={idx} className="relative text-center">
@@ -387,12 +331,12 @@ const Landing = () => {
           </div>
           
           <div className="text-center mt-16">
-            <Link to="/app">
+            <a href="#choose-features">
               <Button size="lg" className="rounded-full text-lg px-10 py-6 shadow-xl group">
-                Start Your Journey
+                Choose Your Features
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -408,12 +352,12 @@ const Landing = () => {
                 <span className="font-semibold text-primary">Start Free Today</span>
               </div>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                Start Building
+                Build It
                 <br />
-                <span className="text-primary">Today</span>
+                <span className="text-primary">Your Way</span>
               </h2>
               <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-                Join 10K+ creators building their dream businesses.
+                10K+ creators already building their perfect workspace.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/app">

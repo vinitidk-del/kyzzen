@@ -259,11 +259,11 @@ All colors MUST be HSL.
   .landing-gradient {
     position: relative;
     background: linear-gradient(180deg, 
-      hsl(210, 60%, 85%) 0%,
-      hsl(200, 70%, 88%) 25%,
-      hsl(195, 65%, 90%) 50%,
-      hsl(190, 60%, 92%) 75%,
-      hsl(185, 55%, 94%) 100%
+      hsl(210, 65%, 82%) 0%,
+      hsl(200, 70%, 85%) 25%,
+      hsl(195, 68%, 88%) 50%,
+      hsl(190, 65%, 90%) 75%,
+      hsl(185, 60%, 92%) 100%
     );
   }
 
@@ -279,26 +279,26 @@ All colors MUST be HSL.
     pointer-events: none;
   }
 
-  /* First Cloud Layer - Larger, slower clouds */
+  /* First Cloud Layer - Larger, slower clouds - MORE VISIBLE */
   .landing-gradient::before {
     background:
-      radial-gradient(ellipse 800px 400px at 10% 30%, hsla(0, 0%, 100%, 0.7) 0%, transparent 60%),
-      radial-gradient(ellipse 900px 450px at 70% 20%, hsla(0, 0%, 100%, 0.6) 0%, transparent 55%),
-      radial-gradient(ellipse 700px 350px at 90% 60%, hsla(0, 0%, 100%, 0.65) 0%, transparent 58%),
-      radial-gradient(ellipse 650px 320px at 20% 70%, hsla(0, 0%, 100%, 0.55) 0%, transparent 52%),
-      radial-gradient(ellipse 750px 380px at 50% 85%, hsla(0, 0%, 100%, 0.6) 0%, transparent 56%);
+      radial-gradient(ellipse 850px 420px at 12% 25%, hsla(0, 0%, 100%, 0.92) 0%, hsla(0, 0%, 100%, 0.4) 45%, transparent 65%),
+      radial-gradient(ellipse 920px 460px at 72% 18%, hsla(0, 0%, 100%, 0.88) 0%, hsla(0, 0%, 100%, 0.35) 42%, transparent 60%),
+      radial-gradient(ellipse 780px 380px at 88% 55%, hsla(0, 0%, 100%, 0.9) 0%, hsla(0, 0%, 100%, 0.38) 44%, transparent 62%),
+      radial-gradient(ellipse 700px 340px at 18% 72%, hsla(0, 0%, 100%, 0.85) 0%, hsla(0, 0%, 100%, 0.32) 40%, transparent 58%),
+      radial-gradient(ellipse 800px 400px at 48% 82%, hsla(0, 0%, 100%, 0.87) 0%, hsla(0, 0%, 100%, 0.36) 43%, transparent 60%);
     z-index: -1;
     animation: cloudDriftSlow 180s ease-in-out infinite;
   }
 
-  /* Second Cloud Layer - Smaller, faster clouds */
+  /* Second Cloud Layer - Smaller, faster clouds - MORE VISIBLE */
   .landing-gradient::after {
     background:
-      radial-gradient(ellipse 500px 250px at 30% 15%, hsla(0, 0%, 100%, 0.5) 0%, transparent 60%),
-      radial-gradient(ellipse 600px 300px at 85% 40%, hsla(0, 0%, 100%, 0.45) 0%, transparent 55%),
-      radial-gradient(ellipse 450px 220px at 15% 55%, hsla(0, 0%, 100%, 0.52) 0%, transparent 58%),
-      radial-gradient(ellipse 550px 270px at 60% 75%, hsla(0, 0%, 100%, 0.48) 0%, transparent 54%),
-      radial-gradient(ellipse 400px 200px at 95% 80%, hsla(0, 0%, 100%, 0.43) 0%, transparent 52%);
+      radial-gradient(ellipse 550px 280px at 28% 12%, hsla(0, 0%, 100%, 0.82) 0%, hsla(0, 0%, 100%, 0.3) 48%, transparent 65%),
+      radial-gradient(ellipse 630px 320px at 82% 38%, hsla(0, 0%, 100%, 0.78) 0%, hsla(0, 0%, 100%, 0.28) 46%, transparent 62%),
+      radial-gradient(ellipse 480px 240px at 16% 58%, hsla(0, 0%, 100%, 0.8) 0%, hsla(0, 0%, 100%, 0.32) 47%, transparent 63%),
+      radial-gradient(ellipse 580px 290px at 58% 72%, hsla(0, 0%, 100%, 0.76) 0%, hsla(0, 0%, 100%, 0.26) 45%, transparent 60%),
+      radial-gradient(ellipse 420px 210px at 92% 78%, hsla(0, 0%, 100%, 0.74) 0%, hsla(0, 0%, 100%, 0.24) 44%, transparent 58%);
     z-index: 0;
     animation: cloudDriftFast 120s ease-in-out infinite;
   }
