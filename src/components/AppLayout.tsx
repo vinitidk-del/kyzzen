@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Briefcase, Edit, Users, TrendingUp, Home, Search, Calendar, DollarSign, BarChart3, MessageSquare, User } from 'lucide-react';
+import { Briefcase, Edit, Users, TrendingUp, Home, Search, Calendar, DollarSign, BarChart3, MessageSquare, User, Grid3x3 } from 'lucide-react';
 import { Sidebar, Header } from '@/components/Sidebar';
 import { useAuth } from '@/contexts/AuthContext';
 import { UserRole } from '@/types/auth';
 import { QuickActions } from '@/components/QuickActions';
 import { MobileActions } from '@/components/MobileActions';
+import { ModuleSelector } from '@/components/ModuleSelector';
 
 // Creator Components
 import { BrandVentures } from '@/components/creator/BrandVentures';
@@ -30,18 +31,21 @@ import { CampaignManagement } from '@/components/business/CampaignManagement';
 
 const navigationConfig = {
   creator: [
+    { id: 'modules', label: 'Apps', icon: <Grid3x3 className="w-5 h-5" /> },
     { id: 'dashboard', label: 'Dashboard', icon: <Home className="w-5 h-5" /> },
     { id: 'campaigns', label: 'Campaigns', icon: <Briefcase className="w-5 h-5" /> },
     { id: 'creators', label: 'Creators', icon: <Users className="w-5 h-5" /> },
     { id: 'analytics', label: 'Analytics', icon: <BarChart3 className="w-5 h-5" /> },
   ],
   agency: [
+    { id: 'modules', label: 'Apps', icon: <Grid3x3 className="w-5 h-5" /> },
     { id: 'dashboard', label: 'Dashboard', icon: <Home className="w-5 h-5" /> },
     { id: 'campaigns', label: 'Campaigns', icon: <Briefcase className="w-5 h-5" /> },
     { id: 'clients', label: 'Clients', icon: <Users className="w-5 h-5" /> },
     { id: 'analytics', label: 'Analytics', icon: <BarChart3 className="w-5 h-5" /> },
   ],
   business: [
+    { id: 'modules', label: 'Apps', icon: <Grid3x3 className="w-5 h-5" /> },
     { id: 'dashboard', label: 'Dashboard', icon: <Home className="w-5 h-5" /> },
     { id: 'campaigns', label: 'Campaigns', icon: <Briefcase className="w-5 h-5" /> },
     { id: 'discovery', label: 'Discovery', icon: <Search className="w-5 h-5" /> },
@@ -73,6 +77,11 @@ export function AppLayout() {
   const navigation = navigationConfig[user.role] || [];
 
   const renderPageContent = () => {
+    // Show ModuleSelector for all roles if on modules page
+    if (activePage === 'modules') {
+      return <ModuleSelector onModuleSelect={setActivePage} />;
+    }
+
     switch (user.role) {
       case 'creator':
           switch (activePage) {
@@ -84,6 +93,28 @@ export function AppLayout() {
               return <TalentNetwork />;
             case 'analytics':
               return <AdvancedAnalytics />;
+            case 'content-calendar':
+              return <ContentCalendar />;
+            case 'financial-tracker':
+              return <FinancialTracker />;
+            case 'brand-ventures':
+              return <BrandVentures />;
+            case 'talent-network':
+              return <TalentNetwork />;
+            case 'content-hub':
+              return <ContentHub />;
+            case 'ai-generator':
+              return (
+                <div className="flex items-center justify-center h-64">
+                  <p className="text-muted-foreground text-lg">AI Content Generator coming soon...</p>
+                </div>
+              );
+            case 'growth-engine':
+              return <GrowthEngine />;
+            case 'audience-engagement':
+              return <AudienceEngagement />;
+            case 'team-collaboration':
+              return <TeamCollaboration />;
             default:
               return <NewCreatorDashboard />;
           }
