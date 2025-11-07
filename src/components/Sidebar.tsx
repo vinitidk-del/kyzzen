@@ -46,15 +46,17 @@ export function Sidebar({ isOpen, setIsOpen, navigation, activePage, onNavigate 
       {/* Sidebar */}
       <aside
         className={cn(
-          "fixed md:relative z-50 w-64 h-full bg-background border-r border-border flex flex-col transition-transform duration-300 ease-in-out",
+          "fixed md:relative z-50 w-64 h-full bg-card/50 backdrop-blur-xl border-r border-border/50 flex flex-col transition-transform duration-300 ease-in-out shadow-lg",
           isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         )}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-4 border-b border-border">
+        <div className="flex items-center justify-between p-6 border-b border-border/50">
           <div className="flex items-center gap-3">
-            <img src={kyzzenLogo} alt="Kyzzen Logo" className="w-10 h-10 rounded-lg" />
-            <span className="text-xl font-extrabold text-foreground">Kyzzen</span>
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center shadow-primary">
+              <img src={kyzzenLogo} alt="Kyzzen Logo" className="w-6 h-6" />
+            </div>
+            <span className="text-xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Kyzzen</span>
           </div>
           <Button
             variant="ghost"
@@ -67,49 +69,57 @@ export function Sidebar({ isOpen, setIsOpen, navigation, activePage, onNavigate 
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+        <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
           {navigation.map((item) => (
             <button
               key={item.id}
               onClick={() => handleNavClick(item.id)}
               className={cn(
-                "w-full flex items-center gap-3 px-4 py-3 rounded-lg font-semibold transition-all duration-200",
+                "w-full flex items-center gap-3 px-4 py-3.5 rounded-xl font-medium transition-all duration-200 group",
                 activePage === item.id
-                  ? "bg-accent text-accent-foreground shadow-primary"
-                  : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                  ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 scale-[0.98]"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50 hover:scale-[0.98]"
               )}
             >
-              {item.icon}
+              <span className={cn(
+                "transition-transform duration-200",
+                activePage === item.id ? "" : "group-hover:scale-110"
+              )}>
+                {item.icon}
+              </span>
               {item.label}
             </button>
           ))}
         </nav>
 
         {/* Bottom Section */}
-        <div className="p-4 border-t border-border space-y-2">
+        <div className="p-4 border-t border-border/50 space-y-1">
           <Settings>
-            <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg font-semibold text-muted-foreground hover:text-foreground hover:bg-muted transition-all">
-              <SettingsIcon className="w-5 h-5" />
+            <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all group">
+              <SettingsIcon className="w-5 h-5 group-hover:rotate-90 transition-transform duration-300" />
               Settings
             </button>
           </Settings>
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg font-semibold text-muted-foreground hover:text-foreground hover:bg-muted transition-all">
-            <HelpCircle className="w-5 h-5" />
+          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-all group">
+            <HelpCircle className="w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
             Help
           </button>
         </div>
 
         {/* User Profile */}
         {user && (
-          <div className="p-4 border-t border-border">
+          <div className="p-4 border-t border-border/50">
             <AccountPreview>
-              <button className="w-full bg-card/20 p-4 rounded-lg border border-border hover:bg-card/30 transition-colors cursor-pointer">
+              <button className="w-full bg-gradient-to-br from-primary/5 to-secondary/5 p-4 rounded-xl border border-primary/10 hover:border-primary/30 hover:shadow-lg transition-all duration-200 cursor-pointer group">
                 <div className="flex items-center gap-3">
-                  <img
-                    src={user.avatar}
-                    alt={user.name}
-                    className="w-10 h-10 rounded-full border-2 border-accent"
-                  />
+                  <div className="relative">
+                    <img
+                      src={user.avatar}
+                      alt={user.name}
+                      className="w-11 h-11 rounded-full border-2 border-primary shadow-md group-hover:scale-105 transition-transform duration-200"
+                    />
+                    <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-success rounded-full border-2 border-card"></div>
+                  </div>
                   <div className="flex-1 min-w-0 text-left">
                     <p className="font-bold text-foreground truncate">{user.name}</p>
                     <p className="text-sm text-muted-foreground truncate">{user.handle}</p>
@@ -132,23 +142,23 @@ export function Header({ onOpenSidebar }: HeaderProps) {
   const { logout, user } = useAuth();
 
   return (
-    <header className="flex items-center justify-between mb-8">
+    <header className="flex items-center justify-between mb-6 bg-card/30 backdrop-blur-sm rounded-2xl p-4 border border-border/50 shadow-sm">
       <Button
         variant="outline"
         size="sm"
         onClick={onOpenSidebar}
-        className="md:hidden"
+        className="md:hidden rounded-xl hover:scale-95 transition-transform"
       >
         <Menu className="w-5 h-5" />
       </Button>
 
       <div className="flex-1" />
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-3">
         <ThemeToggle />
         <Notifications />
         <Achievements>
-          <Button variant="ghost" size="sm">
+          <Button variant="ghost" size="sm" className="rounded-xl hover:scale-95 transition-transform">
             <Trophy className="w-5 h-5" />
           </Button>
         </Achievements>
@@ -156,12 +166,15 @@ export function Header({ onOpenSidebar }: HeaderProps) {
 
         {user && (
           <AccountPreview>
-            <button className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border hover:bg-muted transition-colors">
-              <img
-                src={user.avatar}
-                alt={user.name}
-                className="w-8 h-8 rounded-full border-2 border-primary"
-              />
+            <button className="flex items-center gap-3 px-4 py-2.5 rounded-xl border border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all hover:scale-[0.98] group">
+              <div className="relative">
+                <img
+                  src={user.avatar}
+                  alt={user.name}
+                  className="w-9 h-9 rounded-full border-2 border-primary shadow-sm group-hover:scale-105 transition-transform"
+                />
+                <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-success rounded-full border-2 border-card"></div>
+              </div>
               <div className="text-left hidden lg:block">
                 <p className="text-sm font-semibold text-foreground">{user.name}</p>
                 <p className="text-xs text-muted-foreground">HR</p>

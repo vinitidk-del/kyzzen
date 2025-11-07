@@ -72,15 +72,19 @@ const Landing = () => {
             </p>
           </div>
 
-          {/* Services Marquee */}
-          <div className="overflow-hidden py-8 border-y border-border/50 bg-accent/10">
-            <div className="flex gap-8 animate-marquee whitespace-nowrap">
+          {/* Services Marquee - Enhanced */}
+          <div className="relative overflow-hidden py-10 border-y border-primary/20 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5">
+            {/* Gradient overlays for fade effect */}
+            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background via-background/80 to-transparent z-10 pointer-events-none"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background via-background/80 to-transparent z-10 pointer-events-none"></div>
+            
+            <div className="flex gap-12 animate-marquee whitespace-nowrap">
               {[...Array(4)].map((_, i) => (
                 <React.Fragment key={i}>
                   {services.map((service, idx) => (
                     <React.Fragment key={`${i}-${idx}`}>
-                      <span className="text-2xl font-semibold text-foreground/60">*</span>
-                      <span className="text-2xl font-semibold">{service}</span>
+                      <span className="text-3xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent opacity-30">✦</span>
+                      <span className="text-3xl font-bold text-foreground tracking-tight">{service}</span>
                     </React.Fragment>
                   ))}
                 </React.Fragment>

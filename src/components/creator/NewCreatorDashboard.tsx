@@ -83,15 +83,26 @@ const feedbackCategories = [
 
 export function NewCreatorDashboard() {
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col lg:flex-row gap-4">
-        <div className="lg:w-1/4">
+    <div className="space-y-8 animate-fade-in">
+      {/* Welcome Header */}
+      <div className="mb-6">
+        <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-2">
+          Welcome back 👋
+        </h1>
+        <p className="text-muted-foreground text-lg">
+          Here's what's happening with your creator business today.
+        </p>
+      </div>
+
+      {/* Top Stats Section */}
+      <div className="flex flex-col lg:flex-row gap-6">
+        <div className="lg:w-1/3">
           <OrganizationCard
             organizationName="Kyzzen Media"
             partnerName="Creator Hub"
           />
         </div>
-        <div className="lg:w-3/4">
+        <div className="lg:w-2/3">
           <MetricsBar
             totalCreators={4186}
             activeCampaigns={279}
@@ -101,7 +112,10 @@ export function NewCreatorDashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* KPI Cards with enhanced styling */}
+      <div>
+        <h2 className="text-xl font-bold text-foreground mb-4">Key Metrics</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <KPICard
           title="Number of Campaign sessions"
           value={1245}
@@ -134,9 +148,13 @@ export function NewCreatorDashboard() {
           sparklineData={sparklineData4}
           tooltipText="Total revenue in thousands"
         />
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      {/* Analytics Section */}
+      <div>
+        <h2 className="text-xl font-bold text-foreground mb-4">Analytics Overview</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1">
           <ServiceDistributionChart
             data={serviceData}
@@ -162,9 +180,13 @@ export function NewCreatorDashboard() {
         <div className="lg:col-span-1">
           <CreatorListWidget creators={creators} totalCount={4186} />
         </div>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* Feedback Section */}
+      <div>
+        <h2 className="text-xl font-bold text-foreground mb-4">Recent Activity</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <LiveFeedbackWidget
           totalFeedback={283}
           recentMessage={{
@@ -175,6 +197,7 @@ export function NewCreatorDashboard() {
           }}
           categoryData={feedbackCategories}
         />
+        </div>
       </div>
     </div>
   );
