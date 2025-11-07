@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, TrendingUp, Users, Zap, Target, BarChart3, Rocket, Brain, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -8,10 +8,17 @@ import { LandingModuleSelector } from '@/components/LandingModuleSelector';
 const Landing = () => {
   const services = ['Content Strategy', 'Editing', 'Branding', 'Management'];
 
+  useEffect(() => {
+    document.body.classList.add('landing-page');
+    return () => {
+      document.body.classList.remove('landing-page');
+    };
+  }, []);
+
   return (
     <div className="min-h-screen relative overflow-hidden landing-gradient">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
+      <nav className="fixed top-0 w-full z-50 border-b border-border/50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <Link to="/" className="text-2xl font-bold text-primary">
             kyzzen

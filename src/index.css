@@ -248,26 +248,26 @@ All colors MUST be HSL.
     transform: rotateY(180deg);
   }
 
-  /* Glassmorphism effect for cards in light mode */
-  .light [class*="card"],
-  .light .bg-card {
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+  /* Subtle glassmorphism for app cards only (not landing) */
+  body:not(.landing-page) .light [class*="card"],
+  body:not(.landing-page) .light .bg-card {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
   }
 
-  /* Landing Page Sky Background */
+  /* Landing Page Sky Background - Static Clouds */
   .landing-gradient {
     position: relative;
     background: linear-gradient(180deg, 
-      hsl(210, 65%, 82%) 0%,
-      hsl(200, 70%, 85%) 25%,
-      hsl(195, 68%, 88%) 50%,
-      hsl(190, 65%, 90%) 75%,
-      hsl(185, 60%, 92%) 100%
+      hsl(210, 75%, 75%) 0%,
+      hsl(205, 80%, 80%) 25%,
+      hsl(200, 85%, 85%) 50%,
+      hsl(195, 80%, 88%) 75%,
+      hsl(190, 75%, 92%) 100%
     );
   }
 
-  /* Cloud Layers */
+  /* Static Cloud Layers - Fixed Background */
   .landing-gradient::before,
   .landing-gradient::after {
     content: '';
@@ -279,69 +279,49 @@ All colors MUST be HSL.
     pointer-events: none;
   }
 
-  /* First Cloud Layer - Larger, slower clouds - MORE VISIBLE */
+  /* Large Cloud Layer - Static, Well-Defined */
   .landing-gradient::before {
     background:
-      radial-gradient(ellipse 850px 420px at 12% 25%, hsla(0, 0%, 100%, 0.92) 0%, hsla(0, 0%, 100%, 0.4) 45%, transparent 65%),
-      radial-gradient(ellipse 920px 460px at 72% 18%, hsla(0, 0%, 100%, 0.88) 0%, hsla(0, 0%, 100%, 0.35) 42%, transparent 60%),
-      radial-gradient(ellipse 780px 380px at 88% 55%, hsla(0, 0%, 100%, 0.9) 0%, hsla(0, 0%, 100%, 0.38) 44%, transparent 62%),
-      radial-gradient(ellipse 700px 340px at 18% 72%, hsla(0, 0%, 100%, 0.85) 0%, hsla(0, 0%, 100%, 0.32) 40%, transparent 58%),
-      radial-gradient(ellipse 800px 400px at 48% 82%, hsla(0, 0%, 100%, 0.87) 0%, hsla(0, 0%, 100%, 0.36) 43%, transparent 60%);
+      /* Top left cloud cluster */
+      radial-gradient(ellipse 600px 280px at 15% 15%, hsla(0, 0%, 100%, 0.95) 0%, hsla(0, 0%, 100%, 0.7) 35%, transparent 55%),
+      radial-gradient(ellipse 480px 220px at 8% 18%, hsla(0, 0%, 100%, 0.9) 0%, hsla(0, 0%, 100%, 0.6) 40%, transparent 60%),
+      radial-gradient(ellipse 520px 240px at 22% 12%, hsla(0, 0%, 100%, 0.92) 0%, hsla(0, 0%, 100%, 0.65) 38%, transparent 58%),
+      
+      /* Top right cloud cluster */
+      radial-gradient(ellipse 700px 320px at 78% 20%, hsla(0, 0%, 100%, 0.93) 0%, hsla(0, 0%, 100%, 0.68) 36%, transparent 56%),
+      radial-gradient(ellipse 550px 260px at 88% 16%, hsla(0, 0%, 100%, 0.88) 0%, hsla(0, 0%, 100%, 0.62) 39%, transparent 59%),
+      
+      /* Middle clouds */
+      radial-gradient(ellipse 650px 300px at 45% 45%, hsla(0, 0%, 100%, 0.85) 0%, hsla(0, 0%, 100%, 0.55) 38%, transparent 58%),
+      radial-gradient(ellipse 580px 270px at 65% 50%, hsla(0, 0%, 100%, 0.82) 0%, hsla(0, 0%, 100%, 0.52) 40%, transparent 60%),
+      
+      /* Bottom clouds */
+      radial-gradient(ellipse 720px 340px at 20% 75%, hsla(0, 0%, 100%, 0.88) 0%, hsla(0, 0%, 100%, 0.58) 37%, transparent 57%),
+      radial-gradient(ellipse 620px 290px at 80% 78%, hsla(0, 0%, 100%, 0.86) 0%, hsla(0, 0%, 100%, 0.56) 38%, transparent 58%);
     z-index: -1;
-    animation: cloudDriftSlow 180s ease-in-out infinite;
   }
 
-  /* Second Cloud Layer - Smaller, faster clouds - MORE VISIBLE */
+  /* Small Cloud Details Layer - Static */
   .landing-gradient::after {
     background:
-      radial-gradient(ellipse 550px 280px at 28% 12%, hsla(0, 0%, 100%, 0.82) 0%, hsla(0, 0%, 100%, 0.3) 48%, transparent 65%),
-      radial-gradient(ellipse 630px 320px at 82% 38%, hsla(0, 0%, 100%, 0.78) 0%, hsla(0, 0%, 100%, 0.28) 46%, transparent 62%),
-      radial-gradient(ellipse 480px 240px at 16% 58%, hsla(0, 0%, 100%, 0.8) 0%, hsla(0, 0%, 100%, 0.32) 47%, transparent 63%),
-      radial-gradient(ellipse 580px 290px at 58% 72%, hsla(0, 0%, 100%, 0.76) 0%, hsla(0, 0%, 100%, 0.26) 45%, transparent 60%),
-      radial-gradient(ellipse 420px 210px at 92% 78%, hsla(0, 0%, 100%, 0.74) 0%, hsla(0, 0%, 100%, 0.24) 44%, transparent 58%);
+      /* Small accent clouds */
+      radial-gradient(ellipse 380px 180px at 35% 25%, hsla(0, 0%, 100%, 0.8) 0%, hsla(0, 0%, 100%, 0.45) 42%, transparent 62%),
+      radial-gradient(ellipse 420px 200px at 60% 35%, hsla(0, 0%, 100%, 0.78) 0%, hsla(0, 0%, 100%, 0.42) 44%, transparent 64%),
+      radial-gradient(ellipse 350px 170px at 12% 55%, hsla(0, 0%, 100%, 0.75) 0%, hsla(0, 0%, 100%, 0.4) 45%, transparent 65%),
+      radial-gradient(ellipse 400px 190px at 72% 60%, hsla(0, 0%, 100%, 0.77) 0%, hsla(0, 0%, 100%, 0.43) 43%, transparent 63%),
+      radial-gradient(ellipse 360px 175px at 42% 82%, hsla(0, 0%, 100%, 0.73) 0%, hsla(0, 0%, 100%, 0.38) 46%, transparent 66%);
     z-index: 0;
-    animation: cloudDriftFast 120s ease-in-out infinite;
   }
 
-  @keyframes cloudDriftSlow {
-    0%, 100% {
-      transform: translateX(0%) translateY(0%);
-    }
-    25% {
-      transform: translateX(-5%) translateY(-3%);
-    }
-    50% {
-      transform: translateX(-8%) translateY(2%);
-    }
-    75% {
-      transform: translateX(-3%) translateY(-2%);
-    }
-  }
-
-  @keyframes cloudDriftFast {
-    0%, 100% {
-      transform: translateX(0%) translateY(0%);
-    }
-    25% {
-      transform: translateX(8%) translateY(3%);
-    }
-    50% {
-      transform: translateX(12%) translateY(-2%);
-    }
-    75% {
-      transform: translateX(5%) translateY(2%);
-    }
-  }
-
-  /* Make landing page cards semi-transparent */
+  /* Clean card styling without frosted glass on landing */
   .landing-gradient [class*="card"],
   .landing-gradient .bg-card {
-    background-color: hsla(0, 0%, 100%, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background-color: hsla(0, 0%, 100%, 0.95);
+    border: 1px solid hsla(220, 13%, 91%, 0.6);
   }
 
   .landing-gradient nav {
-    background-color: hsla(0, 0%, 100%, 0.8) !important;
+    background-color: hsla(0, 0%, 100%, 0.95) !important;
+    border-bottom: 1px solid hsla(220, 13%, 91%, 0.6);
   }
 }
