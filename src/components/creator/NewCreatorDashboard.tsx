@@ -6,6 +6,7 @@ import { ServiceDistributionChart } from '@/components/ServiceDistributionChart'
 import { CalendarWidget } from '@/components/CalendarWidget';
 import { CreatorListWidget } from '@/components/CreatorListWidget';
 import { LiveFeedbackWidget } from '@/components/LiveFeedbackWidget';
+import { RealtimeMetricsGrid } from '@/components/RealtimeMetricsGrid';
 
 const sparklineData1 = [
   { value: 800 }, { value: 900 }, { value: 850 }, { value: 950 },
@@ -111,6 +112,9 @@ export function NewCreatorDashboard() {
           />
         </div>
       </div>
+
+      {/* Real-time Animated Metrics */}
+      <RealtimeMetricsGrid />
 
       {/* KPI Cards with enhanced styling */}
       <div>
