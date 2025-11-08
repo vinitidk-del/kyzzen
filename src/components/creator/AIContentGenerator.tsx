@@ -122,159 +122,58 @@ export function AIContentGenerator() {
     return hooks;
   };
 
-  // Advanced AI generation with proper prompt processing and caching controls
+  // Real AI generation with Gemini API
   const generateUniqueContentIdeas = async () => {
     setIsGenerating(true);
     
     try {
-      // Create unique request signature to prevent cached responses
-      const requestId = Date.now();
-      const promptHash = btoa(customPrompt + JSON.stringify({
-        viralityLevel: viralityLevel[0],
-        controversyLevel: controversyLevel[0],
-        spiceLevel: spiceLevel[0],
-        debateLevel: debateLevel[0],
-        politicalLevel: politicalLevel[0],
-        contentType,
-        timestamp: requestId
-      }));
-      
-      console.log(`[AI Generator] Starting generation with request ID: ${requestId}`);
-      console.log(`[AI Generator] Prompt hash: ${promptHash}`);
-      console.log(`[AI Generator] Input prompt: "${customPrompt}"`);
-      console.log(`[AI Generator] Parameters:`, {
-        virality: viralityLevel[0],
-        controversy: controversyLevel[0],
-        spice: spiceLevel[0],
-        debate: debateLevel[0],
-        political: politicalLevel[0],
-        contentType
-      });
-      
-      // Stochastic generation with temperature controls
-      const temperature = 0.7 + (Math.random() * 0.6); // Random temperature 0.7-1.3
-      const topP = 0.8 + (Math.random() * 0.2); // Random top_p 0.8-1.0
-      const seed = Math.floor(Math.random() * 1000000); // Random seed for variation
-      
-      console.log(`[AI Generator] Stochastic parameters:`, { temperature, topP, seed });
-      
-      // Process prompt with user context
       const processedPrompt = customPrompt.trim() || "general content creation";
-      const audienceInsights = analyzeAudienceInsights(processedPrompt);
       
-      console.log(`[AI Generator] Analyzed audience insights:`, audienceInsights);
+      console.log('[AI Generator] Calling Gemini API via edge function');
       
-      // Simulate API call with variation algorithms
-      await new Promise(resolve => setTimeout(resolve, 1500 + Math.random() * 1000));
-      
-      // Generate truly unique ideas based on prompt + parameters + randomness
-      const uniqueTemplates = [
+      const response = await fetch(
+        'https://odyasgiwqghuhbjqbznj.supabase.co/functions/v1/generate-content-ideas',
         {
-          category: "Challenge Content",
-          types: ["24-Hour Challenge", "Skill Test", "Impossible Task", "Time Limit", "Budget Challenge"],
-          concepts: generateContextualConcepts(processedPrompt, "challenge"),
-          viralFactors: ["time pressure", "personal stakes", "viewer participation", "failure risk"]
-        },
-        {
-          category: "Analysis Content", 
-          types: ["Deep Dive", "Comparison Study", "Myth Busting", "Trend Analysis", "Behind the Scenes"],
-          concepts: generateContextualConcepts(processedPrompt, "analysis"),
-          viralFactors: ["exclusive insight", "controversial takes", "data revelation", "expert interviews"]
-        },
-        {
-          category: "Entertainment Content",
-          types: ["Reaction", "Commentary", "Storytelling", "Experiment", "Collaboration"],
-          concepts: generateContextualConcepts(processedPrompt, "entertainment"),
-          viralFactors: ["emotional peaks", "plot twists", "celebrity features", "audience interaction"]
-        },
-        {
-          category: "Educational Content",
-          types: ["Tutorial", "Guide", "Explanation", "Case Study", "Workshop"],
-          concepts: generateContextualConcepts(processedPrompt, "educational"),
-          viralFactors: ["practical value", "step-by-step", "common mistakes", "pro secrets"]
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            prompt: processedPrompt,
+            viralityLevel: viralityLevel[0],
+            controversyLevel: controversyLevel[0],
+            spiceLevel: spiceLevel[0],
+            debateLevel: debateLevel[0],
+            politicalLevel: politicalLevel[0],
+            contentType
+          }),
         }
-      ];
+      );
+
+      if (!response.ok) {
+        throw new Error(`API call failed: ${response.status}`);
+      }
+
+      const data = await response.json();
       
-      // Generate 3-5 unique ideas with advanced reasoning
-      const numIdeas = 3 + Math.floor(Math.random() * 3);
-      const selectedTemplates = uniqueTemplates
-        .sort(() => Math.random() - 0.5)
-        .slice(0, numIdeas);
-      
-      const ideas: ContentIdea[] = selectedTemplates.map((template, index) => {
-        const selectedType = template.types[Math.floor(Math.random() * template.types.length)];
-        const selectedConcept = template.concepts[Math.floor(Math.random() * template.concepts.length)];
-        const selectedFactor = template.viralFactors[Math.floor(Math.random() * template.viralFactors.length)];
-        
-        // Advanced scoring with prompt influence
-        const promptInfluence = Math.min(processedPrompt.length / 20, 25); // Up to 25 point boost
-        const viralityScore = calculateViralPotential({
-          category: template.category,
-          type: selectedType,
-          concept: selectedConcept,
-          promptRelevance: promptInfluence
-        }, {
-          virality: viralityLevel[0],
-          controversy: controversyLevel[0],
-          spice: spiceLevel[0],
-          debate: debateLevel[0],
-          political: politicalLevel[0]
-        });
-        
-        const engagementScore = Math.round(
-          (viralityScore * 0.4) + 
-          (controversyLevel[0] * 0.3) + 
-          (spiceLevel[0] * 0.2) + 
-          (debateLevel[0] * 0.1) + 
-          promptInfluence + 
-          (Math.random() * 15 - 7.5) // ±7.5 random variation
-        );
-        
-        // Generate prompt-specific content
-        const promptContext = processedPrompt.length > 10 ? 
-          ` incorporating "${processedPrompt.substring(0, 50)}${processedPrompt.length > 50 ? '...' : ''}"` : 
-          "";
-        const audienceContext = audienceInsights.interests.length > 0 ? 
-          ` targeting ${audienceInsights.interests.join(' and ')} enthusiasts` : 
-          ` for ${audienceInsights.demographic} audience`;
-        
-        const idea = {
-          title: `${selectedType}: ${selectedConcept}${promptContext}`,
-          description: `Create a ${selectedType.toLowerCase()} focusing on ${selectedConcept.toLowerCase()}${promptContext}. This content leverages ${selectedFactor} to maximize viral potential${audienceContext}. Optimized for ${contentType} format with ${audienceInsights.tone} tone. Generated with unique parameters for maximum originality.`,
-          viralityScore: Math.min(viralityScore, 95),
-          controversyLevel: Math.round(controversyLevel[0] + (Math.random() * 20 - 10)),
-          engagementPotential: Math.min(Math.max(engagementScore, 15), 98),
-          targetAudience: `${audienceInsights.demographic} ${audienceInsights.interests.join(', ')} audience (18-35 primary)`,
-          contentType: contentType.charAt(0).toUpperCase() + contentType.slice(1),
-          hooks: generateAdvancedHooks({
-            category: template.category,
-            type: selectedType,
-            concept: selectedConcept,
-            prompt: processedPrompt
-          }, audienceInsights)
-        };
-        
-        console.log(`[AI Generator] Generated idea ${index + 1}:`, {
-          title: idea.title,
-          viralityScore: idea.viralityScore,
-          engagementPotential: idea.engagementPotential
-        });
-        
-        return idea;
-      });
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
+      const ideas = data.ideas || [];
       
       console.log(`[AI Generator] Successfully generated ${ideas.length} unique ideas`);
       
       setGeneratedIdeas(ideas);
       toast({
-        title: "Unique Content Ideas Generated! 🚀",
-        description: `Generated ${ideas.length} AI-optimized ideas based on your specific prompt with advanced reasoning.`,
+        title: "AI Content Ideas Generated! 🚀",
+        description: `Generated ${ideas.length} unique ideas using Gemini AI.`,
       });
     } catch (error) {
       console.error('[AI Generator] Generation failed:', error);
       toast({
         title: "Generation Failed",
-        description: "Could not generate content ideas. Please try again.",
+        description: error instanceof Error ? error.message : "Could not generate content ideas. Please try again.",
         variant: "destructive",
       });
     } finally {
