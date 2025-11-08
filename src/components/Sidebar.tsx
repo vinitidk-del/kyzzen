@@ -2,6 +2,7 @@ import React from 'react';
 import { X, Menu, LogOut, Settings as SettingsIcon, Trophy, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
 import kyzzenLogo from '@/assets/kyzzen-logo.png';
 import { TalentRegistration } from '@/components/TalentRegistration';
@@ -26,7 +27,13 @@ interface SidebarProps {
 }
 
 export function Sidebar({ isOpen, setIsOpen, navigation, activePage, onNavigate }: SidebarProps) {
-  const { user, logout } = useAuth();
+  const { profile, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await signOut();
+    navigate('/');
+  };
 
   const handleNavClick = (pageId: string) => {
     onNavigate(pageId);
@@ -107,22 +114,22 @@ export function Sidebar({ isOpen, setIsOpen, navigation, activePage, onNavigate 
         </div>
 
         {/* User Profile */}
-        {user && (
+        {profile && (
           <div className="p-4 border-t border-border/50">
             <AccountPreview>
               <button className="w-full bg-gradient-to-br from-primary/5 to-secondary/5 p-4 rounded-xl border border-primary/10 hover:border-primary/30 hover:shadow-lg transition-all duration-200 cursor-pointer group">
                 <div className="flex items-center gap-3">
                   <div className="relative">
                     <img
-                      src={user.avatar}
-                      alt={user.name}
+                      src={profile.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${profile.username}`}
+                      alt={profile.full_name || 'User'}
                       className="w-11 h-11 rounded-full border-2 border-primary shadow-md group-hover:scale-105 transition-transform duration-200"
                     />
                     <div className="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-success rounded-full border-2 border-card"></div>
                   </div>
                   <div className="flex-1 min-w-0 text-left">
-                    <p className="font-bold text-foreground truncate">{user.name}</p>
-                    <p className="text-sm text-muted-foreground truncate">{user.handle}</p>
+                    <p className="font-bold text-foreground truncate">{profile.full_name || profile.username}</p>
+                    <p className="text-sm text-muted-foreground truncate">@{profile.username}</p>
                   </div>
                 </div>
               </button>
@@ -139,7 +146,7 @@ interface HeaderProps {
 }
 
 export function Header({ onOpenSidebar }: HeaderProps) {
-  const { logout, user } = useAuth();
+  const { profile } = useAuth();
 
   return (
     <header className="flex items-center justify-between mb-6 bg-card/30 backdrop-blur-sm rounded-2xl p-4 border border-border/50 shadow-sm">
@@ -164,20 +171,20 @@ export function Header({ onOpenSidebar }: HeaderProps) {
         </Achievements>
         <TalentRegistration />
 
-        {user && (
+        {profile && (
           <AccountPreview>
             <button className="flex items-center gap-3 px-4 py-2.5 rounded-xl border border-border/50 hover:border-primary/50 hover:bg-primary/5 transition-all hover:scale-[0.98] group">
               <div className="relative">
                 <img
-                  src={user.avatar}
-                  alt={user.name}
+                  src={profile.avatar_url || `https://api.dicebear.com/7.x/avataaars/svg?seed=${profile.username}`}
+                  alt={profile.full_name || 'User'}
                   className="w-9 h-9 rounded-full border-2 border-primary shadow-sm group-hover:scale-105 transition-transform"
                 />
                 <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-success rounded-full border-2 border-card"></div>
               </div>
               <div className="text-left hidden lg:block">
-                <p className="text-sm font-semibold text-foreground">{user.name}</p>
-                <p className="text-xs text-muted-foreground">HR</p>
+                <p className="text-sm font-semibold text-foreground">{profile.full_name || profile.username}</p>
+                <p className="text-xs text-muted-foreground capitalize">{profile.role}</p>
               </div>
             </button>
           </AccountPreview>

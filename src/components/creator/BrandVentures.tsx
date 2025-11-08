@@ -35,10 +35,17 @@ const mockBrandDeals = [
 ];
 
 export function BrandVentures() {
-  const { user } = useAuth();
   const [aiPrompt, setAiPrompt] = useState('');
   const [aiOutput, setAiOutput] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
+  
+  // Mock brand data
+  const brand = {
+    name: 'Creator Brand',
+    product: 'Merchandise',
+    metrics: { revenue: 125000, unitsSold: 3420, profitMargin: 0.42 },
+    inventory: { stock: 847, status: 'Low Stock' }
+  };
   
   const handlePayment = (dealId: number, brandName: string, amount: string) => {
     toast({
@@ -60,7 +67,6 @@ export function BrandVentures() {
     });
   };
 
-  const brand = user?.brand;
   const metrics = brand?.metrics;
 
   const handleGenerateIdea = async () => {

@@ -11,7 +11,7 @@ import { toast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
 
 export function Settings({ children }: { children?: React.ReactNode }) {
-  const { user } = useAuth();
+  const { profile } = useAuth();
   const [open, setOpen] = useState(false);
   const [settings, setSettings] = useState({
     notifications: {
@@ -80,7 +80,7 @@ export function Settings({ children }: { children?: React.ReactNode }) {
           <TabsContent value="profile" className="space-y-4 mt-4">
             <div className="space-y-2">
               <Label htmlFor="name">Full Name</Label>
-              <Input id="name" defaultValue={user?.name} />
+              <Input id="name" defaultValue={profile?.full_name || ''} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
@@ -88,7 +88,7 @@ export function Settings({ children }: { children?: React.ReactNode }) {
             </div>
             <div className="space-y-2">
               <Label htmlFor="handle">Handle</Label>
-              <Input id="handle" defaultValue={user?.handle} />
+              <Input id="handle" defaultValue={profile?.username || ''} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="bio">Bio</Label>

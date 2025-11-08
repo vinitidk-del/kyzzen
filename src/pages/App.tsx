@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
-import { LoginScreen } from '@/components/LoginScreen';
 import { AppLayout } from '@/components/AppLayout';
 import { OnboardingWizard } from '@/components/OnboardingWizard';
 
@@ -19,10 +18,6 @@ const AppPage = () => {
     localStorage.setItem('onboarding_completed', 'true');
     setShowOnboarding(false);
   };
-
-  if (!isAuthenticated) {
-    return <LoginScreen />;
-  }
 
   return (
     <>

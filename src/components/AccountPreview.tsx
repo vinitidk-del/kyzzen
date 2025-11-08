@@ -7,10 +7,10 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Edit, Mail, Calendar, MapPin, TrendingUp, Users, Star } from 'lucide-react';
 
 export function AccountPreview({ children }: { children: React.ReactNode }) {
-  const { user } = useAuth();
+  const { profile } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
 
-  if (!user) return null;
+  if (!profile) return null;
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
@@ -30,15 +30,15 @@ export function AccountPreview({ children }: { children: React.ReactNode }) {
             <CardContent className="pt-6">
               <div className="flex flex-col sm:flex-row items-center gap-4">
                 <img
-                  src={user.avatar}
-                  alt={user.name}
+                  src={profile.avatar_url || 'https://api.dicebear.com/7.x/avataaars/svg?seed=' + profile.username}
+                  alt={profile.full_name || 'User'}
                   className="w-20 h-20 rounded-full border-4 border-accent"
                 />
                 <div className="text-center sm:text-left">
-                  <h2 className="text-2xl font-bold text-foreground">{user.name}</h2>
-                  <p className="text-lg text-accent">{user.handle}</p>
+                  <h2 className="text-2xl font-bold text-foreground">{profile.full_name || profile.username}</h2>
+                  <p className="text-lg text-accent">@{profile.username}</p>
                   <Badge variant="secondary" className="mt-2">
-                    {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
+                    {profile.role.charAt(0).toUpperCase() + profile.role.slice(1)}
                   </Badge>
                 </div>
               </div>
@@ -46,7 +46,7 @@ export function AccountPreview({ children }: { children: React.ReactNode }) {
           </Card>
 
           {/* Stats Grid */}
-          {user.role === 'creator' && (
+          {profile.role === 'creator' && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <Card className="bg-secondary/20">
                 <CardContent className="p-4 text-center">
@@ -99,7 +99,7 @@ export function AccountPreview({ children }: { children: React.ReactNode }) {
                   <Mail className="w-5 h-5 text-muted-foreground" />
                   <div>
                     <p className="text-sm text-muted-foreground">Handle</p>
-                    <p className="font-medium text-foreground">{user.handle}</p>
+                    <p className="font-medium text-foreground">@{profile.username}</p>
                   </div>
                 </div>
                 

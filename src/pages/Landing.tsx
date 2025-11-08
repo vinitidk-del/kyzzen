@@ -4,9 +4,11 @@ import { ArrowRight, Sparkles, TrendingUp, Users, Zap, Target, BarChart3, Rocket
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { LandingModuleSelector } from '@/components/LandingModuleSelector';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Landing = () => {
   const services = ['Content Strategy', 'Editing', 'Branding', 'Management'];
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     document.body.classList.add('landing-page');

@@ -5,7 +5,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Landing from "./pages/Landing";
+import Auth from "./pages/Auth";
 import AppPage from "./pages/App";
 import NotFound from "./pages/NotFound";
 
@@ -28,7 +30,15 @@ function App() {
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Landing />} />
-                <Route path="/app" element={<AppPage />} />
+                <Route path="/auth" element={<Auth />} />
+                <Route 
+                  path="/app" 
+                  element={
+                    <ProtectedRoute>
+                      <AppPage />
+                    </ProtectedRoute>
+                  } 
+                />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </BrowserRouter>
