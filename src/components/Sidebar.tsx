@@ -11,6 +11,7 @@ import { Notifications } from '@/components/Notifications';
 import { Settings } from '@/components/Settings';
 import { Achievements } from '@/components/Achievements';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { RoleSwitcher } from '@/components/RoleSwitcher';
 
 interface NavigationItem {
   id: string;
@@ -74,6 +75,13 @@ export function Sidebar({ isOpen, setIsOpen, navigation, activePage, onNavigate 
             <X className="w-5 h-5" />
           </Button>
         </div>
+
+        {/* Role Switcher */}
+        {profile && profile.roles.length > 1 && (
+          <div className="p-4 border-b border-border/50">
+            <RoleSwitcher />
+          </div>
+        )}
 
         {/* Navigation */}
         <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
@@ -184,7 +192,7 @@ export function Header({ onOpenSidebar }: HeaderProps) {
               </div>
               <div className="text-left hidden lg:block">
                 <p className="text-sm font-semibold text-foreground">{profile.full_name || profile.username}</p>
-                <p className="text-xs text-muted-foreground capitalize">{profile.role}</p>
+                <p className="text-xs text-muted-foreground capitalize">{profile.activeRole}</p>
               </div>
             </button>
           </AccountPreview>

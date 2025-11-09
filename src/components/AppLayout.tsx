@@ -69,12 +69,12 @@ export function AppLayout() {
   const { profile } = useAuth();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activePage, setActivePage] = useState(() => 
-    getDefaultPage((profile?.role as UserRole) || 'creator')
+    getDefaultPage((profile?.activeRole as UserRole) || 'creator')
   );
 
   if (!profile) return null;
 
-  const navigation = navigationConfig[profile.role] || [];
+  const navigation = navigationConfig[profile.activeRole] || [];
 
   const renderPageContent = () => {
     // Show ModuleSelector for all roles if on modules page
@@ -82,7 +82,7 @@ export function AppLayout() {
       return <ModuleSelector onModuleSelect={setActivePage} />;
     }
 
-    switch (profile.role) {
+    switch (profile.activeRole) {
       case 'creator':
           switch (activePage) {
             case 'dashboard':

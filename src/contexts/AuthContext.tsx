@@ -9,7 +9,8 @@ interface Profile {
   username: string | null;
   full_name: string | null;
   avatar_url: string | null;
-  role: UserRole; // Fetched from user_roles table
+  roles: UserRole[]; // All roles from user_roles table
+  activeRole: UserRole; // Currently active role
 }
 
 interface AuthContextType {
@@ -19,6 +20,7 @@ interface AuthContextType {
   loading: boolean;
   signOut: () => Promise<void>;
   isAuthenticated: boolean;
+  switchRole: (role: UserRole) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -80,30 +82,49 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return;
       }
 
-      // Fetch user role from user_roles table
-      const { data: roleData, error: roleError } = await (supabase as any)
+      // Fetch ALL user roles from user_roles table
+      const { data: rolesData, error: rolesError } = await (supabase as any)
         .from('user_roles')
         .select('role')
-        .eq('user_id', userId)
-        .single();
+        .eq('user_id', userId);
 
-      if (roleError) {
-        console.error('[Auth] Role fetch error:', roleError);
-        // Default to 'creator' if role not found
+      if (rolesError) {
+        console.error('[Auth] Roles fetch error:', rolesError);
+        // Default to 'creator' if roles not found
         setProfile({
           ...profileData,
-          role: 'creator' as UserRole
+          roles: ['creator' as UserRole],
+          activeRole: 'creator' as UserRole
         });
         return;
       }
 
-      // Combine profile and role data
+      const userRoles = rolesData.map((r: any) => r.role as UserRole);
+      
+      // Get saved active role from localStorage or use first role
+      const savedActiveRole = localStorage.getItem('activeRole') as UserRole;
+      const activeRole = savedActiveRole && userRoles.includes(savedActiveRole) 
+        ? savedActiveRole 
+        : userRoles[0];
+
+      // Combine profile and roles data
       setProfile({
         ...profileData,
-        role: roleData.role as UserRole
+        roles: userRoles,
+        activeRole: activeRole || 'creator'
       });
     } catch (error) {
       console.error('[Auth] Profile fetch exception:', error);
+    }
+  };
+
+  const switchRole = (role: UserRole) => {
+    if (profile && profile.roles.includes(role)) {
+      localStorage.setItem('activeRole', role);
+      setProfile({
+        ...profile,
+        activeRole: role
+      });
     }
   };
 
@@ -123,7 +144,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const isAuthenticated = !!session && !!user;
 
   return (
-    <AuthContext.Provider value={{ user, session, profile, loading, signOut, isAuthenticated }}>
+    <AuthContext.Provider value={{ user, session, profile, loading, signOut, isAuthenticated, switchRole }}>
       {children}
     </AuthContext.Provider>
   );

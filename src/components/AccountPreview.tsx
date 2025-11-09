@@ -37,16 +37,24 @@ export function AccountPreview({ children }: { children: React.ReactNode }) {
                 <div className="text-center sm:text-left">
                   <h2 className="text-2xl font-bold text-foreground">{profile.full_name || profile.username}</h2>
                   <p className="text-lg text-accent">@{profile.username}</p>
-                  <Badge variant="secondary" className="mt-2">
-                    {profile.role.charAt(0).toUpperCase() + profile.role.slice(1)}
-                  </Badge>
+                  <div className="flex gap-2 mt-2 flex-wrap">
+                    {profile.roles.map((role) => (
+                      <Badge 
+                        key={role}
+                        variant={role === profile.activeRole ? "default" : "secondary"}
+                        className="capitalize"
+                      >
+                        {role}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
               </div>
             </CardContent>
           </Card>
 
           {/* Stats Grid */}
-          {profile.role === 'creator' && (
+          {profile.roles.includes('creator') && (
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <Card className="bg-secondary/20">
                 <CardContent className="p-4 text-center">
