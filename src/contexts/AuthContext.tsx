@@ -2,7 +2,6 @@ import React, { createContext, useContext, useState, useEffect, ReactNode } from
 import { User as SupabaseUser, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 import { useNavigate } from 'react-router-dom';
-
 import { UserRole } from '@/types/auth';
 
 interface Profile {
@@ -69,18 +68,40 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const fetchProfile = async (userId: string) => {
     try {
-      const { data, error } = await (supabase as any)
+      // Fetch profile data
+      const { data: profileData, error: profileError } = await (supabase as any)
         .from('profiles')
         .select('*')
         .eq('id', userId)
         .single();
 
-      if (error) {
-        console.error('[Auth] Profile fetch error:', error);
+      if (profileError) {
+        console.error('[Auth] Profile fetch error:', profileError);
         return;
       }
 
-      setProfile(data as Profile);
+      // Fetch user role from user_roles table
+      const { data: roleData, error: roleError } = await (supabase as any)
+        .from('user_roles')
+        .select('role')
+        .eq('user_id', userId)
+        .single();
+
+      if (roleError) {
+        console.error('[Auth] Role fetch error:', roleError);
+        // Default to 'creator' if role not found
+        setProfile({
+          ...profileData,
+          role: 'creator' as UserRole
+        });
+        return;
+      }
+
+      // Combine profile and role data
+      setProfile({
+        ...profileData,
+        role: roleData.role as UserRole
+      });
     } catch (error) {
       console.error('[Auth] Profile fetch exception:', error);
     }
