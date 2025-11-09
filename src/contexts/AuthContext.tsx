@@ -3,12 +3,14 @@ import { User as SupabaseUser, Session } from '@supabase/supabase-js';
 import { supabase } from '@/integrations/supabase/client';
 import { useNavigate } from 'react-router-dom';
 
+import { UserRole } from '@/types/auth';
+
 interface Profile {
   id: string;
   username: string | null;
   full_name: string | null;
   avatar_url: string | null;
-  role: 'creator' | 'agency' | 'business';
+  role: UserRole;
 }
 
 interface AuthContextType {
@@ -67,7 +69,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const fetchProfile = async (userId: string) => {
     try {
-      const { data, error } = await supabase
+      const { data, error } = await (supabase as any)
         .from('profiles')
         .select('*')
         .eq('id', userId)
@@ -78,7 +80,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         return;
       }
 
-      setProfile(data);
+      setProfile(data as Profile);
     } catch (error) {
       console.error('[Auth] Profile fetch exception:', error);
     }
