@@ -9,7 +9,7 @@ interface Profile {
   username: string | null;
   full_name: string | null;
   avatar_url: string | null;
-  role: UserRole;
+  role: UserRole; // Fetched from user_roles table
 }
 
 interface AuthContextType {
