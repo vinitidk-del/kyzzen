@@ -69,6 +69,29 @@ export default function Auth() {
   const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Check for demo credentials
+    if ((email === 'admin' || email === 'admin@kyzzen.com') && password === 'admin') {
+      // Demo login - simulate authentication for demo purposes
+      toast({
+        title: 'Demo Mode',
+        description: 'Logged in as demo admin. This is a demonstration with mock data.',
+      });
+      
+      // Store demo session in localStorage
+      localStorage.setItem('demo_session', JSON.stringify({
+        user: {
+          id: 'demo-admin-id',
+          email: 'admin@kyzzen.com',
+          role: 'admin',
+          roles: ['admin', 'creator', 'agency'],
+        },
+        isDemo: true,
+      }));
+      
+      navigate('/app');
+      return;
+    }
+    
     const isEmailValid = validateEmail(email);
     const isPasswordValid = validatePassword(password);
 
@@ -264,23 +287,28 @@ export default function Auth() {
             <TabsContent value="signin">
               <form onSubmit={handleEmailSignIn} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="signin-email">Email</Label>
+                  <Label htmlFor="signin-email">Email or Username</Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                     <Input
                       id="signin-email"
-                      type="email"
-                      placeholder="you@example.com"
+                      type="text"
+                      placeholder="you@example.com or username"
                       value={email}
                       onChange={(e) => {
                         setEmail(e.target.value);
-                        validateEmail(e.target.value);
+                        if (e.target.value !== 'admin') {
+                          validateEmail(e.target.value);
+                        } else {
+                          setEmailError('');
+                        }
                       }}
                       className="pl-9"
                       required
                     />
                   </div>
                   {emailError && <p className="text-sm text-destructive">{emailError}</p>}
+                  <p className="text-xs text-muted-foreground">Demo: username "admin", password "admin"</p>
                 </div>
 
                 <div className="space-y-2">

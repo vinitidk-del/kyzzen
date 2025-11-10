@@ -42,7 +42,14 @@ export type Permission =
   // Financial features
   | 'view_financial_tracker'
   | 'manage_invoices'
-  | 'view_revenue_reports';
+  | 'view_revenue_reports'
+  
+  // Admin features
+  | 'access_admin_dashboard'
+  | 'manage_user_roles'
+  | 'manage_user_permissions'
+  | 'view_all_users'
+  | 'view_system_logs';
 
 /**
  * Permission configuration mapping permissions to roles
@@ -83,6 +90,13 @@ export const PERMISSIONS: Record<Permission, UserRole[]> = {
   view_financial_tracker: ['creator', 'agency'],
   manage_invoices: ['agency'],
   view_revenue_reports: ['agency', 'business'],
+  
+  // Admin - admin only
+  access_admin_dashboard: ['admin'],
+  manage_user_roles: ['admin'],
+  manage_user_permissions: ['admin'],
+  view_all_users: ['admin'],
+  view_system_logs: ['admin'],
 };
 
 /**

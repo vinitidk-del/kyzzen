@@ -32,6 +32,23 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Check for demo session first
+    const demoSession = localStorage.getItem('demo_session');
+    if (demoSession) {
+      const demo = JSON.parse(demoSession);
+      setUser(demo.user);
+      setProfile({
+        id: demo.user.id,
+        username: 'admin',
+        full_name: 'Demo Admin',
+        avatar_url: null,
+        roles: ['admin', 'creator', 'agency'],
+        activeRole: 'admin',
+      });
+      setLoading(false);
+      return;
+    }
+
     // Set up auth state listener FIRST
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
@@ -130,12 +147,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signOut = async () => {
     try {
+      // Clear demo session if exists
+      localStorage.removeItem('demo_session');
+      
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
       
       setUser(null);
       setSession(null);
       setProfile(null);
+      localStorage.removeItem('activeRole');
     } catch (error) {
       console.error('[Auth] Sign out error:', error);
     }

@@ -29,7 +29,10 @@ import { ClientManagement } from '@/components/agency/ClientManagement';
 import { BusinessDashboard } from '@/components/business/BusinessDashboard';
 import { CampaignManagement } from '@/components/business/CampaignManagement';
 
-const navigationConfig = {
+// Admin Components
+import { AdminDashboard } from '@/components/admin/AdminDashboard';
+
+const navigationConfig: Record<string, any> = {
   creator: [
     { id: 'modules', label: 'Apps', icon: <Grid3x3 className="w-5 h-5" /> },
     { id: 'dashboard', label: 'Dashboard', icon: <Home className="w-5 h-5" /> },
@@ -50,6 +53,10 @@ const navigationConfig = {
     { id: 'campaigns', label: 'Campaigns', icon: <Briefcase className="w-5 h-5" /> },
     { id: 'discovery', label: 'Discovery', icon: <Search className="w-5 h-5" /> },
     { id: 'analytics', label: 'Analytics', icon: <BarChart3 className="w-5 h-5" /> },
+  ],
+  admin: [
+    { id: 'admin', label: 'Admin Dashboard', icon: <Home className="w-5 h-5" /> },
+    { id: 'modules', label: 'Apps', icon: <Grid3x3 className="w-5 h-5" /> },
   ],
 };
 
@@ -80,6 +87,11 @@ export function AppLayout() {
     // Show ModuleSelector for all roles if on modules page
     if (activePage === 'modules') {
       return <ModuleSelector onModuleSelect={setActivePage} />;
+    }
+
+    // Admin role
+    if (profile.activeRole === 'admin') {
+      return <AdminDashboard />;
     }
 
     switch (profile.activeRole) {

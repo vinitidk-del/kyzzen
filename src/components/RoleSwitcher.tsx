@@ -10,10 +10,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { ChevronDown, Users, Briefcase, Building2, Check } from 'lucide-react';
+import { ChevronDown, Users, Briefcase, Building2, Check, Shield } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
-const roleConfig = {
+const roleConfig: Record<string, any> = {
   creator: {
     label: 'Creator',
     icon: Users,
@@ -31,6 +31,12 @@ const roleConfig = {
     icon: Building2,
     color: 'text-green-500',
     bgColor: 'bg-green-500/10',
+  },
+  admin: {
+    label: 'Admin',
+    icon: Shield,
+    color: 'text-red-500',
+    bgColor: 'bg-red-500/10',
   },
 };
 
