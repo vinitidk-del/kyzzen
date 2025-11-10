@@ -87,9 +87,139 @@ CREATE POLICY "Users can insert their own roles during signup"
   WITH CHECK (auth.uid() = user_id);
 ```
 
+## Permissions System
+
+### Overview
+
+The application implements a granular permissions system that controls feature access within each role type. This system is separate from role assignment and provides fine-grained control over what users can do.
+
+### Architecture
+
+**Configuration File**: `src/config/permissions.ts`
+- Defines all available permissions as a TypeScript union type
+- Maps each permission to the roles that have access
+- Provides utility functions for permission checking
+
+**Permission Hook**: `src/hooks/usePermissions.ts`
+- React hook for checking permissions in components
+- Integrates with AuthContext to use current user's role(s)
+- Provides multiple checking strategies (active role, any role, etc.)
+
+**Permission Gate Component**: `src/components/PermissionGate.tsx`
+- Declarative component for conditional rendering based on permissions
+- Supports fallback content and access-denied messages
+- Can be used as a component or HOC
+
+### Permission Categories
+
+1. **Analytics Permissions**: Control access to analytics features
+   - `view_analytics`: Basic analytics (all roles)
+   - `view_advanced_analytics`: Advanced analytics (all roles)
+   - `export_analytics`: Export data (agency, business only)
+
+2. **Content Permissions**: Control content creation and management
+   - `create_content`: Create posts/videos (creator, agency)
+   - `schedule_content`: Schedule posts (creator, agency)
+   - `use_ai_generator`: AI content tools (creator, agency)
+   - `access_content_templates`: Template library (creator, agency)
+
+3. **Collaboration Permissions**: Team and collaboration features
+   - `manage_team`: Team management (creator, agency)
+   - `invite_collaborators`: Invite team members (creator, agency)
+   - `assign_tasks`: Task assignment (agency only)
+
+4. **Client/Campaign Permissions**: Business operations
+   - `manage_clients`: Client management (agency only)
+   - `create_campaigns`: Campaign creation (agency, business)
+   - `view_campaign_analytics`: Campaign reports (agency, business)
+
+5. **Business Permissions**: Business-specific features
+   - `manage_products`: Product management (business only)
+   - `view_sales_data`: Sales analytics (business only)
+   - `access_business_dashboard`: Business dashboard (business only)
+
+6. **Network Permissions**: Talent network features
+   - `access_talent_network`: Browse network (all roles)
+   - `hire_talent`: Hire services (creator, business)
+   - `offer_services`: Offer services (creator only)
+
+7. **Financial Permissions**: Financial tracking
+   - `view_financial_tracker`: View finances (creator, agency)
+   - `manage_invoices`: Invoice management (agency only)
+   - `view_revenue_reports`: Revenue reports (agency, business)
+
+### Usage Examples
+
+**In Components:**
+```tsx
+import { usePermissions } from '@/hooks/usePermissions';
+
+function MyComponent() {
+  const { can, canAny } = usePermissions();
+  
+  // Check if active role has permission
+  if (can('create_campaigns')) {
+    return <CreateCampaignButton />;
+  }
+  
+  // Check if any role has permission
+  if (canAny('manage_clients')) {
+    return <ClientsList />;
+  }
+}
+```
+
+**With PermissionGate:**
+```tsx
+import { PermissionGate } from '@/components/PermissionGate';
+
+function MyComponent() {
+  return (
+    <PermissionGate 
+      permission="use_ai_generator"
+      showMessage={true}
+    >
+      <AIContentGenerator />
+    </PermissionGate>
+  );
+}
+```
+
+**With Multiple Roles:**
+```tsx
+// User switches from 'creator' to 'agency' role
+// Permissions automatically update based on active role
+const { can, activeRole, switchRole } = usePermissions();
+
+console.log(activeRole); // 'creator'
+console.log(can('assign_tasks')); // false
+
+switchRole('agency');
+
+console.log(activeRole); // 'agency'
+console.log(can('assign_tasks')); // true
+```
+
+### Security Considerations
+
+1. **Client-Side Only**: Current permissions are enforced client-side for UX
+2. **Backend Validation Required**: Always validate permissions on backend/database
+3. **RLS Integration**: Database RLS policies should mirror permission rules
+4. **Defense in Depth**: Permissions are one layer; RLS provides server-side enforcement
+
+### Multi-Role Support
+
+The system fully supports users with multiple roles:
+- **Active Role Checking**: `can()` checks only the currently active role
+- **Any Role Checking**: `canAny()` checks if any of the user's roles have permission
+- **Role Switching**: Users can switch between roles, permissions update automatically
+- **Aggregate Permissions**: `getAllUserPermissions()` returns all permissions across all roles
+
 ### Future Enhancements
 
-- Add admin role management interface (only admins can assign roles to others)
-- Implement role history/audit log
-- Support multiple roles per user if needed
-- Add role-based route protection middleware
+- Add admin role for super-user capabilities
+- Implement permission history/audit log
+- Add dynamic permission assignment (not just role-based)
+- Create permission presets/templates
+- Add permission delegation (temporary access grants)
+- Implement time-based permissions (expire after certain time)
