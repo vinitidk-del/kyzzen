@@ -39,10 +39,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(demo.user);
       setProfile({
         id: demo.user.id,
-        username: 'admin',
+        username: 'demoadmin',
         full_name: 'Demo Admin',
         avatar_url: null,
-        roles: ['admin', 'creator', 'agency'],
+        roles: ['admin', 'creator', 'agency', 'business'],
         activeRole: 'admin',
       });
       setLoading(false);
@@ -162,7 +162,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const isAuthenticated = !!session && !!user;
+  const isAuthenticated = (!!session && !!user) || !!localStorage.getItem('demo_session');
 
   return (
     <AuthContext.Provider value={{ user, session, profile, loading, signOut, isAuthenticated, switchRole }}>

@@ -70,7 +70,7 @@ export default function Auth() {
     e.preventDefault();
     
     // Check for demo credentials
-    if ((email === 'admin' || email === 'admin@kyzzen.com') && password === 'admin') {
+    if (email === 'demo@gmail.com' && password === 'adminadmin') {
       // Demo login - simulate authentication for demo purposes
       toast({
         title: 'Demo Mode',
@@ -81,14 +81,15 @@ export default function Auth() {
       localStorage.setItem('demo_session', JSON.stringify({
         user: {
           id: 'demo-admin-id',
-          email: 'admin@kyzzen.com',
+          email: 'demo@gmail.com',
           role: 'admin',
-          roles: ['admin', 'creator', 'agency'],
+          roles: ['admin', 'creator', 'agency', 'business'],
         },
         isDemo: true,
       }));
       
-      navigate('/app');
+      // Force reload to trigger AuthContext update
+      window.location.href = '/app';
       return;
     }
     
@@ -297,7 +298,7 @@ export default function Auth() {
                       value={email}
                       onChange={(e) => {
                         setEmail(e.target.value);
-                        if (e.target.value !== 'admin') {
+                        if (e.target.value !== 'demo@gmail.com') {
                           validateEmail(e.target.value);
                         } else {
                           setEmailError('');
@@ -308,7 +309,7 @@ export default function Auth() {
                     />
                   </div>
                   {emailError && <p className="text-sm text-destructive">{emailError}</p>}
-                  <p className="text-xs text-muted-foreground">Demo: username "admin", password "admin"</p>
+                  <p className="text-xs text-muted-foreground">Demo: email "demo@gmail.com", password "adminadmin"</p>
                 </div>
 
                 <div className="space-y-2">
