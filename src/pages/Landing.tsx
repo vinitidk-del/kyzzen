@@ -29,12 +29,28 @@ const Landing = () => {
             <a href="#home" className="text-foreground/80 hover:text-primary transition-colors">Home</a>
             <a href="#about" className="text-foreground/80 hover:text-primary transition-colors">About</a>
             <a href="#services" className="text-foreground/80 hover:text-primary transition-colors">Services</a>
-            <Link to="/app">
-              <Button variant="outline" size="sm" className="rounded-full">
-                Get Started
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
+            {isAuthenticated ? (
+              <Link to="/app">
+                <Button variant="outline" size="sm" className="rounded-full">
+                  Dashboard
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            ) : (
+              <>
+                <Link to="/auth">
+                  <Button variant="ghost" size="sm">
+                    Sign In
+                  </Button>
+                </Link>
+                <Link to="/auth">
+                  <Button size="sm" className="rounded-full">
+                    Get Started
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </nav>
