@@ -19,6 +19,19 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen relative overflow-hidden landing-gradient">
+      {/* Animated Flying Birds */}
+      <div className="sky-birds">
+        <div className="bird bird-1"></div>
+        <div className="bird bird-2"></div>
+        <div className="bird bird-3"></div>
+        <div className="bird bird-4"></div>
+        <div className="bird bird-5"></div>
+        <div className="bird bird-6"></div>
+        <div className="bird bird-7"></div>
+        <div className="bird bird-8"></div>
+        <div className="bird-flock bird-flock-1"></div>
+        <div className="bird-flock bird-flock-2"></div>
+      </div>
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 border-b border-border/50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
