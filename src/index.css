@@ -449,7 +449,7 @@ All colors MUST be HSL.
     -webkit-backdrop-filter: blur(10px);
   }
 
-  /* Landing Page Sky Background - Static Clouds */
+  /* Landing Page Sky Background - Base */
   .landing-gradient {
     position: relative;
     background: linear-gradient(180deg, 
@@ -459,6 +459,220 @@ All colors MUST be HSL.
       hsl(195, 80%, 88%) 75%,
       hsl(190, 75%, 92%) 100%
     );
+    transition: background 1.5s ease-in-out;
+  }
+
+  /* Day Sky - Default bright blue */
+  .landing-gradient.sky-day {
+    background: linear-gradient(180deg, 
+      hsl(210, 75%, 75%) 0%,
+      hsl(205, 80%, 80%) 25%,
+      hsl(200, 85%, 85%) 50%,
+      hsl(195, 80%, 88%) 75%,
+      hsl(190, 75%, 92%) 100%
+    );
+  }
+
+  /* Dawn Sky - Warm oranges and pinks */
+  .landing-gradient.sky-dawn {
+    background: linear-gradient(180deg, 
+      hsl(270, 40%, 45%) 0%,
+      hsl(320, 50%, 55%) 20%,
+      hsl(15, 70%, 65%) 40%,
+      hsl(35, 80%, 70%) 60%,
+      hsl(45, 85%, 80%) 80%,
+      hsl(50, 70%, 88%) 100%
+    );
+  }
+
+  /* Dusk Sky - Purple and orange sunset */
+  .landing-gradient.sky-dusk {
+    background: linear-gradient(180deg, 
+      hsl(260, 50%, 35%) 0%,
+      hsl(280, 45%, 45%) 20%,
+      hsl(320, 55%, 50%) 40%,
+      hsl(15, 75%, 55%) 60%,
+      hsl(30, 80%, 65%) 80%,
+      hsl(40, 70%, 75%) 100%
+    );
+  }
+
+  /* Night Sky - Deep dark blue with stars */
+  .landing-gradient.sky-night {
+    background: linear-gradient(180deg, 
+      hsl(230, 50%, 8%) 0%,
+      hsl(235, 45%, 12%) 30%,
+      hsl(240, 40%, 18%) 60%,
+      hsl(245, 35%, 22%) 100%
+    );
+  }
+
+  /* Hide clouds at night */
+  .landing-gradient.sky-night::before,
+  .landing-gradient.sky-night::after {
+    opacity: 0 !important;
+    transition: opacity 1s ease-in-out;
+  }
+
+  /* Dim clouds at dawn/dusk */
+  .landing-gradient.sky-dawn::before,
+  .landing-gradient.sky-dawn::after {
+    opacity: 0.6;
+    filter: sepia(0.3) hue-rotate(-20deg);
+    transition: opacity 1s ease-in-out, filter 1s ease-in-out;
+  }
+
+  .landing-gradient.sky-dusk::before,
+  .landing-gradient.sky-dusk::after {
+    opacity: 0.5;
+    filter: sepia(0.4) hue-rotate(-30deg) brightness(0.9);
+    transition: opacity 1s ease-in-out, filter 1s ease-in-out;
+  }
+
+  /* Night Sky Elements Container */
+  .night-sky {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  /* Stars */
+  .stars {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image:
+      radial-gradient(2px 2px at 20px 30px, white, transparent),
+      radial-gradient(2px 2px at 40px 70px, white, transparent),
+      radial-gradient(2px 2px at 50px 160px, white, transparent),
+      radial-gradient(2px 2px at 90px 40px, white, transparent),
+      radial-gradient(2px 2px at 130px 80px, white, transparent),
+      radial-gradient(2px 2px at 160px 120px, white, transparent),
+      radial-gradient(1px 1px at 200px 50px, white, transparent),
+      radial-gradient(1px 1px at 230px 180px, white, transparent),
+      radial-gradient(2px 2px at 280px 90px, white, transparent),
+      radial-gradient(1px 1px at 320px 140px, white, transparent),
+      radial-gradient(2px 2px at 380px 60px, white, transparent),
+      radial-gradient(1px 1px at 420px 200px, white, transparent),
+      radial-gradient(2px 2px at 480px 110px, white, transparent),
+      radial-gradient(1px 1px at 520px 170px, white, transparent),
+      radial-gradient(2px 2px at 580px 40px, white, transparent),
+      radial-gradient(1px 1px at 620px 130px, white, transparent),
+      radial-gradient(2px 2px at 680px 190px, white, transparent),
+      radial-gradient(1px 1px at 740px 70px, white, transparent),
+      radial-gradient(2px 2px at 800px 150px, white, transparent),
+      radial-gradient(1px 1px at 860px 100px, white, transparent),
+      radial-gradient(2px 2px at 920px 180px, white, transparent),
+      radial-gradient(1px 1px at 980px 60px, white, transparent),
+      radial-gradient(2px 2px at 1040px 140px, white, transparent),
+      radial-gradient(1px 1px at 1100px 200px, white, transparent),
+      radial-gradient(2px 2px at 1160px 80px, white, transparent),
+      radial-gradient(1px 1px at 1220px 160px, white, transparent),
+      radial-gradient(2px 2px at 1280px 120px, white, transparent),
+      radial-gradient(1px 1px at 1340px 50px, white, transparent),
+      radial-gradient(2px 2px at 1400px 190px, white, transparent),
+      radial-gradient(1px 1px at 1460px 90px, white, transparent),
+      radial-gradient(3px 3px at 100px 200px, white, transparent),
+      radial-gradient(3px 3px at 350px 150px, white, transparent),
+      radial-gradient(3px 3px at 600px 80px, white, transparent),
+      radial-gradient(3px 3px at 850px 250px, white, transparent),
+      radial-gradient(3px 3px at 1200px 100px, white, transparent);
+    background-repeat: repeat;
+    background-size: 1500px 300px;
+    animation: starsTwinkle 3s ease-in-out infinite alternate;
+  }
+
+  @keyframes starsTwinkle {
+    0% {
+      opacity: 0.7;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0.8;
+    }
+  }
+
+  /* Moon */
+  .moon {
+    position: absolute;
+    top: 8%;
+    right: 12%;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, 
+      hsl(45, 20%, 95%) 0%,
+      hsl(45, 30%, 85%) 50%,
+      hsl(45, 15%, 75%) 100%
+    );
+    border-radius: 50%;
+    box-shadow: 
+      0 0 20px 5px hsla(45, 50%, 90%, 0.4),
+      0 0 60px 15px hsla(45, 40%, 80%, 0.2),
+      inset -10px -10px 20px hsla(45, 20%, 60%, 0.3);
+    animation: moonGlow 4s ease-in-out infinite alternate;
+  }
+
+  /* Moon craters */
+  .moon::before {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: hsla(45, 10%, 70%, 0.4);
+    border-radius: 50%;
+    top: 20%;
+    left: 25%;
+  }
+
+  .moon::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: hsla(45, 10%, 70%, 0.3);
+    border-radius: 50%;
+    top: 55%;
+    left: 55%;
+  }
+
+  @keyframes moonGlow {
+    0% {
+      box-shadow: 
+        0 0 20px 5px hsla(45, 50%, 90%, 0.4),
+        0 0 60px 15px hsla(45, 40%, 80%, 0.2),
+        inset -10px -10px 20px hsla(45, 20%, 60%, 0.3);
+    }
+    100% {
+      box-shadow: 
+        0 0 30px 10px hsla(45, 50%, 90%, 0.5),
+        0 0 80px 25px hsla(45, 40%, 80%, 0.3),
+        inset -10px -10px 20px hsla(45, 20%, 60%, 0.3);
+    }
+  }
+
+  /* Adjust nav/card colors for different times */
+  .landing-gradient.sky-night nav {
+    background-color: hsla(230, 30%, 15%, 0.95) !important;
+    border-bottom-color: hsla(230, 25%, 30%, 0.6);
+  }
+
+  .landing-gradient.sky-night [class*="card"],
+  .landing-gradient.sky-night .bg-card {
+    background-color: hsla(230, 30%, 18%, 0.95);
+    border-color: hsla(230, 25%, 30%, 0.6);
+  }
+
+  .landing-gradient.sky-dawn nav,
+  .landing-gradient.sky-dusk nav {
+    background-color: hsla(30, 50%, 95%, 0.95) !important;
+    border-bottom-color: hsla(30, 30%, 80%, 0.6);
   }
 
   /* Static Cloud Layers - Fixed Background */

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Sparkles, TrendingUp, Users, Zap, Target, BarChart3, Rocket, Brain, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -6,32 +6,62 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { LandingModuleSelector } from '@/components/LandingModuleSelector';
 import { useAuth } from '@/contexts/AuthContext';
 
+type TimeOfDay = 'dawn' | 'day' | 'dusk' | 'night';
+
+const getTimeOfDay = (): TimeOfDay => {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 7) return 'dawn';
+  if (hour >= 7 && hour < 18) return 'day';
+  if (hour >= 18 && hour < 20) return 'dusk';
+  return 'night';
+};
+
 const Landing = () => {
   const services = ['Content Strategy', 'Editing', 'Branding', 'Management'];
   const { isAuthenticated } = useAuth();
+  const [timeOfDay, setTimeOfDay] = useState<TimeOfDay>(getTimeOfDay);
 
   useEffect(() => {
     document.body.classList.add('landing-page');
+    
+    // Update time of day every minute
+    const interval = setInterval(() => {
+      setTimeOfDay(getTimeOfDay());
+    }, 60000);
+    
     return () => {
       document.body.classList.remove('landing-page');
+      clearInterval(interval);
     };
   }, []);
 
+  const showBirds = timeOfDay === 'day' || timeOfDay === 'dawn' || timeOfDay === 'dusk';
+
   return (
-    <div className="min-h-screen relative overflow-hidden landing-gradient">
-      {/* Animated Flying Birds */}
-      <div className="sky-birds">
-        <div className="bird bird-1"></div>
-        <div className="bird bird-2"></div>
-        <div className="bird bird-3"></div>
-        <div className="bird bird-4"></div>
-        <div className="bird bird-5"></div>
-        <div className="bird bird-6"></div>
-        <div className="bird bird-7"></div>
-        <div className="bird bird-8"></div>
-        <div className="bird-flock bird-flock-1"></div>
-        <div className="bird-flock bird-flock-2"></div>
-      </div>
+    <div className={`min-h-screen relative overflow-hidden landing-gradient sky-${timeOfDay}`}>
+      {/* Night Sky Elements */}
+      {timeOfDay === 'night' && (
+        <div className="night-sky">
+          <div className="stars"></div>
+          <div className="moon"></div>
+        </div>
+      )}
+      
+      {/* Animated Flying Birds - Only show during day/dawn/dusk */}
+      {showBirds && (
+        <div className="sky-birds">
+          <div className="bird bird-1"></div>
+          <div className="bird bird-2"></div>
+          <div className="bird bird-3"></div>
+          <div className="bird bird-4"></div>
+          <div className="bird bird-5"></div>
+          <div className="bird bird-6"></div>
+          <div className="bird bird-7"></div>
+          <div className="bird bird-8"></div>
+          <div className="bird-flock bird-flock-1"></div>
+          <div className="bird-flock bird-flock-2"></div>
+        </div>
+      )}
       {/* Navigation */}
       <nav className="fixed top-0 w-full z-50 border-b border-border/50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
