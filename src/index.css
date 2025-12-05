@@ -657,6 +657,163 @@ All colors MUST be HSL.
     }
   }
 
+  /* Shooting Stars */
+  .shooting-star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: linear-gradient(45deg, white, transparent);
+    border-radius: 50%;
+    opacity: 0;
+    filter: drop-shadow(0 0 6px white);
+  }
+
+  .shooting-star::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 120px;
+    height: 2px;
+    background: linear-gradient(90deg, white, hsla(200, 80%, 80%, 0.6), transparent);
+    border-radius: 2px;
+  }
+
+  @keyframes shootingStar1 {
+    0% {
+      transform: translate(0, 0) rotate(-45deg);
+      opacity: 0;
+    }
+    2% {
+      opacity: 1;
+    }
+    8% {
+      transform: translate(300px, 300px) rotate(-45deg);
+      opacity: 1;
+    }
+    10% {
+      transform: translate(350px, 350px) rotate(-45deg);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes shootingStar2 {
+    0%, 40% {
+      transform: translate(0, 0) rotate(-35deg);
+      opacity: 0;
+    }
+    42% {
+      opacity: 1;
+    }
+    48% {
+      transform: translate(280px, 200px) rotate(-35deg);
+      opacity: 1;
+    }
+    50% {
+      transform: translate(320px, 230px) rotate(-35deg);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes shootingStar3 {
+    0%, 65% {
+      transform: translate(0, 0) rotate(-50deg);
+      opacity: 0;
+    }
+    67% {
+      opacity: 1;
+    }
+    73% {
+      transform: translate(250px, 300px) rotate(-50deg);
+      opacity: 1;
+    }
+    75% {
+      transform: translate(290px, 350px) rotate(-50deg);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes shootingStar4 {
+    0%, 20% {
+      transform: translate(0, 0) rotate(-40deg);
+      opacity: 0;
+    }
+    22% {
+      opacity: 1;
+    }
+    28% {
+      transform: translate(320px, 260px) rotate(-40deg);
+      opacity: 1;
+    }
+    30% {
+      transform: translate(360px, 295px) rotate(-40deg);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes shootingStar5 {
+    0%, 80% {
+      transform: translate(0, 0) rotate(-55deg);
+      opacity: 0;
+    }
+    82% {
+      opacity: 1;
+    }
+    88% {
+      transform: translate(200px, 280px) rotate(-55deg);
+      opacity: 1;
+    }
+    90% {
+      transform: translate(230px, 320px) rotate(-55deg);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  .shooting-star-1 {
+    top: 5%;
+    left: 20%;
+    animation: shootingStar1 12s linear infinite;
+  }
+
+  .shooting-star-2 {
+    top: 12%;
+    left: 55%;
+    animation: shootingStar2 15s linear infinite;
+  }
+
+  .shooting-star-3 {
+    top: 8%;
+    left: 75%;
+    animation: shootingStar3 18s linear infinite;
+  }
+
+  .shooting-star-4 {
+    top: 15%;
+    left: 35%;
+    animation: shootingStar4 14s linear infinite;
+  }
+
+  .shooting-star-5 {
+    top: 3%;
+    left: 85%;
+    animation: shootingStar5 20s linear infinite;
+  }
+
   /* Adjust nav/card colors for different times */
   .landing-gradient.sky-night nav {
     background-color: hsla(230, 30%, 15%, 0.95) !important;
