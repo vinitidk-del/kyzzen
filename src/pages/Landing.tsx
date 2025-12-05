@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, TrendingUp, Users, Zap, Target, BarChart3, Rocket, Brain, Heart } from 'lucide-react';
+import { ArrowRight, Sparkles, TrendingUp, Zap, Target, Rocket, Play, Star, Check, ArrowUpRight, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { LandingModuleSelector } from '@/components/LandingModuleSelector';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -17,25 +16,33 @@ const getTimeOfDay = (): TimeOfDay => {
 };
 
 const Landing = () => {
-  const services = ['Content Strategy', 'Editing', 'Branding', 'Management'];
   const { isAuthenticated } = useAuth();
   const [timeOfDay, setTimeOfDay] = useState<TimeOfDay>(getTimeOfDay);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     document.body.classList.add('landing-page');
-    
-    // Update time of day every minute
-    const interval = setInterval(() => {
-      setTimeOfDay(getTimeOfDay());
-    }, 60000);
-    
+    const interval = setInterval(() => setTimeOfDay(getTimeOfDay()), 60000);
     return () => {
       document.body.classList.remove('landing-page');
       clearInterval(interval);
     };
   }, []);
 
-  const showBirds = timeOfDay === 'day' || timeOfDay === 'dawn' || timeOfDay === 'dusk';
+  const showBirds = timeOfDay !== 'night';
+
+  const stats = [
+    { value: '10K+', label: 'Creators' },
+    { value: '50M+', label: 'Content Pieces' },
+    { value: '99%', label: 'Satisfaction' },
+  ];
+
+  const features = [
+    { icon: Target, title: 'Analytics', desc: 'Deep insights into your audience' },
+    { icon: Zap, title: 'Automation', desc: 'Save 10+ hours per week' },
+    { icon: Sparkles, title: 'AI Tools', desc: 'Generate content in seconds' },
+    { icon: Rocket, title: 'Growth', desc: 'Scale your influence faster' },
+  ];
 
   return (
     <div className={`min-h-screen relative overflow-hidden landing-gradient sky-${timeOfDay}`}>
@@ -52,126 +59,155 @@ const Landing = () => {
         </div>
       )}
       
-      {/* Animated Flying Birds - Only show during day/dawn/dusk */}
+      {/* Birds */}
       {showBirds && (
         <div className="sky-birds">
-          <div className="bird bird-1"></div>
-          <div className="bird bird-2"></div>
-          <div className="bird bird-3"></div>
-          <div className="bird bird-4"></div>
-          <div className="bird bird-5"></div>
-          <div className="bird bird-6"></div>
-          <div className="bird bird-7"></div>
-          <div className="bird bird-8"></div>
+          {[1,2,3,4,5,6,7,8].map(i => <div key={i} className={`bird bird-${i}`}></div>)}
           <div className="bird-flock bird-flock-1"></div>
           <div className="bird-flock bird-flock-2"></div>
         </div>
       )}
+
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 border-b border-border/50">
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold text-primary">
-            kyzzen
-          </Link>
-          <div className="hidden md:flex gap-8 items-center">
-            <a href="#home" className="text-foreground/80 hover:text-primary transition-colors">Home</a>
-            <a href="#about" className="text-foreground/80 hover:text-primary transition-colors">About</a>
-            <a href="#services" className="text-foreground/80 hover:text-primary transition-colors">Services</a>
-            {isAuthenticated ? (
-              <Link to="/app">
-                <Button variant="outline" size="sm" className="rounded-full">
-                  Dashboard
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            ) : (
-              <>
-                <Link to="/auth">
-                  <Button variant="ghost" size="sm">
-                    Sign In
+      <nav className="fixed top-0 w-full z-50 backdrop-blur-xl bg-background/60 border-b border-border/30">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <Link to="/" className="flex items-center gap-2">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                <span className="text-white font-black text-lg">K</span>
+              </div>
+              <span className="text-xl font-bold tracking-tight">kyzzen</span>
+            </Link>
+            
+            <div className="hidden md:flex items-center gap-8">
+              <a href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Features</a>
+              <a href="#pricing" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Pricing</a>
+              <a href="#testimonials" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Reviews</a>
+            </div>
+
+            <div className="hidden md:flex items-center gap-3">
+              {isAuthenticated ? (
+                <Link to="/app">
+                  <Button className="rounded-full px-6 shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all">
+                    Dashboard <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-                <Link to="/auth">
-                  <Button size="sm" className="rounded-full">
-                    Get Started
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </>
-            )}
+              ) : (
+                <>
+                  <Link to="/auth">
+                    <Button variant="ghost" className="rounded-full">Sign in</Button>
+                  </Link>
+                  <Link to="/auth">
+                    <Button className="rounded-full px-6 shadow-lg shadow-primary/25 hover:shadow-primary/40 transition-all">
+                      Start Free <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </Link>
+                </>
+              )}
+            </div>
+
+            <button className="md:hidden p-2" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+            </button>
           </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <div className="md:hidden pt-4 pb-2 space-y-3 animate-fade-in">
+              <a href="#features" className="block py-2 text-muted-foreground">Features</a>
+              <a href="#pricing" className="block py-2 text-muted-foreground">Pricing</a>
+              <Link to="/auth" className="block">
+                <Button className="w-full rounded-full mt-2">Get Started</Button>
+              </Link>
+            </div>
+          )}
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section id="home" className="pt-32 pb-20 px-6">
-        <div className="container mx-auto">
-          <div className="max-w-5xl mx-auto text-center mb-16 animate-fade-in">
-            <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-4 py-2 mb-6">
-              <Sparkles className="h-4 w-4 text-primary" />
-              <span className="text-sm font-medium text-primary">Creator Operating System</span>
+      <section className="pt-32 md:pt-40 pb-16 px-6">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-center animate-fade-in">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-primary/10 backdrop-blur-sm border border-primary/20 rounded-full px-4 py-1.5 mb-8">
+              <div className="w-2 h-2 rounded-full bg-primary animate-pulse"></div>
+              <span className="text-sm font-medium">Now with AI-powered tools</span>
             </div>
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              Your Creator OS
-              <br />
-              <span className="text-primary">Choose What You Need.</span>
+
+            {/* Main Headline */}
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.9] mb-6">
+              <span className="block">Create.</span>
+              <span className="block bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                Grow.
+              </span>
+              <span className="block">Dominate.</span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Pick the exact tools you want. Start with one, add more as you grow.
+
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+              The all-in-one operating system for modern creators. 
+              Build your empire with tools that actually work.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
               <a href="#choose-features">
-                <Button size="lg" className="rounded-full text-lg px-10 py-6 shadow-xl hover:shadow-primary/50 transition-all group">
-                  Choose Your Tools
+                <Button size="lg" className="rounded-full text-base px-8 py-6 shadow-2xl shadow-primary/30 hover:shadow-primary/50 hover:scale-105 transition-all group">
+                  Build Your Workspace
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </a>
-              <a href="#how-it-works">
-                <Button size="lg" variant="outline" className="rounded-full text-lg px-10 py-6">
-                  How It Works
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </a>
+              <Button size="lg" variant="outline" className="rounded-full text-base px-8 py-6 backdrop-blur-sm bg-background/50 hover:bg-background/80 transition-all group">
+                <Play className="mr-2 h-5 w-5" />
+                Watch Demo
+              </Button>
             </div>
-            <p className="text-sm text-muted-foreground mt-6">
-              <Heart className="inline h-4 w-4 text-primary" /> Trusted by 10K+ creators
-            </p>
-          </div>
 
-          {/* Services Marquee - Enhanced */}
-          <div className="relative overflow-hidden py-10 border-y border-primary/20 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5">
-            {/* Gradient overlays for fade effect */}
-            <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background via-background/80 to-transparent z-10 pointer-events-none"></div>
-            <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background via-background/80 to-transparent z-10 pointer-events-none"></div>
-            
-            <div className="flex gap-12 animate-marquee whitespace-nowrap">
-              {[...Array(4)].map((_, i) => (
-                <React.Fragment key={i}>
-                  {services.map((service, idx) => (
-                    <React.Fragment key={`${i}-${idx}`}>
-                      <span className="text-3xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent opacity-30">✦</span>
-                      <span className="text-3xl font-bold text-foreground tracking-tight">{service}</span>
-                    </React.Fragment>
-                  ))}
-                </React.Fragment>
+            {/* Stats */}
+            <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+              {stats.map((stat, i) => (
+                <div key={i} className="text-center">
+                  <div className="text-3xl md:text-4xl font-black bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
+                </div>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Choose Features Section */}
+      {/* Features Grid */}
+      <section id="features" className="py-20 px-6">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {features.map((feature, i) => (
+              <div 
+                key={i}
+                className="group relative p-6 rounded-3xl bg-background/60 backdrop-blur-xl border border-border/50 hover:border-primary/30 hover:bg-background/80 transition-all duration-300 hover:-translate-y-1"
+                style={{ animationDelay: `${i * 100}ms` }}
+              >
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <feature.icon className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="font-bold mb-1">{feature.title}</h3>
+                <p className="text-sm text-muted-foreground">{feature.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Module Selector */}
       <section id="choose-features" className="py-20 px-6">
         <div className="container mx-auto max-w-7xl">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Build Your Perfect <span className="text-primary">Workspace</span>
+            <span className="text-sm font-bold text-primary uppercase tracking-wider">Modular Design</span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mt-2 mb-4">
+              Pick Your <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Powers</span>
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-2">
-              Select only the features you need. No bloat, just power.
-            </p>
-            <p className="text-sm text-primary font-medium">
-              Click any tool to add it to your workspace →
+            <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+              Only pay for what you use. Start minimal, scale infinitely.
             </p>
           </div>
           
@@ -179,273 +215,123 @@ const Landing = () => {
         </div>
       </section>
 
-      {/* Why Choose Us Section */}
-      <section id="about" className="py-20 px-6">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Built <span className="text-primary">Your Way</span>
-            </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Modular. Flexible. Scalable.
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="bg-gradient-to-br from-card to-accent/10 border-border shadow-xl">
-              <CardHeader>
-                <Sparkles className="h-8 w-8 text-primary mb-4" />
-                <CardTitle className="text-2xl">Start Small, Scale Big</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground leading-relaxed">
-                  Begin with just what you need today. Add more tools as your business grows. No commitment, no waste.
-                </p>
-              </CardContent>
-            </Card>
-            
-            <Card className="bg-gradient-to-br from-card to-primary/10 border-border shadow-xl">
-              <CardHeader>
-                <Zap className="h-8 w-8 text-primary mb-4" />
-                <CardTitle className="text-2xl">Pay For What You Use</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground leading-relaxed">
-                  Choose individual modules or bundles. Only pay for features you actually need. Cancel anytime.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
       {/* Testimonials */}
-      <section className="py-20 px-6">
+      <section id="testimonials" className="py-20 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">Loved by Creators</h2>
-            <p className="text-lg text-muted-foreground">Real results from real creators</p>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                name: 'Jake M.',
-                initial: 'J',
-                role: 'YouTube Creator',
-                followers: '250K',
-                text: 'Went from posting weekly to daily. Engagement tripled. Game-changer.',
-                metric: '+300% Engagement'
-              },
-              {
-                name: 'Sophia L.',
-                initial: 'S',
-                role: 'Instagram Influencer',
-                followers: '500K',
-                text: 'Brand deals used to be chaos. Now organized. Closed 5 partnerships this month.',
-                metric: '5 New Deals/Month'
-              },
-              {
-                name: 'Tom S.',
-                initial: 'T',
-                role: 'Digital Artist',
-                followers: '150K',
-                text: 'Analytics showed what works. Sales up 150%. Finally understand my audience.',
-                metric: '+150% Sales'
-              }
-            ].map((testimonial, idx) => (
-              <Card key={idx} className="bg-card border-border hover:shadow-xl hover:scale-105 transition-all duration-300">
-                <CardHeader>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 flex items-center justify-center text-primary font-bold text-xl">
-                        {testimonial.initial}
-                      </div>
-                      <div>
-                        <CardTitle className="text-lg">{testimonial.name}</CardTitle>
-                        <p className="text-sm text-muted-foreground">{testimonial.role} • {testimonial.followers}</p>
-                      </div>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground mb-4">"{testimonial.text}"</p>
-                  <div className="inline-flex items-center gap-2 bg-primary/10 rounded-full px-3 py-1">
-                    <TrendingUp className="h-4 w-4 text-primary" />
-                    <span className="text-sm font-medium text-primary">{testimonial.metric}</span>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing Plans */}
-      <section className="py-20 px-6">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Start Free, <span className="text-primary">Scale Fast</span>
+            <span className="text-sm font-bold text-primary uppercase tracking-wider">Wall of Love</span>
+            <h2 className="text-4xl md:text-5xl font-black mt-2">
+              Trusted by <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Creators</span>
             </h2>
-            <p className="text-lg text-muted-foreground">Choose your plan</p>
           </div>
+
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              {
-                name: 'Basic',
-                price: '$499/month',
-                description: 'For Emerging Creators',
-                features: [
-                  'Social Media Management (1 Platform)',
-                  '3 Posts per Week',
-                  'Community Engagement',
-                  'Basic Video Editing (up to 10 videos/month)',
-                  'Monthly Performance Report'
-                ]
-              },
-              {
-                name: 'Essential',
-                price: '$999/month',
-                description: 'For Growing Creators',
-                features: [
-                  'Initial Consultation and Personalized Strategy',
-                  'Social Media Management (2 Platforms)',
-                  '5 Posts per Week',
-                  'Community Engagement',
-                  'Hashtag and Trend Research',
-                  'Enhanced Video Editing (up to 4 videos/month)',
-                  'SEO Optimization',
-                  'Monthly Performance Report'
-                ],
-                popular: true
-              },
-              {
-                name: 'Custom Plan',
-                price: '$1999/month',
-                description: 'Tailored to Your Needs',
-                features: [
-                  'Everything in Essential',
-                  'Custom Services',
-                  'Specialized Marketing Tactics',
-                  'Dedicated Account Manager',
-                  'Priority Support'
-                ]
-              }
-            ].map((plan, idx) => (
-              <Card key={idx} className={`bg-card border-border hover:shadow-xl transition-all ${plan.popular ? 'ring-2 ring-primary shadow-primary/20' : ''}`}>
-                <CardHeader>
-                  {plan.popular && (
-                    <div className="text-primary text-sm font-semibold mb-2">MOST POPULAR</div>
-                  )}
-                  <CardTitle className="text-2xl">{plan.name}</CardTitle>
-                  <div className="text-4xl font-bold text-primary my-4">{plan.price}</div>
-                  <CardDescription className="text-base">{plan.description}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 mb-6">
-                    {plan.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm">
-                        <span className="text-primary mt-1">✓</span>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <Link to="/app">
-                    <Button className="w-full" variant={plan.popular ? 'default' : 'outline'}>
-                      Get Started
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works Section */}
-      <section id="how-it-works" className="py-20 px-6">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">How It Works</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Three simple steps to get started
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-12 relative">
-            {/* Connection Lines */}
-            <div className="hidden md:block absolute top-1/4 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
-            
-            {[
-              {
-                step: '01',
-                title: 'Choose Your Tools',
-                description: 'Select from our library of creator tools. Pick one or pick them all.',
-                icon: Target
-              },
-              {
-                step: '02',
-                title: 'Customize Your Dashboard',
-                description: 'Your workspace adapts to your choices. Clean, focused, powerful.',
-                icon: Sparkles
-              },
-              {
-                step: '03',
-                title: 'Start Creating',
-                description: 'Everything you need, nothing you don\'t. Add more tools anytime.',
-                icon: Rocket
-              }
-            ].map((step, idx) => (
-              <div key={idx} className="relative text-center">
-                <div className="w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center relative z-10 border-4 border-background">
-                  <step.icon className="h-10 w-10 text-primary" />
+              { name: 'Jake M.', role: 'YouTube • 250K', text: 'Tripled my engagement in 2 months. The AI tools are insane.', metric: '+300%' },
+              { name: 'Sophia L.', role: 'Instagram • 500K', text: 'Finally organized my brand deals. Closed 5 partnerships this month.', metric: '5 deals' },
+              { name: 'Tom S.', role: 'TikTok • 1M', text: 'The analytics helped me understand my audience. Revenue up 150%.', metric: '+150%' },
+            ].map((t, i) => (
+              <div key={i} className="group relative p-6 rounded-3xl bg-background/60 backdrop-blur-xl border border-border/50 hover:border-primary/30 transition-all duration-300">
+                <div className="flex gap-1 mb-4">
+                  {[...Array(5)].map((_, j) => (
+                    <Star key={j} className="h-4 w-4 fill-primary text-primary" />
+                  ))}
                 </div>
-                <div className="text-5xl font-bold text-primary/20 mb-2">{step.step}</div>
-                <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-                <p className="text-muted-foreground">{step.description}</p>
+                <p className="text-foreground mb-6 leading-relaxed">"{t.text}"</p>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="font-bold">{t.name}</div>
+                    <div className="text-sm text-muted-foreground">{t.role}</div>
+                  </div>
+                  <div className="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-bold">
+                    {t.metric}
+                  </div>
+                </div>
               </div>
             ))}
-          </div>
-          
-          <div className="text-center mt-16">
-            <a href="#choose-features">
-              <Button size="lg" className="rounded-full text-lg px-10 py-6 shadow-xl group">
-                Choose Your Features
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </a>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-6">
-        <div className="container mx-auto max-w-5xl text-center">
-          <div className="relative overflow-hidden bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 rounded-3xl p-12 md:p-16 border border-primary/20 shadow-2xl">
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent animate-pulse"></div>
-            <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 bg-background/80 backdrop-blur-sm rounded-full px-6 py-2 mb-6">
-                <Sparkles className="h-5 w-5 text-primary" />
-                <span className="font-semibold text-primary">Start Free Today</span>
-              </div>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                Build It
-                <br />
-                <span className="text-primary">Your Way</span>
-              </h2>
-              <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
-                10K+ creators already building their perfect workspace.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+      {/* Pricing */}
+      <section id="pricing" className="py-20 px-6">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-12">
+            <span className="text-sm font-bold text-primary uppercase tracking-wider">Simple Pricing</span>
+            <h2 className="text-4xl md:text-5xl font-black mt-2">
+              Start Free, <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Scale Fast</span>
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { name: 'Starter', price: '$0', period: '/forever', features: ['3 modules', 'Basic analytics', 'Community support'], popular: false },
+              { name: 'Pro', price: '$29', period: '/month', features: ['Unlimited modules', 'Advanced analytics', 'AI tools', 'Priority support', 'Custom branding'], popular: true },
+              { name: 'Team', price: '$99', period: '/month', features: ['Everything in Pro', 'Team collaboration', 'API access', 'Dedicated manager', 'White-label'], popular: false },
+            ].map((plan, i) => (
+              <div 
+                key={i}
+                className={`relative p-8 rounded-3xl backdrop-blur-xl border transition-all duration-300 hover:-translate-y-1 ${
+                  plan.popular 
+                    ? 'bg-gradient-to-b from-primary/10 to-background/80 border-primary/50 shadow-2xl shadow-primary/20' 
+                    : 'bg-background/60 border-border/50 hover:border-primary/30'
+                }`}
+              >
+                {plan.popular && (
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold">
+                    MOST POPULAR
+                  </div>
+                )}
+                <div className="text-lg font-bold mb-2">{plan.name}</div>
+                <div className="flex items-baseline gap-1 mb-6">
+                  <span className="text-4xl font-black">{plan.price}</span>
+                  <span className="text-muted-foreground">{plan.period}</span>
+                </div>
+                <ul className="space-y-3 mb-8">
+                  {plan.features.map((f, j) => (
+                    <li key={j} className="flex items-center gap-2 text-sm">
+                      <Check className="h-4 w-4 text-primary" />
+                      <span>{f}</span>
+                    </li>
+                  ))}
+                </ul>
                 <Link to="/app">
-                  <Button size="lg" className="rounded-full text-lg px-12 py-7 shadow-2xl hover:shadow-primary/50 transition-all group text-lg font-semibold">
-                    Launch App
-                    <Rocket className="ml-2 h-5 w-5 group-hover:translate-y-[-2px] transition-transform" />
+                  <Button 
+                    className={`w-full rounded-full ${plan.popular ? 'shadow-lg shadow-primary/25' : ''}`}
+                    variant={plan.popular ? 'default' : 'outline'}
+                  >
+                    Get Started
                   </Button>
                 </Link>
               </div>
-              <p className="text-sm text-muted-foreground mt-6">
-                ✨ Free forever • No credit card • 30 seconds setup
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA */}
+      <section className="py-20 px-6">
+        <div className="container mx-auto max-w-4xl">
+          <div className="relative overflow-hidden rounded-[2.5rem] p-12 md:p-16 bg-gradient-to-br from-primary via-primary to-secondary text-primary-foreground">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+            
+            <div className="relative z-10 text-center">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mb-6">
+                Ready to Level Up?
+              </h2>
+              <p className="text-lg md:text-xl opacity-90 mb-10 max-w-xl mx-auto">
+                Join 10,000+ creators who are building their empires with Kyzzen.
+              </p>
+              <Link to="/auth">
+                <Button size="lg" variant="secondary" className="rounded-full text-base px-10 py-6 bg-white text-primary hover:bg-white/90 shadow-2xl hover:scale-105 transition-all group">
+                  Start Building Now
+                  <ArrowUpRight className="ml-2 h-5 w-5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                </Button>
+              </Link>
+              <p className="text-sm opacity-75 mt-6">
+                Free forever • No credit card required • Setup in 30 seconds
               </p>
             </div>
           </div>
@@ -453,43 +339,25 @@ const Landing = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border/50 py-12 px-6">
+      <footer className="border-t border-border/30 py-12 px-6 backdrop-blur-sm bg-background/30">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-4 gap-8 mb-8">
-            <div className="md:col-span-2">
-              <div className="text-3xl font-bold text-primary mb-4">kyzzen</div>
-              <p className="text-muted-foreground mb-4 max-w-sm">
-                Complete creator operating system. Build, grow, monetize.
-              </p>
-              <div className="flex gap-2">
-                <Link to="/app">
-                  <Button variant="outline" size="sm" className="rounded-full">
-                    Get Started Free
-                  </Button>
-                </Link>
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
+                <span className="text-white font-black text-sm">K</span>
               </div>
+              <span className="font-bold">kyzzen</span>
             </div>
-            <div>
-              <h3 className="font-semibold mb-4">Product</h3>
-              <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#features" className="hover:text-primary transition-colors">Features</a></li>
-                <li><a href="#about" className="hover:text-primary transition-colors">About</a></li>
-                <li><a href="#services" className="hover:text-primary transition-colors">How It Works</a></li>
-                <li><Link to="/app" className="hover:text-primary transition-colors">Launch App</Link></li>
-              </ul>
+            
+            <div className="flex gap-8 text-sm text-muted-foreground">
+              <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
+              <a href="#" className="hover:text-foreground transition-colors">Terms</a>
+              <a href="#" className="hover:text-foreground transition-colors">Contact</a>
             </div>
-            <div>
-              <h3 className="font-semibold mb-4">Company</h3>
-              <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#about" className="hover:text-primary transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Support</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Privacy</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-border/50 pt-8 text-center text-muted-foreground text-sm">
-            <p>© 2025 Kyzzen Media. Made with <Heart className="inline h-4 w-4 text-primary" /> for creators worldwide.</p>
+
+            <p className="text-sm text-muted-foreground">
+              © 2025 Kyzzen. Made for creators.
+            </p>
           </div>
         </div>
       </footer>
