@@ -908,3 +908,249 @@ All colors MUST be HSL.
     border-bottom: 1px solid hsla(220, 13%, 91%, 0.6);
   }
 }
+
+/* ========================================
+   CONSTELLATION & PARTICLE EFFECTS
+   For App Background
+======================================== */
+
+/* Floating Particles Container */
+.particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+/* Individual Particles */
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: hsl(var(--primary));
+  border-radius: 50%;
+  opacity: 0;
+  animation: particleFloat 20s ease-in-out infinite;
+}
+
+.particle::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  border-radius: 50%;
+  filter: blur(2px);
+  transform: scale(2);
+  opacity: 0.5;
+}
+
+@keyframes particleFloat {
+  0%, 100% {
+    transform: translateY(0) translateX(0) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+  }
+  90% {
+    opacity: 0.6;
+    transform: translateY(-100px) translateX(50px) scale(1);
+  }
+}
+
+/* Particle positions and delays */
+.particle-1 { top: 20%; left: 10%; animation-delay: 0s; animation-duration: 18s; }
+.particle-2 { top: 40%; left: 25%; animation-delay: 2s; animation-duration: 22s; }
+.particle-3 { top: 60%; left: 15%; animation-delay: 4s; animation-duration: 20s; }
+.particle-4 { top: 80%; left: 30%; animation-delay: 1s; animation-duration: 19s; }
+.particle-5 { top: 30%; left: 70%; animation-delay: 3s; animation-duration: 21s; }
+.particle-6 { top: 50%; left: 85%; animation-delay: 5s; animation-duration: 17s; }
+.particle-7 { top: 70%; left: 75%; animation-delay: 2.5s; animation-duration: 23s; }
+.particle-8 { top: 15%; left: 50%; animation-delay: 4.5s; animation-duration: 20s; }
+.particle-9 { top: 85%; left: 60%; animation-delay: 1.5s; animation-duration: 18s; }
+.particle-10 { top: 45%; left: 40%; animation-delay: 3.5s; animation-duration: 22s; }
+.particle-11 { top: 25%; left: 90%; animation-delay: 0.5s; animation-duration: 19s; }
+.particle-12 { top: 75%; left: 5%; animation-delay: 6s; animation-duration: 21s; }
+
+/* Constellation Lines */
+.constellation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.constellation-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    hsl(var(--primary) / 0.15), 
+    hsl(var(--secondary) / 0.15), 
+    transparent
+  );
+  transform-origin: left center;
+  animation: constellationPulse 8s ease-in-out infinite;
+}
+
+@keyframes constellationPulse {
+  0%, 100% {
+    opacity: 0.1;
+    transform: scaleX(0.8);
+  }
+  50% {
+    opacity: 0.3;
+    transform: scaleX(1);
+  }
+}
+
+/* Constellation line positions */
+.constellation-line-1 { top: 15%; left: 5%; width: 150px; transform: rotate(25deg); animation-delay: 0s; }
+.constellation-line-2 { top: 25%; left: 20%; width: 100px; transform: rotate(-15deg); animation-delay: 1s; }
+.constellation-line-3 { top: 35%; left: 8%; width: 120px; transform: rotate(45deg); animation-delay: 2s; }
+.constellation-line-4 { top: 20%; right: 15%; width: 130px; transform: rotate(-30deg); animation-delay: 0.5s; }
+.constellation-line-5 { top: 30%; right: 8%; width: 90px; transform: rotate(20deg); animation-delay: 1.5s; }
+.constellation-line-6 { top: 45%; right: 20%; width: 110px; transform: rotate(-40deg); animation-delay: 2.5s; }
+.constellation-line-7 { bottom: 30%; left: 10%; width: 140px; transform: rotate(35deg); animation-delay: 3s; }
+.constellation-line-8 { bottom: 20%; left: 25%; width: 80px; transform: rotate(-20deg); animation-delay: 3.5s; }
+.constellation-line-9 { bottom: 25%; right: 12%; width: 100px; transform: rotate(15deg); animation-delay: 4s; }
+.constellation-line-10 { bottom: 35%; right: 5%; width: 120px; transform: rotate(-35deg); animation-delay: 4.5s; }
+
+/* Star nodes at constellation intersections */
+.constellation-star {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: hsl(var(--primary));
+  border-radius: 50%;
+  box-shadow: 
+    0 0 4px hsl(var(--primary) / 0.6),
+    0 0 8px hsl(var(--primary) / 0.3);
+  animation: starPulse 3s ease-in-out infinite;
+}
+
+@keyframes starPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.8;
+  }
+}
+
+/* Star positions */
+.constellation-star-1 { top: 15%; left: 5%; animation-delay: 0s; }
+.constellation-star-2 { top: 18%; left: 15%; animation-delay: 0.5s; }
+.constellation-star-3 { top: 25%; left: 20%; animation-delay: 1s; }
+.constellation-star-4 { top: 35%; left: 12%; animation-delay: 1.5s; }
+.constellation-star-5 { top: 20%; right: 15%; animation-delay: 0.3s; }
+.constellation-star-6 { top: 25%; right: 10%; animation-delay: 0.8s; }
+.constellation-star-7 { top: 32%; right: 18%; animation-delay: 1.3s; }
+.constellation-star-8 { top: 45%; right: 8%; animation-delay: 1.8s; }
+.constellation-star-9 { bottom: 30%; left: 10%; animation-delay: 2s; }
+.constellation-star-10 { bottom: 22%; left: 18%; animation-delay: 2.5s; }
+.constellation-star-11 { bottom: 25%; right: 12%; animation-delay: 2.2s; }
+.constellation-star-12 { bottom: 35%; right: 5%; animation-delay: 2.7s; }
+
+/* Nebula glow effects */
+.nebula {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.15;
+  animation: nebulaFloat 30s ease-in-out infinite;
+}
+
+@keyframes nebulaFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.1;
+  }
+  33% {
+    transform: translate(20px, -20px) scale(1.1);
+    opacity: 0.18;
+  }
+  66% {
+    transform: translate(-10px, 15px) scale(0.95);
+    opacity: 0.12;
+  }
+}
+
+.nebula-1 {
+  top: 5%;
+  right: 10%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, hsl(var(--primary) / 0.4), transparent 70%);
+  animation-delay: 0s;
+}
+
+.nebula-2 {
+  bottom: 10%;
+  left: 5%;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, hsl(var(--secondary) / 0.4), transparent 70%);
+  animation-delay: 10s;
+}
+
+.nebula-3 {
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 200px;
+  background: radial-gradient(ellipse, hsl(var(--accent) / 0.3), transparent 70%);
+  animation-delay: 20s;
+}
+
+/* Dark mode enhancements for particles */
+.dark .particle {
+  background: hsl(var(--primary));
+  box-shadow: 0 0 6px hsl(var(--primary) / 0.5);
+}
+
+.dark .constellation-line {
+  background: linear-gradient(90deg, 
+    transparent, 
+    hsl(var(--primary) / 0.25), 
+    hsl(var(--secondary) / 0.25), 
+    transparent
+  );
+}
+
+.dark .constellation-star {
+  box-shadow: 
+    0 0 6px hsl(var(--primary) / 0.8),
+    0 0 12px hsl(var(--primary) / 0.4);
+}
+
+.dark .nebula {
+  opacity: 0.2;
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .particle,
+  .constellation-line,
+  .constellation-star,
+  .nebula {
+    animation: none;
+    opacity: 0.2;
+  }
+}

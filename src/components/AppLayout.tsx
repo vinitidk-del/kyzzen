@@ -174,6 +174,56 @@ export function AppLayout() {
 
   return (
     <div className="flex h-screen overflow-hidden bg-gradient-to-br from-background via-background to-muted/50">
+      {/* Constellation Effect */}
+      <div className="constellation">
+        {/* Star nodes */}
+        <div className="constellation-star constellation-star-1" />
+        <div className="constellation-star constellation-star-2" />
+        <div className="constellation-star constellation-star-3" />
+        <div className="constellation-star constellation-star-4" />
+        <div className="constellation-star constellation-star-5" />
+        <div className="constellation-star constellation-star-6" />
+        <div className="constellation-star constellation-star-7" />
+        <div className="constellation-star constellation-star-8" />
+        <div className="constellation-star constellation-star-9" />
+        <div className="constellation-star constellation-star-10" />
+        <div className="constellation-star constellation-star-11" />
+        <div className="constellation-star constellation-star-12" />
+        
+        {/* Constellation lines */}
+        <div className="constellation-line constellation-line-1" />
+        <div className="constellation-line constellation-line-2" />
+        <div className="constellation-line constellation-line-3" />
+        <div className="constellation-line constellation-line-4" />
+        <div className="constellation-line constellation-line-5" />
+        <div className="constellation-line constellation-line-6" />
+        <div className="constellation-line constellation-line-7" />
+        <div className="constellation-line constellation-line-8" />
+        <div className="constellation-line constellation-line-9" />
+        <div className="constellation-line constellation-line-10" />
+      </div>
+
+      {/* Floating Particles */}
+      <div className="particles-container">
+        <div className="particle particle-1" />
+        <div className="particle particle-2" />
+        <div className="particle particle-3" />
+        <div className="particle particle-4" />
+        <div className="particle particle-5" />
+        <div className="particle particle-6" />
+        <div className="particle particle-7" />
+        <div className="particle particle-8" />
+        <div className="particle particle-9" />
+        <div className="particle particle-10" />
+        <div className="particle particle-11" />
+        <div className="particle particle-12" />
+      </div>
+
+      {/* Nebula Glow Effects */}
+      <div className="nebula nebula-1" />
+      <div className="nebula nebula-2" />
+      <div className="nebula nebula-3" />
+
       <Sidebar
         isOpen={sidebarOpen}
         setIsOpen={setSidebarOpen}
@@ -182,12 +232,7 @@ export function AppLayout() {
         onNavigate={setActivePage}
       />
 
-      <main className="flex-1 overflow-y-auto relative">
-        {/* Subtle space-themed background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl pointer-events-none" />
-        
+      <main className="flex-1 overflow-y-auto relative z-10">
         <div className="relative container mx-auto p-4 md:p-6 lg:p-8 max-w-7xl">
           <div className="mb-6">
             <Header onOpenSidebar={() => setSidebarOpen(true)} />
