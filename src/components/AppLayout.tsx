@@ -173,7 +173,7 @@ export function AppLayout() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
+    <div className="flex h-screen overflow-hidden bg-gradient-to-br from-background via-background to-muted/50">
       <Sidebar
         isOpen={sidebarOpen}
         setIsOpen={setSidebarOpen}
@@ -182,8 +182,13 @@ export function AppLayout() {
         onNavigate={setActivePage}
       />
 
-      <main className="flex-1 overflow-y-auto bg-muted/30">
-        <div className="container mx-auto p-4 md:p-6 lg:p-8 max-w-7xl">
+      <main className="flex-1 overflow-y-auto relative">
+        {/* Subtle space-themed background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-secondary/5 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl pointer-events-none" />
+        
+        <div className="relative container mx-auto p-4 md:p-6 lg:p-8 max-w-7xl">
           <div className="mb-6">
             <Header onOpenSidebar={() => setSidebarOpen(true)} />
           </div>

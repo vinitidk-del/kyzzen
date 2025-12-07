@@ -1,10 +1,9 @@
 import React from 'react';
-import { X, Menu, LogOut, Settings as SettingsIcon, Trophy, HelpCircle } from 'lucide-react';
+import { X, Menu, LogOut, Settings as SettingsIcon, Trophy, HelpCircle, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { cn } from '@/lib/utils';
-import kyzzenLogo from '@/assets/kyzzen-logo.png';
 import { TalentRegistration } from '@/components/TalentRegistration';
 import { AccountPreview } from '@/components/AccountPreview';
 import { Notifications } from '@/components/Notifications';
@@ -61,10 +60,10 @@ export function Sidebar({ isOpen, setIsOpen, navigation, activePage, onNavigate 
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-border/50">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-primary-hover flex items-center justify-center shadow-primary">
-              <img src={kyzzenLogo} alt="Kyzzen Logo" className="w-6 h-6" />
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-secondary to-accent flex items-center justify-center shadow-lg shadow-primary/30">
+              <Sparkles className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Kyzzen</span>
+            <span className="text-xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">kyzzen</span>
           </div>
           <Button
             variant="ghost"

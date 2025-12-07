@@ -183,17 +183,17 @@ export const ModuleSelector: React.FC<ModuleSelectorProps> = ({ onModuleSelect }
             return (
               <Card
                 key={module.id}
-                className={`relative overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 group ${
+                className={`relative overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] group bg-card/80 backdrop-blur-sm border-2 border-border/50 hover:border-primary/30 ${
                   !module.available ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
                 onClick={module.available ? module.onClick : undefined}
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${module.gradient} opacity-0 group-hover:opacity-100 transition-opacity`} />
+                <div className={`absolute inset-0 bg-gradient-to-br ${module.gradient} opacity-0 group-hover:opacity-20 transition-opacity duration-300`} />
                 <CardHeader className="relative z-10 pb-3">
-                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${module.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                  <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${module.gradient} flex items-center justify-center mb-4 group-hover:scale-110 group-hover:shadow-lg transition-all duration-300`}>
                     <Icon className={`h-7 w-7 ${module.color}`} />
                   </div>
-                  <CardTitle className="text-xl">{module.title}</CardTitle>
+                  <CardTitle className="text-lg group-hover:text-primary transition-colors">{module.title}</CardTitle>
                 </CardHeader>
                 <CardContent className="relative z-10">
                   <CardDescription className="text-sm mb-4 min-h-[40px]">
@@ -202,7 +202,7 @@ export const ModuleSelector: React.FC<ModuleSelectorProps> = ({ onModuleSelect }
                   <Button
                     variant="outline"
                     size="sm"
-                    className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+                    className="w-full border-primary/30 group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary group-hover:text-white group-hover:border-transparent transition-all duration-300"
                     disabled={!module.available}
                   >
                     {module.available ? 'Open' : 'Coming Soon'}
