@@ -73,10 +73,10 @@ const Landing = () => {
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                <span className="text-white font-black text-lg">K</span>
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-secondary to-accent flex items-center justify-center shadow-lg shadow-primary/30">
+                <Sparkles className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold tracking-tight">kyzzen</span>
+              <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">kyzzen</span>
             </Link>
             
             <div className="hidden md:flex items-center gap-8">
@@ -343,10 +343,10 @@ const Landing = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                <span className="text-white font-black text-sm">K</span>
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary via-secondary to-accent flex items-center justify-center shadow-lg shadow-primary/30">
+                <Sparkles className="w-4 h-4 text-white" />
               </div>
-              <span className="font-bold">kyzzen</span>
+              <span className="font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">kyzzen</span>
             </div>
             
             <div className="flex gap-8 text-sm text-muted-foreground">

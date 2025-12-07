@@ -145,64 +145,76 @@ export function AdminDashboard() {
   };
 
   return (
-    <div className="space-y-6 p-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 p-4 md:p-6">
+      <div className="flex items-center justify-between bg-gradient-to-r from-primary/10 via-card to-secondary/10 rounded-2xl p-6 border border-border/50">
         <div>
-          <h1 className="text-3xl font-bold text-foreground">Admin Dashboard</h1>
+          <h1 className="text-2xl md:text-3xl font-bold text-foreground">Admin Dashboard</h1>
           <p className="text-muted-foreground mt-1">Manage users, roles, and permissions</p>
         </div>
-        <Shield className="h-12 w-12 text-primary" />
+        <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-secondary">
+          <Shield className="h-8 w-8 md:h-10 md:w-10 text-white" />
+        </div>
       </div>
 
       {/* Stats Grid */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-        <Card>
+      <div className="grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+        <Card className="bg-gradient-to-br from-primary/10 to-card border-primary/20 hover:shadow-lg hover:shadow-primary/10 transition-all">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Users</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
+            <div className="p-2 rounded-lg bg-primary/10">
+              <Users className="h-4 w-4 text-primary" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.totalUsers}</div>
+            <div className="text-2xl font-bold text-primary">{stats.totalUsers}</div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-gradient-to-br from-secondary/10 to-card border-secondary/20 hover:shadow-lg hover:shadow-secondary/10 transition-all">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Creators</CardTitle>
-            <Activity className="h-4 w-4 text-purple-500" />
+            <div className="p-2 rounded-lg bg-secondary/10">
+              <Activity className="h-4 w-4 text-secondary" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.creators}</div>
+            <div className="text-2xl font-bold text-secondary">{stats.creators}</div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-gradient-to-br from-primary/10 to-card border-primary/20 hover:shadow-lg hover:shadow-primary/10 transition-all">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Agencies</CardTitle>
-            <Activity className="h-4 w-4 text-blue-500" />
+            <div className="p-2 rounded-lg bg-primary/10">
+              <Activity className="h-4 w-4 text-primary" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.agencies}</div>
+            <div className="text-2xl font-bold text-primary">{stats.agencies}</div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-gradient-to-br from-success/10 to-card border-success/20 hover:shadow-lg hover:shadow-success/10 transition-all">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Businesses</CardTitle>
-            <Activity className="h-4 w-4 text-green-500" />
+            <div className="p-2 rounded-lg bg-success/10">
+              <Activity className="h-4 w-4 text-success" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.businesses}</div>
+            <div className="text-2xl font-bold text-success">{stats.businesses}</div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-gradient-to-br from-accent/10 to-card border-accent/20 hover:shadow-lg hover:shadow-accent/10 transition-all">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Admins</CardTitle>
-            <Settings className="h-4 w-4 text-red-500" />
+            <div className="p-2 rounded-lg bg-accent/10">
+              <Settings className="h-4 w-4 text-accent" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stats.admins}</div>
+            <div className="text-2xl font-bold text-accent">{stats.admins}</div>
           </CardContent>
         </Card>
       </div>

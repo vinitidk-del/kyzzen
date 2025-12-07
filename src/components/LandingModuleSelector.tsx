@@ -164,32 +164,36 @@ export const LandingModuleSelector: React.FC = () => {
           return (
             <Card
               key={module.id}
-              className={`relative overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 group ${
-                isSelected ? 'ring-2 ring-primary shadow-xl' : ''
+              className={`relative overflow-hidden cursor-pointer transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] group bg-card/80 backdrop-blur-sm border-2 ${
+                isSelected 
+                  ? 'ring-2 ring-primary shadow-xl shadow-primary/20 border-primary bg-primary/5' 
+                  : 'border-border/50 hover:border-primary/30'
               }`}
               onClick={() => toggleModule(module.id)}
             >
               {module.popular && (
-                <Badge className="absolute top-3 right-3 bg-warning text-warning-foreground z-10">
+                <Badge className="absolute top-3 right-3 bg-gradient-to-r from-warning to-accent text-warning-foreground z-10 shadow-lg">
                   Popular
                 </Badge>
               )}
               
               {isSelected && (
-                <div className="absolute top-3 left-3 w-6 h-6 bg-primary rounded-full flex items-center justify-center z-10">
-                  <Check className="h-4 w-4 text-primary-foreground" />
+                <div className="absolute top-3 left-3 w-7 h-7 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center z-10 shadow-lg shadow-primary/30 animate-scale-in">
+                  <Check className="h-4 w-4 text-white" />
                 </div>
               )}
               
-              <div className={`absolute inset-0 bg-gradient-to-br ${module.gradient} opacity-0 group-hover:opacity-100 transition-opacity ${
-                isSelected ? 'opacity-50' : ''
+              <div className={`absolute inset-0 bg-gradient-to-br ${module.gradient} transition-opacity duration-300 ${
+                isSelected ? 'opacity-30' : 'opacity-0 group-hover:opacity-20'
               }`} />
               
               <CardHeader className="relative z-10 pb-3">
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${module.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${module.gradient} flex items-center justify-center mb-4 transition-all duration-300 ${
+                  isSelected ? 'scale-110 shadow-lg' : 'group-hover:scale-110'
+                }`}>
                   <Icon className={`h-7 w-7 ${module.color}`} />
                 </div>
-                <CardTitle className="text-lg">{module.title}</CardTitle>
+                <CardTitle className={`text-lg transition-colors ${isSelected ? 'text-primary' : ''}`}>{module.title}</CardTitle>
               </CardHeader>
               <CardContent className="relative z-10">
                 <CardDescription className="text-sm">
