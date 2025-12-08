@@ -32,10 +32,10 @@ interface Task {
 }
 
 const initialTeam: TeamMember[] = [
-  { id: '1', name: 'You', email: 'creator@kyzzen.com', role: 'owner', avatar: '', status: 'active', hoursLogged: 156 },
-  { id: '2', name: 'Sarah Chen', email: 'sarah@kyzzen.com', role: 'editor', avatar: '', status: 'active', hoursLogged: 124 },
-  { id: '3', name: 'Mike Torres', email: 'mike@kyzzen.com', role: 'manager', avatar: '', status: 'active', hoursLogged: 98 },
-  { id: '4', name: 'Emily Davis', email: 'emily@kyzzen.com', role: 'viewer', avatar: '', status: 'invited', hoursLogged: 0 },
+  { id: '1', name: 'You', email: 'creator@kaizen.app', role: 'owner', avatar: '', status: 'active', hoursLogged: 156 },
+  { id: '2', name: 'Sarah Chen', email: 'sarah@kaizen.app', role: 'editor', avatar: '', status: 'active', hoursLogged: 124 },
+  { id: '3', name: 'Mike Torres', email: 'mike@kaizen.app', role: 'manager', avatar: '', status: 'active', hoursLogged: 98 },
+  { id: '4', name: 'Emily Davis', email: 'emily@kaizen.app', role: 'viewer', avatar: '', status: 'invited', hoursLogged: 0 },
 ];
 
 const initialTasks: Task[] = [

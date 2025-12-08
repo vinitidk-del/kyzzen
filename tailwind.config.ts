@@ -50,11 +50,11 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Kyzzen Brand Colors
-        "kyzzen-blue": {
-          DEFAULT: "hsl(var(--kyzzen-blue))",
-          light: "hsl(var(--kyzzen-blue-light))",
-          dark: "hsl(var(--kyzzen-blue-dark))",
+        // Kaizen Brand Colors
+        "kaizen-blue": {
+          DEFAULT: "hsl(var(--kaizen-blue))",
+          light: "hsl(var(--kaizen-blue-light))",
+          dark: "hsl(var(--kaizen-blue-dark))",
         },
         "creator-teal": {
           DEFAULT: "hsl(var(--creator-teal))",

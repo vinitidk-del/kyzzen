@@ -99,7 +99,7 @@ export function NewCreatorDashboard() {
       <div className="flex flex-col lg:flex-row gap-6">
         <div className="lg:w-1/3">
           <OrganizationCard
-            organizationName="Kyzzen Media"
+            organizationName="Kaizen"
             partnerName="Creator Hub"
           />
         </div>
