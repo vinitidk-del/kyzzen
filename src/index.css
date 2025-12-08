@@ -23,10 +23,10 @@ All colors MUST be HSL.
     --primary-foreground: 0 0% 100%;
     --primary-hover: 220 71% 35%;
 
-    /* Secondary: Creator Purple - Innovation & Creativity */
-    --secondary: 258 82% 57%;
+    /* Secondary: Creator Teal - Innovation & Creativity */
+    --secondary: 172 80% 40%;
     --secondary-foreground: 0 0% 100%;
-    --secondary-hover: 258 82% 52%;
+    --secondary-hover: 172 80% 35%;
 
     --muted: 220 13% 95%;
     --muted-foreground: 220 8% 46%;
@@ -50,9 +50,9 @@ All colors MUST be HSL.
     --kyzzen-blue-light: 220 71% 50%;
     --kyzzen-blue-dark: 220 71% 30%;
     
-    --creator-purple: 258 82% 57%;
-    --creator-purple-light: 258 82% 67%;
-    --creator-purple-dark: 258 82% 47%;
+    --creator-teal: 172 80% 40%;
+    --creator-teal-light: 172 80% 50%;
+    --creator-teal-dark: 172 80% 30%;
     
     --revenue-green: 162 93% 30%;
     --revenue-green-light: 162 93% 40%;
@@ -88,18 +88,18 @@ All colors MUST be HSL.
 
     /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(var(--kyzzen-blue)) 0%, hsl(var(--kyzzen-blue-dark)) 100%);
-    --gradient-purple: linear-gradient(135deg, hsl(var(--creator-purple)) 0%, hsl(var(--creator-purple-dark)) 100%);
+    --gradient-teal: linear-gradient(135deg, hsl(var(--creator-teal)) 0%, hsl(var(--creator-teal-dark)) 100%);
     --gradient-revenue: linear-gradient(135deg, hsl(var(--revenue-green)) 0%, hsl(var(--revenue-green-dark)) 100%);
     --gradient-premium: linear-gradient(135deg, hsl(var(--premium-gold)) 0%, hsl(var(--content-orange)) 100%);
     --gradient-card: linear-gradient(135deg, hsl(var(--bg-medium)) 0%, hsl(var(--bg-light)) 100%);
-    --gradient-hero: radial-gradient(circle at top right, hsl(var(--kyzzen-blue) / 0.15) 0%, transparent 50%), radial-gradient(circle at bottom left, hsl(var(--creator-purple) / 0.1) 0%, transparent 50%);
+    --gradient-hero: radial-gradient(circle at top right, hsl(var(--kyzzen-blue) / 0.15) 0%, transparent 50%), radial-gradient(circle at bottom left, hsl(var(--creator-teal) / 0.1) 0%, transparent 50%);
 
     /* Shadows */
     --shadow-card: 0 4px 15px 0 hsl(var(--kyzzen-blue) / 0.1);
     --shadow-primary: 0 4px 15px 0 hsl(var(--kyzzen-blue) / 0.3);
     --shadow-primary-hover: 0 6px 20px 0 hsl(var(--kyzzen-blue) / 0.5);
     --shadow-revenue: 0 4px 15px 0 hsl(var(--revenue-green) / 0.3);
-    --shadow-purple: 0 4px 15px 0 hsl(var(--creator-purple) / 0.3);
+    --shadow-teal: 0 4px 15px 0 hsl(var(--creator-teal) / 0.3);
     --shadow-gold: 0 4px 15px 0 hsl(var(--premium-gold) / 0.3);
 
     /* Animations */
@@ -121,7 +121,7 @@ All colors MUST be HSL.
     --primary: 220 71% 40%;
     --primary-foreground: 220 10% 98%;
 
-    --secondary: 258 82% 57%;
+    --secondary: 172 80% 40%;
     --secondary-foreground: 220 10% 98%;
 
     --muted: 220 15% 25%;

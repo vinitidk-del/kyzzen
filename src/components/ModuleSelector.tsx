@@ -92,8 +92,8 @@ export const ModuleSelector: React.FC<ModuleSelectorProps> = ({ onModuleSelect }
       title: 'Talent Network',
       description: 'Connect with other creators and collaborators',
       icon: Users,
-      color: 'text-secondary',
-      gradient: 'from-secondary/20 to-secondary/5',
+      color: 'text-insight-teal',
+      gradient: 'from-insight-teal/20 to-insight-teal/5',
       available: true,
       onClick: () => onModuleSelect('talent-network')
     },
@@ -112,8 +112,8 @@ export const ModuleSelector: React.FC<ModuleSelectorProps> = ({ onModuleSelect }
       title: 'AI Content Generator',
       description: 'Create engaging content with AI assistance',
       icon: Brain,
-      color: 'text-secondary',
-      gradient: 'from-secondary/20 to-secondary/5',
+      color: 'text-insight-teal',
+      gradient: 'from-insight-teal/20 to-insight-teal/5',
       available: true,
       onClick: () => onModuleSelect('ai-generator')
     },
@@ -152,8 +152,8 @@ export const ModuleSelector: React.FC<ModuleSelectorProps> = ({ onModuleSelect }
       title: 'Campaign Management',
       description: 'Plan and execute marketing campaigns',
       icon: Target,
-      color: 'text-secondary',
-      gradient: 'from-secondary/20 to-secondary/5',
+      color: 'text-insight-teal',
+      gradient: 'from-insight-teal/20 to-insight-teal/5',
       available: true,
       onClick: () => onModuleSelect('campaigns')
     }
@@ -202,7 +202,7 @@ export const ModuleSelector: React.FC<ModuleSelectorProps> = ({ onModuleSelect }
                   <Button
                     variant="outline"
                     size="sm"
-                    className="w-full border-primary/30 group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-secondary group-hover:text-white group-hover:border-transparent transition-all duration-300"
+                    className="w-full border-primary/30 group-hover:bg-gradient-to-r group-hover:from-primary group-hover:to-insight-teal group-hover:text-white group-hover:border-transparent transition-all duration-300"
                     disabled={!module.available}
                   >
                     {module.available ? 'Open' : 'Coming Soon'}

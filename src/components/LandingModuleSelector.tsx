@@ -83,8 +83,8 @@ export const LandingModuleSelector: React.FC = () => {
       title: 'Talent Network',
       description: 'Connect with creators',
       icon: Users,
-      color: 'text-secondary',
-      gradient: 'from-secondary/20 to-secondary/5'
+      color: 'text-insight-teal',
+      gradient: 'from-insight-teal/20 to-insight-teal/5'
     },
     {
       id: 'content-hub',
@@ -99,8 +99,8 @@ export const LandingModuleSelector: React.FC = () => {
       title: 'AI Content Generator',
       description: 'Create with AI assistance',
       icon: Brain,
-      color: 'text-secondary',
-      gradient: 'from-secondary/20 to-secondary/5',
+      color: 'text-insight-teal',
+      gradient: 'from-insight-teal/20 to-insight-teal/5',
       popular: true
     },
     {
@@ -132,8 +132,8 @@ export const LandingModuleSelector: React.FC = () => {
       title: 'Campaign Management',
       description: 'Plan marketing campaigns',
       icon: Target,
-      color: 'text-secondary',
-      gradient: 'from-secondary/20 to-secondary/5'
+      color: 'text-insight-teal',
+      gradient: 'from-insight-teal/20 to-insight-teal/5'
     }
   ];
 
@@ -178,7 +178,7 @@ export const LandingModuleSelector: React.FC = () => {
               )}
               
               {isSelected && (
-                <div className="absolute top-3 left-3 w-7 h-7 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center z-10 shadow-lg shadow-primary/30 animate-scale-in">
+                <div className="absolute top-3 left-3 w-7 h-7 bg-gradient-to-br from-primary to-insight-teal rounded-full flex items-center justify-center z-10 shadow-lg shadow-primary/30 animate-scale-in">
                   <Check className="h-4 w-4 text-white" />
                 </div>
               )}

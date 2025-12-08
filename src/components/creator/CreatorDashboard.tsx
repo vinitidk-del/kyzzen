@@ -160,18 +160,18 @@ export function CreatorDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="group relative overflow-hidden bg-gradient-card border-border hover:border-secondary transition-all duration-300 hover:scale-105 hover:shadow-purple cursor-pointer">
+        <Card className="group relative overflow-hidden bg-gradient-card border-border hover:border-insight-teal transition-all duration-300 hover:scale-105 hover:shadow-teal cursor-pointer">
           <CardContent className="p-4 md:p-6">
             <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
-                <div className="p-2 md:p-3 rounded-xl bg-secondary/10 group-hover:bg-secondary/20 transition-colors">
-                  <Zap className="w-6 h-6 md:w-8 md:h-8 text-secondary" />
+                <div className="p-2 md:p-3 rounded-xl bg-insight-teal/10 group-hover:bg-insight-teal/20 transition-colors">
+                  <Zap className="w-6 h-6 md:w-8 md:h-8 text-insight-teal" />
                 </div>
-                <span className="text-xs md:text-sm text-secondary font-medium">+2.3%</span>
+                <span className="text-xs md:text-sm text-insight-teal font-medium">+2.3%</span>
               </div>
               <div>
                 <h3 className="text-xs md:text-sm font-medium text-muted-foreground mb-1">Avg Engagement</h3>
-                <p className="text-2xl md:text-4xl font-bold text-secondary tracking-tight">
+                <p className="text-2xl md:text-4xl font-bold text-insight-teal tracking-tight">
                   {avgEngagement.toFixed(1)}%
                 </p>
               </div>
@@ -283,9 +283,9 @@ export function CreatorDashboard() {
                   ${(platform.revenue / 1000).toFixed(0)}K
                 </span>
               </div>
-              <div className="flex justify-between items-center p-3 rounded-lg bg-secondary/5 hover:bg-secondary/10 transition-colors">
+              <div className="flex justify-between items-center p-3 rounded-lg bg-insight-teal/5 hover:bg-insight-teal/10 transition-colors">
                 <span className="text-sm text-muted-foreground">Engagement</span>
-                <span className="text-lg md:text-xl font-bold text-secondary">
+                <span className="text-lg md:text-xl font-bold text-insight-teal">
                   {platform.engagement}%
                 </span>
               </div>

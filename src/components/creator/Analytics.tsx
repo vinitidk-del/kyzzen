@@ -187,14 +187,14 @@ export function Analytics() {
           <CardContent className="p-4 md:p-5">
             <div className="flex flex-col gap-3">
               <div className="flex items-center justify-between">
-                <div className="p-2 md:p-3 rounded-xl bg-secondary/10 group-hover:bg-secondary/20 transition-colors">
-                  <Heart className="w-6 h-6 md:w-8 md:h-8 text-secondary" />
+                <div className="p-2 md:p-3 rounded-xl bg-insight-teal/10 group-hover:bg-insight-teal/20 transition-colors">
+                  <Heart className="w-6 h-6 md:w-8 md:h-8 text-insight-teal" />
                 </div>
-                <span className="text-xs md:text-sm text-secondary font-medium">+2.3%</span>
+                <span className="text-xs md:text-sm text-insight-teal font-medium">+2.3%</span>
               </div>
               <div>
                 <h3 className="text-xs md:text-sm font-medium text-muted-foreground mb-1">Avg Engagement</h3>
-                <p className="text-2xl md:text-3xl font-bold text-secondary tracking-tight">{avgEngagement}%</p>
+                <p className="text-2xl md:text-3xl font-bold text-insight-teal tracking-tight">{avgEngagement}%</p>
               </div>
             </div>
           </CardContent>

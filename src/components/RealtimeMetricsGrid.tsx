@@ -53,7 +53,7 @@ export function RealtimeMetricsGrid() {
           title="Content Views"
           icon={Eye}
           initialValue={15780}
-          color="hsl(var(--creator-purple))"
+          color="hsl(var(--creator-teal))"
           changeRange={{ min: -20, max: 50 }}
           updateInterval={1500}
           trend="up"
