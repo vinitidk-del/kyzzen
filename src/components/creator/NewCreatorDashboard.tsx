@@ -79,7 +79,7 @@ const feedbackCategories = [
   { name: 'Tech', value: 25, color: 'hsl(var(--success))' },
   { name: 'Fashion', value: 20, color: 'hsl(var(--accent))' },
   { name: 'Lifestyle', value: 15, color: 'hsl(var(--warning))' },
-  { name: 'Food', value: 10, color: 'hsl(var(--secondary))' },
+  { name: 'Food', value: 10, color: 'hsl(var(--insight-teal))' },
 ];
 
 export function NewCreatorDashboard() {

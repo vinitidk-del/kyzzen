@@ -73,10 +73,10 @@ const Landing = () => {
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-secondary to-accent flex items-center justify-center shadow-lg shadow-primary/30">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-insight-teal to-accent flex items-center justify-center shadow-lg shadow-primary/30">
                 <Sparkles className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">kyzzen</span>
+              <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-primary to-insight-teal bg-clip-text text-transparent">kyzzen</span>
             </Link>
             
             <div className="hidden md:flex items-center gap-8">
@@ -137,7 +137,7 @@ const Landing = () => {
             {/* Main Headline */}
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[0.9] mb-6">
               <span className="block">Create.</span>
-              <span className="block bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+              <span className="block bg-gradient-to-r from-primary via-insight-teal to-accent bg-clip-text text-transparent">
                 Grow.
               </span>
               <span className="block">Dominate.</span>
@@ -187,7 +187,7 @@ const Landing = () => {
                 className="group relative p-6 rounded-3xl bg-background/60 backdrop-blur-xl border border-border/50 hover:border-primary/30 hover:bg-background/80 transition-all duration-300 hover:-translate-y-1"
                 style={{ animationDelay: `${i * 100}ms` }}
               >
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary/20 to-insight-teal/20 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                   <feature.icon className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="font-bold mb-1">{feature.title}</h3>
@@ -204,7 +204,7 @@ const Landing = () => {
           <div className="text-center mb-12">
             <span className="text-sm font-bold text-primary uppercase tracking-wider">Modular Design</span>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black mt-2 mb-4">
-              Pick Your <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Powers</span>
+              Pick Your <span className="bg-gradient-to-r from-primary to-insight-teal bg-clip-text text-transparent">Powers</span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-xl mx-auto">
               Only pay for what you use. Start minimal, scale infinitely.
@@ -221,7 +221,7 @@ const Landing = () => {
           <div className="text-center mb-12">
             <span className="text-sm font-bold text-primary uppercase tracking-wider">Wall of Love</span>
             <h2 className="text-4xl md:text-5xl font-black mt-2">
-              Trusted by <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Creators</span>
+              Trusted by <span className="bg-gradient-to-r from-primary to-insight-teal bg-clip-text text-transparent">Creators</span>
             </h2>
           </div>
 
@@ -259,7 +259,7 @@ const Landing = () => {
           <div className="text-center mb-12">
             <span className="text-sm font-bold text-primary uppercase tracking-wider">Simple Pricing</span>
             <h2 className="text-4xl md:text-5xl font-black mt-2">
-              Start Free, <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Scale Fast</span>
+              Start Free, <span className="bg-gradient-to-r from-primary to-insight-teal bg-clip-text text-transparent">Scale Fast</span>
             </h2>
           </div>
 
@@ -312,7 +312,7 @@ const Landing = () => {
       {/* Final CTA */}
       <section className="py-20 px-6">
         <div className="container mx-auto max-w-4xl">
-          <div className="relative overflow-hidden rounded-[2.5rem] p-12 md:p-16 bg-gradient-to-br from-primary via-primary to-secondary text-primary-foreground">
+          <div className="relative overflow-hidden rounded-[2.5rem] p-12 md:p-16 bg-gradient-to-br from-primary via-primary to-insight-teal text-primary-foreground">
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-black/10 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
@@ -343,10 +343,10 @@ const Landing = () => {
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary via-secondary to-accent flex items-center justify-center shadow-lg shadow-primary/30">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary via-insight-teal to-accent flex items-center justify-center shadow-lg shadow-primary/30">
                 <Sparkles className="w-4 h-4 text-white" />
               </div>
-              <span className="font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">kyzzen</span>
+              <span className="font-bold bg-gradient-to-r from-primary to-insight-teal bg-clip-text text-transparent">kyzzen</span>
             </div>
             
             <div className="flex gap-8 text-sm text-muted-foreground">

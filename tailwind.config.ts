@@ -56,10 +56,10 @@ export default {
           light: "hsl(var(--kyzzen-blue-light))",
           dark: "hsl(var(--kyzzen-blue-dark))",
         },
-        "creator-purple": {
-          DEFAULT: "hsl(var(--creator-purple))",
-          light: "hsl(var(--creator-purple-light))",
-          dark: "hsl(var(--creator-purple-dark))",
+        "creator-teal": {
+          DEFAULT: "hsl(var(--creator-teal))",
+          light: "hsl(var(--creator-teal-light))",
+          dark: "hsl(var(--creator-teal-dark))",
         },
         "revenue-green": {
           DEFAULT: "hsl(var(--revenue-green))",
@@ -100,7 +100,7 @@ export default {
       },
       backgroundImage: {
         'gradient-primary': 'var(--gradient-primary)',
-        'gradient-purple': 'var(--gradient-purple)',
+        'gradient-teal': 'var(--gradient-teal)',
         'gradient-revenue': 'var(--gradient-revenue)',
         'gradient-premium': 'var(--gradient-premium)',
         'gradient-card': 'var(--gradient-card)',
@@ -111,7 +111,7 @@ export default {
         'primary': 'var(--shadow-primary)',
         'primary-hover': 'var(--shadow-primary-hover)',
         'revenue': 'var(--shadow-revenue)',
-        'purple': 'var(--shadow-purple)',
+        'teal': 'var(--shadow-teal)',
         'gold': 'var(--shadow-gold)',
       },
       transitionTimingFunction: {

@@ -60,10 +60,10 @@ export function Sidebar({ isOpen, setIsOpen, navigation, activePage, onNavigate 
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-border/50">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-secondary to-accent flex items-center justify-center shadow-lg shadow-primary/30">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-insight-teal to-accent flex items-center justify-center shadow-lg shadow-primary/30">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
-            <span className="text-xl font-extrabold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">kyzzen</span>
+            <span className="text-xl font-extrabold bg-gradient-to-r from-primary to-insight-teal bg-clip-text text-transparent">kyzzen</span>
           </div>
           <Button
             variant="ghost"
@@ -124,7 +124,7 @@ export function Sidebar({ isOpen, setIsOpen, navigation, activePage, onNavigate 
         {profile && (
           <div className="p-4 border-t border-border/50">
             <AccountPreview>
-              <button className="w-full bg-gradient-to-br from-primary/5 to-secondary/5 p-4 rounded-xl border border-primary/10 hover:border-primary/30 hover:shadow-lg transition-all duration-200 cursor-pointer group">
+              <button className="w-full bg-gradient-to-br from-primary/5 to-insight-teal/5 p-4 rounded-xl border border-primary/10 hover:border-primary/30 hover:shadow-lg transition-all duration-200 cursor-pointer group">
                 <div className="flex items-center gap-3">
                   <div className="relative">
                     <img

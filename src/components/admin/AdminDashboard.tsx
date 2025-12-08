@@ -138,20 +138,20 @@ export function AdminDashboard() {
   };
 
   const roleColors: Record<UserRole, string> = {
-    creator: 'bg-purple-500',
-    agency: 'bg-blue-500',
-    business: 'bg-green-500',
-    admin: 'bg-red-500',
+    creator: 'bg-insight-teal',
+    agency: 'bg-primary',
+    business: 'bg-success',
+    admin: 'bg-accent',
   };
 
   return (
     <div className="space-y-6 p-4 md:p-6">
-      <div className="flex items-center justify-between bg-gradient-to-r from-primary/10 via-card to-secondary/10 rounded-2xl p-6 border border-border/50">
+      <div className="flex items-center justify-between bg-gradient-to-r from-primary/10 via-card to-accent/10 rounded-2xl p-6 border border-border/50">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold text-foreground">Admin Dashboard</h1>
           <p className="text-muted-foreground mt-1">Manage users, roles, and permissions</p>
         </div>
-        <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-secondary">
+        <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-accent">
           <Shield className="h-8 w-8 md:h-10 md:w-10 text-white" />
         </div>
       </div>
@@ -170,15 +170,15 @@ export function AdminDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="bg-gradient-to-br from-secondary/10 to-card border-secondary/20 hover:shadow-lg hover:shadow-secondary/10 transition-all">
+        <Card className="bg-gradient-to-br from-insight-teal/10 to-card border-insight-teal/20 hover:shadow-lg hover:shadow-insight-teal/10 transition-all">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Creators</CardTitle>
-            <div className="p-2 rounded-lg bg-secondary/10">
-              <Activity className="h-4 w-4 text-secondary" />
+            <div className="p-2 rounded-lg bg-insight-teal/10">
+              <Activity className="h-4 w-4 text-insight-teal" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-secondary">{stats.creators}</div>
+            <div className="text-2xl font-bold text-insight-teal">{stats.creators}</div>
           </CardContent>
         </Card>
 
