@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Kyzzen Creator Platform E2E Tests', () => {
+test.describe('Kaizen Creator Platform E2E Tests', () => {
   
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
   });
 
   test('should load the homepage and show login screen', async ({ page }) => {
-    await expect(page.locator('h1')).toContainText('Welcome to Kyzzen');
+    await expect(page.locator('h1')).toContainText('Welcome to Kaizen');
     await expect(page.getByRole('button', { name: /login/i })).toBeVisible();
   });
 

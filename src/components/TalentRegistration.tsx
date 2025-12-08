@@ -83,7 +83,7 @@ export function TalentRegistration({ trigger }: TalentRegistrationProps) {
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-xl">
             <Star className="w-6 h-6 text-accent" />
-            Join Kyzzen Talent Network
+            Join Kaizen Talent Network
           </DialogTitle>
         </DialogHeader>
         

@@ -18,7 +18,7 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
 
-    /* Primary Brand: Kyzzen Blue - Trust & Professionalism */
+    /* Primary Brand: Kaizen Blue - Trust & Professionalism */
     --primary: 220 71% 40%;
     --primary-foreground: 0 0% 100%;
     --primary-hover: 220 71% 35%;
@@ -45,10 +45,10 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
 
-    /* Kyzzen Brand Colors */
-    --kyzzen-blue: 220 71% 40%;
-    --kyzzen-blue-light: 220 71% 50%;
-    --kyzzen-blue-dark: 220 71% 30%;
+    /* Kaizen Brand Colors */
+    --kaizen-blue: 220 71% 40%;
+    --kaizen-blue-light: 220 71% 50%;
+    --kaizen-blue-dark: 220 71% 30%;
     
     --creator-teal: 172 80% 40%;
     --creator-teal-light: 172 80% 50%;
@@ -87,17 +87,17 @@ All colors MUST be HSL.
     --error: 0 84% 60%;
 
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--kyzzen-blue)) 0%, hsl(var(--kyzzen-blue-dark)) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(var(--kaizen-blue)) 0%, hsl(var(--kaizen-blue-dark)) 100%);
     --gradient-teal: linear-gradient(135deg, hsl(var(--creator-teal)) 0%, hsl(var(--creator-teal-dark)) 100%);
     --gradient-revenue: linear-gradient(135deg, hsl(var(--revenue-green)) 0%, hsl(var(--revenue-green-dark)) 100%);
     --gradient-premium: linear-gradient(135deg, hsl(var(--premium-gold)) 0%, hsl(var(--content-orange)) 100%);
     --gradient-card: linear-gradient(135deg, hsl(var(--bg-medium)) 0%, hsl(var(--bg-light)) 100%);
-    --gradient-hero: radial-gradient(circle at top right, hsl(var(--kyzzen-blue) / 0.15) 0%, transparent 50%), radial-gradient(circle at bottom left, hsl(var(--creator-teal) / 0.1) 0%, transparent 50%);
+    --gradient-hero: radial-gradient(circle at top right, hsl(var(--kaizen-blue) / 0.15) 0%, transparent 50%), radial-gradient(circle at bottom left, hsl(var(--creator-teal) / 0.1) 0%, transparent 50%);
 
     /* Shadows */
-    --shadow-card: 0 4px 15px 0 hsl(var(--kyzzen-blue) / 0.1);
-    --shadow-primary: 0 4px 15px 0 hsl(var(--kyzzen-blue) / 0.3);
-    --shadow-primary-hover: 0 6px 20px 0 hsl(var(--kyzzen-blue) / 0.5);
+    --shadow-card: 0 4px 15px 0 hsl(var(--kaizen-blue) / 0.1);
+    --shadow-primary: 0 4px 15px 0 hsl(var(--kaizen-blue) / 0.3);
+    --shadow-primary-hover: 0 6px 20px 0 hsl(var(--kaizen-blue) / 0.5);
     --shadow-revenue: 0 4px 15px 0 hsl(var(--revenue-green) / 0.3);
     --shadow-teal: 0 4px 15px 0 hsl(var(--creator-teal) / 0.3);
     --shadow-gold: 0 4px 15px 0 hsl(var(--premium-gold) / 0.3);

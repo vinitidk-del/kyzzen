@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Sparkles, TrendingUp, Package, AlertTriangle, CreditCard, DollarSign } from 'lucide-react';
+import { Lightbulb, TrendingUp, Package, AlertTriangle, CreditCard, DollarSign } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -302,8 +302,8 @@ export function BrandVentures() {
       <Card className="bg-gradient-card border-border shadow-card">
         <CardHeader>
           <CardTitle className="flex items-center gap-3 text-2xl">
-            <Sparkles className="w-8 h-8 text-accent" />
-            ✨ AI Product Idea Lab
+            <Lightbulb className="w-8 h-8 text-accent" />
+            Product Idea Lab
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">

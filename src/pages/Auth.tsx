@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Mail, Lock, User, Chrome } from 'lucide-react';
+import { Loader2, Mail, Lock, User, Chrome, Mountain } from 'lucide-react';
 import { z } from 'zod';
 
 const emailSchema = z.string().email('Invalid email address');
@@ -263,17 +263,17 @@ export default function Auth() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background via-background/95 to-primary/5 p-4">
       <Card className="w-full max-w-md border-border shadow-xl">
         <CardHeader className="space-y-1 text-center">
-          <img 
-            src="/src/assets/kyzzen-logo.png" 
-            alt="Kyzzen Media" 
-            className="h-12 mx-auto mb-2"
-          />
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary via-insight-teal to-accent flex items-center justify-center shadow-lg shadow-primary/30">
+              <Mountain className="w-6 h-6 text-white" />
+            </div>
+          </div>
           <CardTitle className="text-3xl font-bold text-foreground">
             {isSignUp ? 'Create Account' : 'Welcome Back'}
           </CardTitle>
           <CardDescription>
             {isSignUp 
-              ? 'Start your creator journey with Kyzzen' 
+              ? 'Start your creator journey with Kaizen' 
               : 'Sign in to access your dashboard'}
           </CardDescription>
         </CardHeader>

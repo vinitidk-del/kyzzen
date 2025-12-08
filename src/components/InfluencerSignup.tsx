@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Sparkles, Users, TrendingUp, Zap, Globe, Camera } from 'lucide-react';
+import { Mountain, Users, TrendingUp, Zap, Globe, Camera } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 interface InfluencerSignupProps {
@@ -43,7 +43,7 @@ export function InfluencerSignup({ trigger }: InfluencerSignupProps) {
       await new Promise(resolve => setTimeout(resolve, 2000));
       
       toast({
-        title: "Welcome to Kyzzen! 🚀",
+        title: "Welcome to Kaizen!",
         description: "Your creator account is being set up. We'll send you onboarding details shortly!",
       });
       
@@ -73,7 +73,7 @@ export function InfluencerSignup({ trigger }: InfluencerSignupProps) {
 
   const defaultTrigger = (
     <Button className="flex items-center gap-2">
-      <Sparkles className="w-4 h-4" />
+      <Mountain className="w-4 h-4" />
       Join as Creator
     </Button>
   );
@@ -86,8 +86,8 @@ export function InfluencerSignup({ trigger }: InfluencerSignupProps) {
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-xl">
-            <Sparkles className="w-6 h-6 text-accent" />
-            Join Kyzzen as a Creator
+            <Mountain className="w-6 h-6 text-accent" />
+            Join Kaizen as a Creator
           </DialogTitle>
         </DialogHeader>
         
@@ -253,7 +253,7 @@ export function InfluencerSignup({ trigger }: InfluencerSignupProps) {
             </div>
 
             <div>
-              <label className="text-sm font-medium mb-2 block">Goals with Kyzzen</label>
+              <label className="text-sm font-medium mb-2 block">Goals with Kaizen</label>
               <Textarea
                 value={formData.goals}
                 onChange={(e) => handleInputChange('goals', e.target.value)}
@@ -268,7 +268,7 @@ export function InfluencerSignup({ trigger }: InfluencerSignupProps) {
                 Cancel
               </Button>
               <Button type="submit" disabled={isSubmitting}>
-                {isSubmitting ? 'Creating Account...' : 'Join Kyzzen'}
+                {isSubmitting ? 'Creating Account...' : 'Join Kaizen'}
               </Button>
             </div>
           </form>

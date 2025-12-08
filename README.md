@@ -1,16 +1,16 @@
-# Kyzzen Media - The Creator Super App
+# Kaizen - The Creator Super App
 
 **URL**: https://lovable.dev/projects/700046ab-188b-485e-b21b-f780bc3850e8
 
 ## About
 
-Kyzzen Media is a comprehensive creator management platform that serves as the "operating system for creator empires." It provides different dashboards and tools for creators, agencies, and businesses to manage their content, campaigns, and partnerships.
+Kaizen is a comprehensive creator management platform that serves as the "operating system for creator empires." It provides different dashboards and tools for creators, agencies, and businesses to manage their content, campaigns, and partnerships.
 
 ## Features
 
 ### For Creators
 - **Brand Ventures Dashboard**: Track revenue, units sold, profit margins, and inventory
-- **AI Product Idea Lab**: Generate innovative product ideas based on audience data
+- **Product Idea Lab**: Generate innovative product ideas based on audience data
 - **Content Pipeline**: Kanban-style content management from idea to published
 - **Talent Network**: Browse and connect with editors, managers, and designers
 
@@ -58,9 +58,9 @@ npm run build
 
 ## Design System
 
-The app features a custom dark theme with:
-- **Primary Colors**: Forest green and golden orange accents
-- **Typography**: Inter font family
+The app features a custom theme with:
+- **Primary Colors**: Blue and teal accents
+- **Typography**: Modern font family
 - **Components**: Fully customized shadcn/ui components
 - **Animations**: Smooth transitions and hover effects
 
@@ -70,4 +70,4 @@ Deploy easily through [Lovable](https://lovable.dev/projects/700046ab-188b-485e-
 
 ---
 
-&copy; 2025 Kyzzen Media. All rights reserved.
+© 2025 Kaizen. All rights reserved.

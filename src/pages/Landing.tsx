@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Sparkles, TrendingUp, Zap, Target, Rocket, Play, Star, Check, ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowRight, Mountain, TrendingUp, Zap, Target, Rocket, Play, Star, Check, ArrowUpRight, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { LandingModuleSelector } from '@/components/LandingModuleSelector';
 import { useAuth } from '@/contexts/AuthContext';
@@ -40,7 +40,7 @@ const Landing = () => {
   const features = [
     { icon: Target, title: 'Analytics', desc: 'Deep insights into your audience' },
     { icon: Zap, title: 'Automation', desc: 'Save 10+ hours per week' },
-    { icon: Sparkles, title: 'AI Tools', desc: 'Generate content in seconds' },
+    { icon: TrendingUp, title: 'Insights', desc: 'Data-driven content strategies' },
     { icon: Rocket, title: 'Growth', desc: 'Scale your influence faster' },
   ];
 
@@ -74,9 +74,9 @@ const Landing = () => {
           <div className="flex justify-between items-center">
             <Link to="/" className="flex items-center gap-2">
               <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-insight-teal to-accent flex items-center justify-center shadow-lg shadow-primary/30">
-                <Sparkles className="w-5 h-5 text-white" />
+                <Mountain className="w-5 h-5 text-white" />
               </div>
-              <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-primary to-insight-teal bg-clip-text text-transparent">kyzzen</span>
+              <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-primary to-insight-teal bg-clip-text text-transparent">kaizen</span>
             </Link>
             
             <div className="hidden md:flex items-center gap-8">
@@ -322,7 +322,7 @@ const Landing = () => {
                 Ready to Level Up?
               </h2>
               <p className="text-lg md:text-xl opacity-90 mb-10 max-w-xl mx-auto">
-                Join 10,000+ creators who are building their empires with Kyzzen.
+                Join 10,000+ creators who are building their empires with Kaizen.
               </p>
               <Link to="/auth">
                 <Button size="lg" variant="secondary" className="rounded-full text-base px-10 py-6 bg-white text-primary hover:bg-white/90 shadow-2xl hover:scale-105 transition-all group">
@@ -344,9 +344,9 @@ const Landing = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary via-insight-teal to-accent flex items-center justify-center shadow-lg shadow-primary/30">
-                <Sparkles className="w-4 h-4 text-white" />
+                <Mountain className="w-4 h-4 text-white" />
               </div>
-              <span className="font-bold bg-gradient-to-r from-primary to-insight-teal bg-clip-text text-transparent">kyzzen</span>
+              <span className="font-bold bg-gradient-to-r from-primary to-insight-teal bg-clip-text text-transparent">kaizen</span>
             </div>
             
             <div className="flex gap-8 text-sm text-muted-foreground">
@@ -356,7 +356,7 @@ const Landing = () => {
             </div>
 
             <p className="text-sm text-muted-foreground">
-              © 2025 Kyzzen. Made for creators.
+              © 2025 Kaizen. Made for creators.
             </p>
           </div>
         </div>

@@ -30,7 +30,7 @@ export function RealtimeMetricsGrid() {
           title="Active Users"
           icon={Users}
           initialValue={1245}
-          color="hsl(var(--kyzzen-blue))"
+          color="hsl(var(--kaizen-blue))"
           changeRange={{ min: -5, max: 15 }}
           updateInterval={2000}
           trend="up"
