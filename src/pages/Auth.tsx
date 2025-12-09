@@ -8,8 +8,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
-import { Loader2, Mail, Lock, User, Chrome, Mountain } from 'lucide-react';
+import { Loader2, Mail, Lock, User, Chrome } from 'lucide-react';
 import { z } from 'zod';
+import { KaizenLogo } from '@/components/KaizenLogo';
 
 const emailSchema = z.string().email('Invalid email address');
 const passwordSchema = z.string().min(6, 'Password must be at least 6 characters');
@@ -264,9 +265,7 @@ export default function Auth() {
       <Card className="w-full max-w-md border-border shadow-xl">
         <CardHeader className="space-y-1 text-center">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary via-insight-teal to-accent flex items-center justify-center shadow-lg shadow-primary/30">
-              <Mountain className="w-6 h-6 text-white" />
-            </div>
+            <KaizenLogo size="lg" />
           </div>
           <CardTitle className="text-3xl font-bold text-foreground">
             {isSignUp ? 'Create Account' : 'Welcome Back'}
