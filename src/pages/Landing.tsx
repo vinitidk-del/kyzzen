@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Mountain, TrendingUp, Zap, Target, Rocket, Play, Star, Check, ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowRight, TrendingUp, Zap, Target, Rocket, Play, Star, Check, ArrowUpRight, Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { LandingModuleSelector } from '@/components/LandingModuleSelector';
 import { useAuth } from '@/contexts/AuthContext';
+import { KaizenLogo } from '@/components/KaizenLogo';
 
 type TimeOfDay = 'dawn' | 'day' | 'dusk' | 'night';
 
@@ -73,10 +74,7 @@ const Landing = () => {
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <Link to="/" className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-insight-teal to-accent flex items-center justify-center shadow-lg shadow-primary/30">
-                <Mountain className="w-5 h-5 text-white" />
-              </div>
-              <span className="text-xl font-bold tracking-tight bg-gradient-to-r from-primary to-insight-teal bg-clip-text text-transparent">kaizen</span>
+              <KaizenLogo size="md" showText />
             </Link>
             
             <div className="hidden md:flex items-center gap-8">
@@ -342,12 +340,7 @@ const Landing = () => {
       <footer className="border-t border-border/30 py-12 px-6 backdrop-blur-sm bg-background/30">
         <div className="container mx-auto max-w-6xl">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary via-insight-teal to-accent flex items-center justify-center shadow-lg shadow-primary/30">
-                <Mountain className="w-4 h-4 text-white" />
-              </div>
-              <span className="font-bold bg-gradient-to-r from-primary to-insight-teal bg-clip-text text-transparent">kaizen</span>
-            </div>
+            <KaizenLogo size="sm" showText />
             
             <div className="flex gap-8 text-sm text-muted-foreground">
               <a href="#" className="hover:text-foreground transition-colors">Privacy</a>

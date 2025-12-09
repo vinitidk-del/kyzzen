@@ -6,7 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Mountain, Users, TrendingUp, Zap, Globe, Camera } from 'lucide-react';
+import { Users, TrendingUp, Zap, Globe, Camera } from 'lucide-react';
+import { KaizenIcon } from '@/components/KaizenLogo';
 import { useToast } from '@/hooks/use-toast';
 
 interface InfluencerSignupProps {
@@ -73,7 +74,7 @@ export function InfluencerSignup({ trigger }: InfluencerSignupProps) {
 
   const defaultTrigger = (
     <Button className="flex items-center gap-2">
-      <Mountain className="w-4 h-4" />
+      <KaizenIcon className="w-4 h-4" />
       Join as Creator
     </Button>
   );
@@ -86,7 +87,7 @@ export function InfluencerSignup({ trigger }: InfluencerSignupProps) {
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-xl">
-            <Mountain className="w-6 h-6 text-accent" />
+            <KaizenIcon className="w-6 h-6 text-accent" />
             Join Kaizen as a Creator
           </DialogTitle>
         </DialogHeader>

@@ -13,12 +13,12 @@ import {
   Brain,
   Heart,
   Rocket,
-  Mountain,
   Network,
   FileText
 } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { KaizenIcon } from '@/components/KaizenLogo';
 
 interface Module {
   id: string;
@@ -165,7 +165,7 @@ export const ModuleSelector: React.FC<ModuleSelectorProps> = ({ onModuleSelect }
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 rounded-full px-6 py-2 mb-6">
-            <Mountain className="h-5 w-5 text-primary" />
+            <KaizenIcon className="h-5 w-5 text-primary" />
             <span className="text-sm font-medium text-primary">Creator Operating System</span>
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">

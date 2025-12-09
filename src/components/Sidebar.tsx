@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Menu, LogOut, Settings as SettingsIcon, Trophy, HelpCircle, Mountain } from 'lucide-react';
+import { X, Menu, LogOut, Settings as SettingsIcon, Trophy, HelpCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,7 @@ import { Settings } from '@/components/Settings';
 import { Achievements } from '@/components/Achievements';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { RoleSwitcher } from '@/components/RoleSwitcher';
+import { KaizenLogo } from '@/components/KaizenLogo';
 
 interface NavigationItem {
   id: string;
@@ -59,12 +60,7 @@ export function Sidebar({ isOpen, setIsOpen, navigation, activePage, onNavigate 
       >
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-border/50">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary via-insight-teal to-accent flex items-center justify-center shadow-lg shadow-primary/30">
-              <Mountain className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-xl font-extrabold bg-gradient-to-r from-primary to-insight-teal bg-clip-text text-transparent">kaizen</span>
-          </div>
+          <KaizenLogo size="md" showText />
           <Button
             variant="ghost"
             size="sm"

@@ -5,7 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Progress } from '@/components/ui/progress';
-import { CheckCircle2, ArrowRight, ArrowLeft, Mountain } from 'lucide-react';
+import { CheckCircle2, ArrowRight, ArrowLeft } from 'lucide-react';
+import { KaizenIcon } from '@/components/KaizenLogo';
 import { toast } from '@/hooks/use-toast';
 
 interface OnboardingWizardProps {
@@ -55,7 +56,7 @@ export function OnboardingWizard({ open, onClose }: OnboardingWizardProps) {
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold flex items-center gap-2">
-            <Mountain className="w-6 h-6 text-primary" />
+            <KaizenIcon className="w-6 h-6 text-primary" />
             Welcome to Kaizen
           </DialogTitle>
         </DialogHeader>
